@@ -36,9 +36,7 @@ const PanelContent = () => {
       <div className='right_bottom'>
         <a href='#contact'>
           <span className='circle' />
-          <span className='text'>
-            I’m open to hearing about new opportunities!
-          </span>
+          <span className='text'>I’m open to new opportunities!</span>
         </a>
       </div>
     </div>

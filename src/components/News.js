@@ -57,7 +57,7 @@ const News = () => {
                     />
                   </div>
                   <div className='title_holder'>
-                    <p>Django</p>
+                    <p>Django, Javascript</p>
                     <h3>
                       <a href='#'>B & B Real Estate</a>
                     </h3>
@@ -81,9 +81,9 @@ const News = () => {
                     />
                   </div>
                   <div className='title_holder'>
-                    <p>PERN Stack</p>
+                    <p>Angular, C#</p>
                     <h3>
-                      <a href='#'>Neighbr</a>
+                      <a href='#'>Pebbl</a>
                     </h3>
                   </div>
                 </div>
@@ -105,9 +105,9 @@ const News = () => {
                     />
                   </div>
                   <div className='title_holder'>
-                    <p>JavaScript, React, Node.js, Express.js</p>
+                    <p>React, Express, Node, and MongoDB</p>
                     <h3>
-                      <a href='#'>Petful</a>
+                      <a href='#'>Devcon</a>
                     </h3>
                   </div>
                 </div>
@@ -129,9 +129,9 @@ const News = () => {
                     />
                   </div>
                   <div className='title_holder'>
-                    <p>PERN Stack</p>
+                    <p>React, Django</p>
                     <h3>
-                      <a href='#'>Lango</a>
+                      <a href='#'>Revree</a>
                     </h3>
                   </div>
                 </div>
