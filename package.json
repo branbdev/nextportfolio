@@ -8,7 +8,9 @@
     "dev": "next dev",
     "build": "next build && next export",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "deploy": "next build && next export && gh-pages -d out",
+    "postexport": "cp CNAME out/CNAME && touch out/.nojekyll"
   },
   "dependencies": {
     "@emailjs/browser": "^3.6.2",
@@ -23,7 +25,8 @@
   "devDependencies": {
     "babel-eslint": "^10.1.0",
     "eslint": "^7.32.0",
-    "eslint-config-next": "^12.2.5"
+    "eslint-config-next": "^12.2.5",
+    "gh-pages": "^6.3.0"
   },
   "eslintConfig": {
     "extends": "eslint:recommended",

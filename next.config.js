@@ -1,9 +1,7 @@
-/**
- * @type {import('next').NextConfig}
- */
+/** @type {import('next').NextConfig} */
 const nextConfig = {
-  /* config options here */
-  output: 'export',
+  // REMOVE output: 'export'
+  // REMOVE assetPrefix
+  // REMOVE basePath
 };
-
 module.exports = nextConfig;
