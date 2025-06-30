@@ -64,10 +64,10 @@ const Portfolio = () => {
               }}
               data-index={1}>
               <div className='img_holder'>
-                <img src='img/portfolio/bbrealestatehomepage.jpg' alt='image' />
+                <img src='public/img/portfolio/devcon.jpg' alt='image' />
                 <div
                   className='abs_img'
-                  data-bg-img='img/portfolio/bbrealestatehomepage.jpg'
+                  data-bg-img='public/img/portfolio/devcon.jpg'
                 />
               </div>
               <div className='title_holder'>
@@ -86,10 +86,10 @@ const Portfolio = () => {
               }}
               data-index={2}>
               <div className='img_holder'>
-                <img src='img/portfolio/bbrealestatehomepage.jpg' alt='image' />
+                <img src='public/img/portfolio/devcon.jpg' alt='image' />
                 <div
                   className='abs_img'
-                  data-bg-img='img/portfolio/bbrealestatehomepage.jpg'
+                  data-bg-img='public/img/portfolio/devcon.jpg'
                 />
               </div>
               <div className='title_holder'>

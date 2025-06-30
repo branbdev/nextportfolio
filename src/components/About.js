@@ -12,7 +12,7 @@ const About = () => {
             <h3 className='subtitle'>About Me</h3>
             <h3 className='title'>Biography</h3>
             <p className='desc'>
-              {`Software engineer proficient in JavaScript, React, Node, Express, and MongoDB. I have experience in freelancing and marketing. Both have allowed me to develop my problem-solving, assessment, and communication skills with clients and partners.`}
+              {`Growing up in southern California, I was enamored with the internet from an early age. From the early days of AOL/MSN Groups to the dawn of social media, I've used the web to express myself and provide platforms for others to do the same. Since around the time of the recent pandemic, I had the opportunity to change careers and as much as a journey it has been, I can say that I'm genuinely excited to continue to apply my skills and help others make modern and scalable applications for any need.`}
             </p>
           </div>
           {/* /Main Title */}
@@ -131,34 +131,24 @@ const About = () => {
                     <li>
                       <div className='item'>
                         <div className='item_top'>
-                          <h5>Rodeo Logistics</h5>
-                          <span>( 12/2021 — Today )</span>
+                          <h5>BB Web Solutions</h5>
+                          <span>( 2020 — Today )</span>
                         </div>
-                        <h3>
-                          Junior Software Engineer/Quality Assurance Engineer
-                        </h3>
+                        <h3>Freelance Web Developer</h3>
                         <p>
                           <ul className='experience-list'>
                             <li>
-                              Collaborated with a cross-functional team to
-                              define features and build powerful and easy-to-use
-                              products and customer-facing workflow tools.
+                              Collaborated with clients to make make user story
+                              and feature list of desired web app.
                             </li>
                             <li>
-                              Conducted full lifecycle software development from
-                              planning to deployment and maintenance.
+                              Used tools like Figma to make mockups of different
+                              designs.
                             </li>
                             <li>
-                              Documented technical specifications and project
-                              testing methods for future reference.
-                            </li>
-                            <li>
-                              Participate in code reviews with senior engineers
-                              to gain feedback and insight for improvements.
-                            </li>
-                            <li>
-                              Produced test scripts using Cypress for new
-                              automated software testing rounds.
+                              Developed functioning web applications with
+                              industry leading technology according to client
+                              need.
                             </li>
                           </ul>{' '}
                         </p>
@@ -246,7 +236,7 @@ const About = () => {
                     <li>
                       <div className='item'>
                         <div className='item_top'>
-                          <h5>Coding Bootcamp @ UC Riverside</h5>
+                          <h5>UC Riverside</h5>
                           <span>( 11/19-5/20 )</span>
                         </div>
                         <h3>Web Development Bootcamp</h3>

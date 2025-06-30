@@ -54,10 +54,10 @@ const PortfolioBlock = () => {
                   onClick={() => modalValueSet(2)}
                   data-index={2}>
                   <div className='img_holder'>
-                    <img src='img/portfolio/neighbr-home.png' alt='image' />
+                    <img src='/img/portfolio/devcon.jpg' alt='image' />
                     <div
                       className='abs_img'
-                      data-bg-img='img/portfolio/neighbr-home.png'
+                      data-bg-img='/img/portfolio/devcon.jpg'
                     />
                   </div>
                   <div className='title_holder'>
@@ -75,10 +75,10 @@ const PortfolioBlock = () => {
                   onClick={() => modalValueSet(3)}
                   data-index={3}>
                   <div className='img_holder'>
-                    <img src='img/bbrealestatehomepage.jpg' alt='image' />
+                    <img src='/img/portfolio/devcon.jpg' alt='image' />
                     <div
                       className='abs_img'
-                      data-bg-img='img/bbrealestatehomepage.jpg'
+                      data-bg-img='/img/portfolio/devcon.jpg'
                     />
                   </div>
                   <div className='title_holder'>

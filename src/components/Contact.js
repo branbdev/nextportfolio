@@ -24,10 +24,10 @@ const Contact = () => {
       setSuccess(true);
       emailjs
         .sendForm(
-          'service_gqjceqa',
-          'template_wz583e7',
+          'service_aht8d0r',
+          'template_ssz1szh',
           e.target,
-          'bOBPvsrEac-7DQaGD'
+          'process.env.local.EMAIL_KEY'
         )
         .then((result) => {
           console.log(result.text);

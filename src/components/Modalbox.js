@@ -9,7 +9,7 @@ const Modalbox = ({ close, value }) => {
       tag: 'Django',
       desc: [
         {
-          p: 'User registers with phone number, allows user to be as anonymous as possible. Logged in user is able to submit a list of things needed as well as a location of where the trusted admin is to drop off the requested items. Admin is able to see a list of orders with the items requested from all users.',
+          p: 'Users can register, login, and contact real estate agents to enquire about property listings. Users can browse or search property listings by specific metrics such as number of bedroom/bathroom/garages, square footage, location, etc. Administers can easily add, remove, and update both homes listed and employee profiles, including adding a public distinction for Employee of the Month',
         },
       ],
     },
@@ -18,7 +18,7 @@ const Modalbox = ({ close, value }) => {
       tag: 'Angular',
       desc: [
         {
-          p: 'This application is meant to be used as an online bulletin board for your neighborhood but focused on asking for help and helping others. User creates an account and can see a feed of posts from users and things they need help with. The user can make a post themselves as well.',
+          p: 'This application is meant to match users up with potential partners based on their preferences.',
         },
       ],
     },
@@ -27,16 +27,16 @@ const Modalbox = ({ close, value }) => {
       tag: 'React',
       desc: [
         {
-          p: "Pet adoption site where user submits their name and waits in line for others to adopt. Once it's user's turn, they get to adopt a cat or dog. This project is meant to show my understanding of the queue data structure.",
+          p: 'A Simple social media application for web developers. Users can register, login, and add relevant information reguarding their experience, education, and expertise. Users can post, comment and send likes to different user posts.',
         },
       ],
     },
     {
-      name: 'Revry',
+      name: 'Revree',
       tag: 'React',
       desc: [
         {
-          p: 'This project uses spaced repetition to teach Italian. The user guesses the translation for the Italian word and the next page shows if they got the word right or wrong. For each user, score is kept on how many times they have guessed on the word, the correct and incorrect number of guesses on each word.',
+          p: 'An E Commerce site where users can browse item listings and add them to a shopping cart before checking out',
         },
       ],
     },
