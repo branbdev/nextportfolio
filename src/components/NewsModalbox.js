@@ -1,58 +1,33 @@
 import { useEffect, useState } from 'react';
 import { dataImage } from '../utilits';
+import { portfolioData } from './portfolioData';
 
 const NewsModalbox = ({ close, value }) => {
-  const data = [
-    {
-      title: 'B & B Real Estate',
-      date: 'Javascript, Django, PostgreSQL, NGINX',
-      desc: [
-        {
-          p: 'Users can register, login, and contact real estate agents to enquire about property listings. Users can browse or search property listings by specific metrics such as number of bedroom/bathroom/garages, square footage, location, etc. Administers can easily add, remove, and update both homes listed and employee profiles, including adding a public distinction for Employee of the Month',
-          l: 'http://146.190.32.74/',
-          c: 'https://github.com/branbdev/bt_realestate',
-        },
-      ],
-    },
-    {
-      title: 'Pebbl',
-      date: 'Angular, C#',
-      desc: [
-        {
-          p: 'This application is meant to match users up with potential partners based on their preferences.',
-          l: 'https://github.com/branbdev/',
-          c: 'https://github.com/branbdev/',
-        },
-      ],
-    },
-    {
-      title: 'DevCon',
-      date: 'React, Node, Express, MongoDB',
-      desc: [
-        {
-          p: 'A Simple social media application for web developers. Users can register, login, and add relevant information reguarding their experience, education, and expertise. Users can post, comment and send likes to different user posts.',
-          l: 'https://devcon-et5h.onrender.com/',
-          c: 'https://github.com/branbdev/devcon',
-        },
-      ],
-    },
-    {
-      title: 'Revree',
-      date: 'React, Django',
-      desc: [
-        {
-          p: 'An E Commerce site where users can browse item listings and add them to a shopping cart before checking out',
-          l: 'https://github.com/branbdev/',
-          c: 'https://github.com/branbdev/',
-        },
-      ],
-    },
-  ];
+  const [currentIndex, setCurrentIndex] = useState(
+    portfolioData.findIndex((p) => p.id === value)
+  );
 
-  const [index, setIndex] = useState(value);
   useEffect(() => {
     dataImage();
-  }, [index]);
+  }, [currentIndex]);
+
+  const project = portfolioData[currentIndex];
+
+  const handleNav = (direction) => {
+    let nextIndex;
+    if (direction === 'prev') {
+      nextIndex =
+        currentIndex === 0 ? portfolioData.length - 1 : currentIndex - 1;
+    } else {
+      nextIndex =
+        currentIndex === portfolioData.length - 1 ? 0 : currentIndex + 1;
+    }
+    setCurrentIndex(nextIndex);
+  };
+
+  if (!project) {
+    return null;
+  }
 
   return (
     <div className='resumo_fn_modalbox opened'>
@@ -76,47 +51,36 @@ const NewsModalbox = ({ close, value }) => {
         </a>
         <div className='modal_content'>
           <div className='modal_in'>
-            {data.map(
-              (d, i) =>
-                i + 1 == index && (
-                  <div key={i}>
-                    <p className='fn__cat'>{d.date}</p>
-                    <p className='fn__cat'>{d.tag}</p>
-                    <h3 className='fn__title'>{d.title}</h3>
-                    <div className='img_holder'>
-                      <img src={`/img/portfolio/${i}.jpg`} alt='' />
-                      <div
-                        className='abs_img'
-                        data-bg-img={`/img/portfolio/${i}.jpg`}
-                      />
-                    </div>
-                    {d.desc.map((des) => (
-                      <p key={i} className='fn__desc'>
-                        {des.p}
-                        <div className='repo-links'>
-                          <a
-                            className='repo-live-links'
-                            target='_blank'
-                            rel='noreferrer'
-                            href={`${des.l}`}>
-                            Live App
-                          </a>{' '}
-                          |
-                          <a
-                            className='repo-live-links'
-                            target='_blank'
-                            rel='noreferrer'
-                            href={`${des.c}`}>
-                            {' '}
-                            Repo
-                          </a>{' '}
-                          |
-                        </div>
-                      </p>
-                    ))}
-                  </div>
-                )
-            )}
+            <div>
+              <p className='fn__cat'>{project.tags.join(', ')}</p>
+              <h3 className='fn__title'>{project.title}</h3>
+              <div className='img_holder'>
+                <img src={project.image} alt={project.title} />
+                <div className='abs_img' data-bg-img={project.image} />
+              </div>
+              <p className='fn__desc'>
+                {project.description}
+                <div className='repo-links'>
+                  <a
+                    className='repo-live-links'
+                    target='_blank'
+                    rel='noreferrer'
+                    href={project.liveUrl}>
+                    Live App
+                  </a>{' '}
+                  |
+                  <a
+                    className='repo-live-links'
+                    target='_blank'
+                    rel='noreferrer'
+                    href={project.codeUrl}>
+                    {' '}
+                    Repo
+                  </a>{' '}
+                  |
+                </div>
+              </p>
+            </div>
           </div>
 
           <div className='fn__nav' data-from='portfolio' data-index='1'>
@@ -125,7 +89,7 @@ const NewsModalbox = ({ close, value }) => {
               className='prev'
               onClick={(e) => {
                 e.preventDefault();
-                setIndex(index == 1 ? 4 : index - 1);
+                handleNav('prev');
               }}>
               <span className='text'>Prev</span>
               <span className='arrow_wrapper'>
@@ -137,7 +101,7 @@ const NewsModalbox = ({ close, value }) => {
               className='next'
               onClick={(e) => {
                 e.preventDefault();
-                setIndex(index == 4 ? 1 : index + 1);
+                handleNav('next');
               }}>
               <span className='text'>Next</span>
               <span className='arrow_wrapper'>

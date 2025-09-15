@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { siteData } from './siteData';
 
 const About = () => {
   const [toggleList, setToggleList] = useState('tab1');
@@ -23,7 +24,7 @@ const About = () => {
                 <tbody>
                   <tr>
                     <th>Name</th>
-                    <th>Brandon Bowen</th>
+                    <th>{siteData.name}</th>
                   </tr>
                   {/* <tr>
                     <th>Birthday</th>
@@ -35,7 +36,7 @@ const About = () => {
                   </tr>*/}
                   <tr>
                     <th>Address</th>
-                    <th>Corona, CA</th>
+                    <th>{siteData.location}</th>
                   </tr>
                   {/* <tr>
                     <th>Phone</th>
@@ -46,9 +47,7 @@ const About = () => {
                   <tr>
                     <th>Email</th>
                     <th>
-                      <a href='mailto:contact@brandonbowen.net'>
-                        contact@brandonbowen.net
-                      </a>
+                      <a href={`mailto:${siteData.email}`}>{siteData.email}</a>
                     </th>
                   </tr>
                   {/* <tr>
@@ -63,7 +62,7 @@ const About = () => {
             <div className='about_right'>
               {/* Download CV Button */}
               <div className='resumo_fn_cv_btn'>
-                <a href='img/Resume.pdf' download='Brandon Bowen Resume'>
+                <a href={siteData.resume} download={`${siteData.name} Resume`}>
                   <span className='icon'>
                     <svg
                       xmlns='http://www.w3.org/2000/svg'

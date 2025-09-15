@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import NewsModalbox from './NewsModalbox';
+import { portfolioData } from './portfolioData';
 
 const News = () => {
   const [modal, setModal] = useState(false);
@@ -40,102 +41,29 @@ const News = () => {
           {/* /Main Title */}
           {/* Blog List */}
           <div className='resumo_fn_blog_list'>
-            <ul className='modal_items' data-from='blog' data-count={5}>
-              <li>
-                <div
-                  className='item modal_item'
-                  onClick={() => modalValueSet(1)}
-                  data-index={1}>
-                  <div className='img_holder'>
-                    <img
-                      src='img/portfolio/bbrealestatehomepage.jpg'
-                      alt='image'
-                    />
-                    <div
-                      className='abs_img'
-                      data-bg-img='img/portfolio/bbrealestatehomepage.jpg'
-                    />
+            <ul
+              className='modal_items'
+              data-from='blog'
+              data-count={portfolioData.length}>
+              {portfolioData.map((project) => (
+                <li key={project.id}>
+                  <div
+                    className='item modal_item'
+                    onClick={() => modalValueSet(project.id)}
+                    data-index={project.id}>
+                    <div className='img_holder'>
+                      <img src={project.image} alt={project.title} />
+                      <div className='abs_img' data-bg-img={project.image} />
+                    </div>
+                    <div className='title_holder'>
+                      <p>{project.tags.slice(0, 2).join(', ')}</p>
+                      <h3>
+                        <a href='#'>{project.title}</a>
+                      </h3>
+                    </div>
                   </div>
-                  <div className='title_holder'>
-                    <p>Django, Javascript</p>
-                    <h3>
-                      <a href='#'>B & B Real Estate</a>
-                    </h3>
-                  </div>
-                </div>
-              </li>
-
-              <li>
-                <div
-                  className='item modal_item'
-                  onClick={() => modalValueSet(2)}
-                  data-index={2}>
-                  <div className='img_holder'>
-                    <img
-                      src='img/portfolio/bbrealestatehomepage.jpg'
-                      alt='image'
-                    />
-                    <div
-                      className='abs_img'
-                      data-bg-img='img/portfolio/bbrealestatehomepage.jpg'
-                    />
-                  </div>
-                  <div className='title_holder'>
-                    <p>Angular, C#</p>
-                    <h3>
-                      <a href='#'>Pebbl</a>
-                    </h3>
-                  </div>
-                </div>
-              </li>
-
-              <li>
-                <div
-                  className='item modal_item'
-                  onClick={() => modalValueSet(3)}
-                  data-index={3}>
-                  <div className='img_holder'>
-                    <img
-                      src='img/portfolio/bbrealestatehomepage.jpg'
-                      alt='image'
-                    />
-                    <div
-                      className='abs_img'
-                      data-bg-img='img/portfolio/bbrealestatehomepage.jpg'
-                    />
-                  </div>
-                  <div className='title_holder'>
-                    <p>React, Express, Node, and MongoDB</p>
-                    <h3>
-                      <a href='#'>Devcon</a>
-                    </h3>
-                  </div>
-                </div>
-              </li>
-
-              <li>
-                <div
-                  className='item modal_item'
-                  onClick={() => modalValueSet(4)}
-                  data-index={4}>
-                  <div className='img_holder'>
-                    <img
-                      src='img/portfolio/bbrealestatehomepage.jpg'
-                      alt='image'
-                    />
-                    <div
-                      className='abs_img'
-                      data-bg-img='img/portfolio/bbrealestatehomepage.jpg'
-                    />
-                  </div>
-                  <div className='title_holder'>
-                    <p>React, Django</p>
-                    <h3>
-                      <a href='#'>Revree</a>
-                    </h3>
-                  </div>
-                </div>
-              </li>
+                </li>
+              ))}
             </ul>
             <div className='clearfix' />
             <div className='load_more'>

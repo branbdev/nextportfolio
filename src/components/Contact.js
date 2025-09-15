@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { siteData } from './siteData';
 import emailjs from '@emailjs/browser';
 
 const Contact = () => {
@@ -17,34 +18,43 @@ const Contact = () => {
   };
   const { email, name, subject, message } = form;
 
-  const onSubmit = (e) => {
+  const onSubmit = async (e) => {
     e.preventDefault();
+    const formData = new FormData(e.target);
+    const email = formData.get('email');
+    const name = formData.get('name');
+    const subject = formData.get('subject');
+    const message = formData.get('message');
+    const honeypot = formData.get('website'); // Check the honeypot field
 
-    if (email && name && subject && message) {
-      setSuccess(true);
-      emailjs
-        .sendForm(
-          'service_aht8d0r',
-          'template_ssz1szh',
-          e.target,
-          'process.env.local.EMAIL_KEY'
-        )
-        .then((result) => {
-          console.log(result.text);
-        }, 2000);
-      e.target.reset();
-      setTimeout(() => {
-        setForm({ email: '', name: '', subject: '', message: '' });
-      });
-    } else {
+    // 1. If the honeypot field is filled, it's a bot. Silently exit.
+    if (honeypot) {
+      return;
+    }
+    // 2. Check for required fields
+    if (!email || !name) {
       setError(true);
-      setSuccess(false);
-      (error) => {
-        console.log(error);
-      };
-      setTimeout(() => {
-        setError(false);
-      }, 2000);
+      setTimeout(() => setError(false), 3000);
+      return;
+    }
+
+    try {
+      await emailjs.sendForm(
+        'service_aht8d0r',
+        'template_ssz1szh',
+        e.target,
+        process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY
+      );
+
+      setSuccess(true);
+      setTimeout(() => setSuccess(false), 3000);
+
+      e.target.reset();
+      setForm({ email: '', name: '', subject: '', message: '' });
+    } catch (err) {
+      console.error('FAILED...', err);
+      setError(true);
+      setTimeout(() => setError(false), 3000);
     }
   };
 
@@ -96,9 +106,21 @@ const Contact = () => {
                       name='name'
                       id='name'
                       type='text'
-                      required
+                      autoComplete='name'
                     />
                     <span className='moving_placeholder'>Name *</span>
+                  </div>
+                </div>
+                {/* Honeypot Field: Hidden from users, but bots will see it */}
+                <div className='item' style={{ display: 'none' }}>
+                  <div className='input_wrapper'>
+                    <input
+                      type='text'
+                      name='website'
+                      id='website'
+                      tabIndex={-1}
+                      autoComplete='off'
+                    />
                   </div>
                 </div>
                 <div className='item half'>
@@ -114,7 +136,7 @@ const Contact = () => {
                       name='email'
                       id='email'
                       type='email'
-                      required
+                      autoComplete='email'
                     />
                     <span className='moving_placeholder'>Email *</span>
                   </div>
@@ -132,7 +154,7 @@ const Contact = () => {
                       value={subject}
                       name='subject'
                       type='text'
-                      required
+                      autoComplete='off'
                     />
                     <span className='moving_placeholder'>Subject</span>
                   </div>
@@ -149,10 +171,17 @@ const Contact = () => {
                       onChange={(e) => onChange(e)}
                       value={message}
                       id='message'
-                      required
+                      autoComplete='off'
                     />
                     <span className='moving_placeholder'>Message</span>
                   </div>
+                </div>
+                <div className='item'>
+                  <div
+                    className='g-recaptcha'
+                    data-sitekey={
+                      process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY
+                    }></div>
                 </div>
                 <div className='item'>
                   {/* <a id="send_message" href="#">
@@ -172,20 +201,20 @@ const Contact = () => {
           {/* Contact Info */}
           <div className='resumo_fn_contact_info'>
             <p>Location</p>
-            <h3>Corona, CA</h3>
+            <h3>{siteData.location}</h3>
             {/* <p>Phone</p>
             <h3>
               <a href="tel:+7068980751">(+706) 898-0751</a>
             </h3> */}
             <p>
-              <a className='fn__link' href='mailto:contact@brandonbowen.net'>
-                contact@brandonbowen.net
+              <a className='fn__link' href={`mailto:${siteData.email}`}>
+                {siteData.email}
               </a>
               <br />
               <br />
               <a
                 className='fn__link'
-                href='https://github.com/branbdev'
+                href={siteData.github}
                 target='_blank'
                 rel='noreferrer'>
                 GitHub
@@ -194,7 +223,7 @@ const Contact = () => {
               <br />
               <a
                 className='fn__link'
-                href='https://www.linkedin.com/in/brandon-bowen-4a9369199/'
+                href={siteData.linkedin}
                 target='_blank'
                 rel='noreferrer'>
                 Linkedin
