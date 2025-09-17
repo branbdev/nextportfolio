@@ -26,36 +26,16 @@ const About = () => {
                     <th>Name</th>
                     <th>{siteData.name}</th>
                   </tr>
-                  {/* <tr>
-                    <th>Birthday</th>
-                    <th>28th April 1991</th>
-                  </tr> 
-                  <tr>
-                    <th>Age</th>
-                    <th>31 years</th>
-                  </tr>*/}
                   <tr>
                     <th>Address</th>
                     <th>{siteData.location}</th>
                   </tr>
-                  {/* <tr>
-                    <th>Phone</th>
-                    <th>
-                      <a href="tel:+3846923442364">(+38) 469 2344 2364</a>
-                    </th>
-                  </tr> */}
                   <tr>
                     <th>Email</th>
                     <th>
                       <a href={`mailto:${siteData.email}`}>{siteData.email}</a>
                     </th>
                   </tr>
-                  {/* <tr>
-                    <th>Skype</th>
-                    <th>
-                      <a href="skype:brucewilson.90">brucewilson.90</a>
-                    </th>
-                  </tr> */}
                 </tbody>
               </table>
             </div>
@@ -153,61 +133,6 @@ const About = () => {
                         </p>
                       </div>
                     </li>
-                    {/* Break */}
-                    {/* <li>
-                      <div className='item'>
-                        <div className='item_top'>
-                          <h5>DevWorks</h5>
-                          <span>( 3/2021 — 12/2021 )</span>
-                        </div>
-                        <h3>Web Developer</h3>
-                        <p>
-                          <ul className='experience-list'>
-                            <li>
-                              Redesigned mission-critical web apps with
-                              Javascript, React, and Node.
-                            </li>
-                            <li>
-                              Design and develop APIs using Node and various
-                              data technologies including Express middleware
-                              routing and Knex.
-                            </li>
-                            <li>
-                              Performance tuning for both Frontend and Backend
-                              code using debugger, DevTools, console logs, and
-                              reproducing bugs.
-                            </li>
-                            <li>
-                              Write unit, integration, and end-to-end test using
-                              Jest and Puppeteer.
-                            </li>
-                          </ul>{' '}
-                        </p>
-                      </div>
-                    </li>
-                    <li>
-                      <div className='item'>
-                        <div className='item_top'>
-                          <h5>Siska Financial Services</h5>
-                          <span>( 3/2015 — 10/2019 )</span>
-                        </div>
-                        <h3>Financial Advisor</h3>
-                        <p>
-                          <ul className='experience-list'>
-                            <li>
-                              Serviced accounts for more than 100 clients with
-                              over $22 million in investment assets.
-                            </li>
-                            <li>
-                              Counseled clients on financial matters and
-                              provided recommendations on investment
-                              opportunities, products and services based on
-                              client needs and asset availability.
-                            </li>
-                          </ul>{' '}
-                        </p>
-                      </div>
-                    </li> */}
                   </ul>
                 </div>
                 {/* /Boxed List */}
@@ -218,20 +143,6 @@ const About = () => {
                 {/* Boxed List */}
                 <div className='resumo_fn_boxed_list'>
                   <ul>
-                    {/* <li>
-                      <div className="item">
-                        <div className="item_top">
-                          <h5>Frenify University</h5>
-                          <span>( 2014 — 2017 )</span>
-                        </div>
-                        <h3>Computer Science</h3>
-                        <p>
-                          Adipisicing Lorem ipsum dolor sit amet, consectetur
-                          elit, sed do eiusmod tempor incididunt ut labore et
-                          dolore magna aliqua.{" "}
-                        </p>
-                      </div>
-                    </li> */}
                     <li>
                       <div className='item'>
                         <div className='item_top'>
@@ -242,16 +153,6 @@ const About = () => {
                         <p> </p>
                       </div>
                     </li>
-                    {/* <li>
-                      <div className='item'>
-                        <div className='item_top'>
-                          <h5>University of Houston-Downtown</h5>
-                          <span>( 2018 )</span>
-                        </div>
-                        <h3>Bachelor of Business Administration</h3>
-                        <p> </p>
-                      </div>
-                    </li> */}
                   </ul>
                 </div>
                 {/* /Boxed List */}
@@ -398,16 +299,6 @@ const About = () => {
                 </div>
 
                 {/* /Progress Bar */}
-                {/* Description */}
-                {/* <div className="resumo_fn_desc">
-                  <p>
-                    A freelance creative designer with a love for minimal
-                    design, clean typography and well-written code, located in
-                    San Francisco. Provide high quality and cost effective
-                    offshore web and software development services. Wide range
-                    of web and software development services across the world.
-                  </p>
-                </div> */}
               </div>
               {/* /#2 tab content */}
             </div>

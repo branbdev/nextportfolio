@@ -6,6 +6,7 @@ import Cursor from './Cursor';
 import Footer from './Footer';
 import Nav from './Nav';
 import Triggger from './Triggger';
+import Accessibility from '../components/Accessibility';
 
 const Layout = ({ children }) => {
   const [trigger, setTrigger] = useState(false);
@@ -28,6 +29,7 @@ const Layout = ({ children }) => {
         {/* MODALBOX */}
         {/* <Modalbox /> */}
         {/* /MODALBOX */}
+        <Accessibility />
         <div className='resumo_fn_content'>
           {/* Main Left Part */}
           <div className='resumo_fn_left'>
