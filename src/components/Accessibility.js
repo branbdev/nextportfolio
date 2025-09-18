@@ -66,7 +66,7 @@ const Accessibility = () => {
   };
 
   return (
-    <div className={`resumo_fn_accessibility ${isOpen ? 'opened' : ''}`}>
+    <div className={`fn_accessibility ${isOpen ? 'opened' : ''}`}>
       <div className='accessibility_button' onClick={() => setIsOpen(!isOpen)}>
         <svg
           xmlns='http://www.w3.org/2000/svg'

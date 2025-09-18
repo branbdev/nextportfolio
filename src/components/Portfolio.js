@@ -1,130 +1,51 @@
-import { useState } from 'react';
+import { useContext, Fragment } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { portfolioSliderProps } from '../sliderProps';
-import Modalbox from './Modalbox';
+import { portfolioData } from './portfolioData';
+import { Context } from '../context/Context';
 
 const Portfolio = () => {
-  const [modal, setModal] = useState(false);
-  const [modalValue, setModalValue] = useState(null);
+  const { modalValueSet } = useContext(Context);
 
   return (
-    <section id='portfolio'>
-      {modal && <Modalbox close={setModal} value={modalValue} />}
-      <div className='container'>
-        <div className='roww'>
-          {/* Main Title */}
+    <Fragment>
+      <div className='resumo_fn_section' id='portfolio'>
+        <div className='container'>
           <div className='resumo_fn_main_title'>
-            <div className='my__nav'>
-              <a href='#' className='prev'>
-                <span />
-              </a>
-              <a href='#' className='next'>
-                <span />
-              </a>
-            </div>
             <h3 className='subtitle'>Portfolio</h3>
             <h3 className='title'>Featured Projects</h3>
+            <p className='desc'>
+              A collection of my favorite projects that I've worked on.
+            </p>
           </div>
-          {/* /Main Title */}
         </div>
-      </div>
-      <div className='container noright'>
-        <div className='roww'>
+        <div className='noright'>
           <Swiper
             {...portfolioSliderProps}
             className='owl-carousel modal_items'
             data-from='portfolio'>
-            <SwiperSlide
-              className='item modal_item'
-              onClick={() => {
-                setModal(true);
-                setModalValue(0);
-              }}
-              data-index={0}>
-              <div className='img_holder'>
-                <img src='img/portfolio/bbrealestatehomepage.jpg' alt='image' />
-                <div
-                  className='abs_img'
-                  data-bg-img='img/portfolio/bbrealestatehomepage.jpg'
-                />
-              </div>
-              <div className='title_holder'>
-                <p>PERN Stack</p>
-                <h3>
-                  <a href='#'>M.A.S.S.</a>
-                </h3>
-              </div>
-            </SwiperSlide>
-
-            <SwiperSlide
-              className='item modal_item'
-              onClick={() => {
-                setModal(true);
-                setModalValue(2);
-              }}
-              data-index={1}>
-              <div className='img_holder'>
-                <img src='public/img/portfolio/devcon.jpg' alt='image' />
-                <div
-                  className='abs_img'
-                  data-bg-img='public/img/portfolio/devcon.jpg'
-                />
-              </div>
-              <div className='title_holder'>
-                <p>PERN Stack</p>
-                <h3>
-                  <a href='#'>Neighbr</a>
-                </h3>
-              </div>
-            </SwiperSlide>
-
-            <SwiperSlide
-              className='item modal_item'
-              onClick={() => {
-                setModal(true);
-                setModalValue(3);
-              }}
-              data-index={2}>
-              <div className='img_holder'>
-                <img src='public/img/portfolio/devcon.jpg' alt='image' />
-                <div
-                  className='abs_img'
-                  data-bg-img='public/img/portfolio/devcon.jpg'
-                />
-              </div>
-              <div className='title_holder'>
-                <p>JavaScript, React, Node.js, Express.js</p>
-                <h3>
-                  <a href='#'>Petful</a>
-                </h3>
-              </div>
-            </SwiperSlide>
-
-            <SwiperSlide
-              className='item modal_item'
-              onClick={() => {
-                setModal(true);
-                setModalValue(4);
-              }}
-              data-index={3}>
-              <div className='img_holder'>
-                <img src='img/portfolio/bbrealestatehomepage.jpg' alt='image' />
-                <div
-                  className='abs_img'
-                  data-bg-img='img/portfolio/bbrealestatehomepage.jpg'
-                />
-              </div>
-              <div className='title_holder'>
-                <p>PERN Stack</p>
-                <h3>
-                  <a href='#'>Lango</a>
-                </h3>
-              </div>
-            </SwiperSlide>
+            {portfolioData.map((project) => (
+              <SwiperSlide
+                className='item modal_item'
+                onClick={() => modalValueSet(project.id)}
+                data-index={project.id}
+                key={project.id}>
+                <div className='img_holder'>
+                  <img src={project.image} alt={project.title} />
+                  <div className='abs_img' data-bg-img={project.image} />
+                </div>
+                <div className='title_holder'>
+                  <p>{project.tags.slice(0, 2).join(', ')}</p>
+                  <h3>
+                    <a href='#'>{project.title}</a>
+                  </h3>
+                </div>
+              </SwiperSlide>
+            ))}
           </Swiper>
         </div>
       </div>
-    </section>
+    </Fragment>
   );
 };
 

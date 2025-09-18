@@ -1,17 +1,17 @@
 import About from '../src/components/About';
 import Contact from '../src/components/Contact';
 import Home from '../src/components/Home';
-import PortfolioBlock from '../src/components/PortfolioBlock';
-import Layout from '../src/layouts/Layout';
+import Portfolio from '../src/components/Portfolio';
+import { Fragment } from 'react';
 
 const Index = () => {
   return (
-    <Layout>
+    <Fragment>
       <Home />
       <About />
-      <PortfolioBlock />
+      <Portfolio />
       <Contact />
-    </Layout>
+    </Fragment>
   );
 };
 

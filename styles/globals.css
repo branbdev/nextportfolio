@@ -1,7 +1,7 @@
-@import "../public/css/base.css?ver=4";
-@import "../public/css/owl-carousel.css?ver=4";
-@import "../public/css/style.css?ver=4";
-@import "swiper/css";
+@import '../public/css/base.css?ver=4';
+@import '../public/css/owl-carousel.css?ver=4';
+@import '../public/css/style.css?ver=4';
+@import 'swiper/css';
 
 .owl-carousel {
   display: block;
@@ -17,7 +17,7 @@
   overflow: scroll;
   height: calc(100% - 0px);
 }
-.resumo_fn_modalbox .img_holder img {
+.fn_modalbox .img_holder img {
   margin-bottom: -50% !important;
   min-width: 100% !important;
   max-height: unset !important;
