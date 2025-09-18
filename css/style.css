@@ -658,7 +658,7 @@ a:focus {
   font-weight: 500;
   letter-spacing: 1px;
   color: var(--mc);
-  margin-bottom: 54px;
+  margin-bottom: 20px;
 }
 .resumo_fn_main_title .title {
   margin: 0;
@@ -686,6 +686,9 @@ a:focus {
   line-height: 44px;
   letter-spacing: 0;
   margin-bottom: 57px;
+}
+.resumo_fn_main_title {
+  margin-bottom: 74px;
 }
 /*------------------------------------------------------------------*/
 /*	06) About Section
@@ -2777,40 +2780,12 @@ body.light .dark.cursor-inner .fn-right:after,
 body.light .dark.cursor-inner .fn-right:before {
   background-color: rgba(255, 255, 255, 0.5);
 }
-body.light .resumo_fn_modalbox {
-  background-color: rgba(255, 247, 235, 0.95);
-}
-body.light .resumo_fn_modalbox .box_inner {
-  background-color: #ffffff;
-  border-color: #ede8e1;
-}
-body.light .fn__nav {
-  border-top-color: #ede8e1;
-}
-body.light .fn__nav:after {
-  background-color: #ede8e1;
-}
-body.light .fn__nav a {
-  color: #375c52;
-}
-body.light .fn__nav a:hover {
-  color: #1d1b19;
-}
-body.light .resumo_fn_modalbox .modal_content::-webkit-scrollbar-thumb {
-  border-color: #ffffff;
-}
-@media (max-width: 768px) {
-  body.light .resumo_fn_right .menu_trigger {
-    background-color: #ffffff;
-    border: 1px solid #ede8e1;
-  }
-}
 
 /*------------------------------------------------------------------*/
 /*	24) Accessibility Panel
 /*------------------------------------------------------------------*/
 
-.resumo_fn_accessibility {
+.fn_accessibility {
   position: fixed;
   top: 20px;
   left: 20px;
@@ -2834,7 +2809,7 @@ body.light .resumo_fn_modalbox .modal_content::-webkit-scrollbar-thumb {
   transition: all 0.3s ease;
 }
 
-.resumo_fn_accessibility.opened .accessibility_button {
+.fn_accessibility.opened .accessibility_button {
   background-color: var(--accent-color, #987750);
 }
 
@@ -2859,7 +2834,7 @@ body.light .resumo_fn_modalbox .modal_content::-webkit-scrollbar-thumb {
   color: #ddd; /* Make text readable in dark mode */
 }
 
-.resumo_fn_accessibility.opened .accessibility_panel {
+.fn_accessibility.opened .accessibility_panel {
   opacity: 1;
   visibility: visible;
   transform: translateY(0);
@@ -2977,7 +2952,7 @@ body.high-contrast a {
 body.high-contrast .resumo_fn_left,
 body.high-contrast .resumo_fn_right,
 body.high-contrast .resumo_fn_navigation .nav_in,
-body.high-contrast .resumo_fn_modalbox .box_inner {
+body.high-contrast .fn_modalbox .box_inner {
   background-color: #000 !important;
 }
 
@@ -2985,4 +2960,130 @@ body.high-contrast .resumo_fn_modalbox .box_inner {
 body.motion-reduced * {
   transition: none !important;
   animation: none !important;
+}
+
+/*------------------------------------------------------------------*/
+/*	24) Portfolio Modalbox
+/*------------------------------------------------------------------*/
+.fn_modalbox {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.8);
+  z-index: 100;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+}
+.fn_modalbox.opened {
+  opacity: 1;
+  visibility: visible;
+}
+.fn_modalbox .box_inner {
+  position: absolute;
+  top: 70px;
+  bottom: 70px;
+  width: 800px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #1d1b19;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  z-index: 1;
+  opacity: 0;
+  transform: translateY(20px) translateX(-50%);
+  transition: all 0.3s ease;
+}
+.fn_modalbox.opened .box_inner {
+  opacity: 1;
+  transform: translateY(0) translateX(-50%);
+}
+.fn_modalbox .extra_closer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 0;
+}
+.fn_modalbox .closer {
+  position: absolute;
+  right: -40px;
+  top: -40px;
+  width: 40px;
+  height: 40px;
+  z-index: 2;
+}
+.fn_modalbox .closer span {
+  width: 2px;
+  height: 20px;
+  background-color: #fff;
+  position: absolute;
+  top: 10px;
+  left: 19px;
+  transform: rotate(45deg);
+}
+.fn_modalbox .closer span:after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #fff;
+  transform: rotate(90deg);
+}
+.fn_modalbox .modal_content {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+}
+.fn_modalbox .modal_in {
+  padding: 40px;
+}
+.modal_portfolio .portfolio_images {
+  margin-bottom: 20px;
+}
+.modal_portfolio .portfolio_desc h3 {
+  font-size: 24px;
+  margin-bottom: 15px;
+}
+.modal_portfolio .portfolio_desc p {
+  margin-bottom: 20px;
+}
+.modal_portfolio .portfolio_desc .tags {
+  margin-bottom: 20px;
+}
+.modal_portfolio .portfolio_desc .tags span {
+  background-color: rgba(255, 255, 255, 0.1);
+  padding: 5px 10px;
+  border-radius: 3px;
+  margin-right: 10px;
+  font-size: 14px;
+}
+.modal_portfolio .portfolio_desc .links a {
+  color: var(--mc);
+  text-decoration: none;
+  margin-right: 20px;
+  border-bottom: 1px solid var(--mc);
+}
+
+/*------------------------------------------------------------------*/
+/*	25) Portfolio Carousel & Headers
+/*------------------------------------------------------------------*/
+
+#portfolio .item.modal_item {
+  background-color: #181715;
+  border: 1px solid #151412;
+  padding: 20px;
+  border-radius: 6px;
+  transition: all 0.3s ease;
+}
+#portfolio .item.modal_item:hover {
+  border-color: var(--mc);
+}
+#portfolio .img_holder {
+  border-radius: 4px;
 }
