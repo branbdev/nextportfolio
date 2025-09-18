@@ -705,6 +705,12 @@ a:focus {
   justify-content: space-between;
   margin-bottom: 126px;
 }
+/* About Section Left Content */
+.resumo_fn_about_info .about_left {
+  max-width: 700px; /* Limit the width of the content */
+  margin: 0; /* Center the content horizontally */
+  padding: 0; /* Remove any extra padding */
+}
 .resumo_fn_about_info .about_left {
   width: 100%;
   padding-right: 250px;
@@ -2712,4 +2718,20 @@ body.high-contrast .fn_modalbox .box_inner {
 body.motion-reduced * {
   transition: none !important;
   animation: none !important;
+}
+
+/* Progress Bar Styling */
+.resumo_fn_progress_bar .progress_item {
+  padding: 15px 0; /* Add spacing between items */
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2); /* Add a subtle line */
+}
+
+.resumo_fn_progress_bar .progress_item:last-child {
+  border-bottom: none; /* Remove the line for the last item */
+}
+
+.resumo_fn_progress_bar .progress_title {
+  font-size: 18px; /* Match the font size with the rest of the section */
+  font-weight: 400; /* Use a lighter font weight */
+  color: #ddd; /* Match the color with the rest of the section */
 }
