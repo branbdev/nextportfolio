@@ -6,36 +6,37 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build && next export",
+    "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "deploy": "next build && next export && gh-pages -d out",
+    "deploy": "next build && gh-pages -d out",
     "postexport": "cp CNAME out/CNAME && touch out/.nojekyll"
   },
   "dependencies": {
-    "@emailjs/browser": "^3.6.2",
-    "dotenv": "^16.0.3",
-    "emailjs": "^4.0.0",
-    "next": "^12.3.4",
-    "react": "17.0.2",
-    "react-dom": "17.0.2",
-    "swiper": "^8.3.2",
-    "typed.js": "^2.0.12"
+    "@emailjs/browser": "^4.4.1",
+    "dotenv": "^17.2.2",
+    "emailjs": "^4.0.3",
+    "next": "^15.5.3",
+    "react": "19.1.1",
+    "react-dom": "19.1.1",
+    "swiper": "^12.0.1",
+    "typed.js": "^2.1.0"
   },
   "devDependencies": {
-    "babel-eslint": "^10.1.0",
-    "eslint": "^7.32.0",
-    "eslint-config-next": "^12.2.5",
+    "@babel/eslint-parser": "^7.28.4",
+    "eslint": "^9.35.0",
+    "eslint-config-next": "^15.5.3",
     "gh-pages": "^6.3.0"
   },
   "eslintConfig": {
-    "extends": "eslint:recommended",
-    "root": true,
+    "extends": [
+      "eslint:recommended",
+      "next/core-web-vitals"
+    ],
     "rules": {
       "react/no-unescaped-entities": "off",
       "@next/next/no-page-custom-font": "off",
-      "@next/next/no-img-element": "off",
-      "parser": "babel-eslint"
+      "@next/next/no-img-element": "off"
     }
   }
 }

@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 
 const Accessibility = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -18,12 +18,7 @@ const Accessibility = () => {
     }
   }, []);
 
-  useEffect(() => {
-    localStorage.setItem('accessibilitySettings', JSON.stringify(settings));
-    applySettings();
-  }, [settings]);
-
-  const applySettings = () => {
+  const applySettings = useCallback(() => {
     const body = document.body;
     // Theme
     if (settings.theme === 'light') {
@@ -45,7 +40,12 @@ const Accessibility = () => {
     }
     // Font Size
     document.documentElement.style.fontSize = `${settings.fontSize}px`;
-  };
+  }, [settings]);
+
+  useEffect(() => {
+    localStorage.setItem('accessibilitySettings', JSON.stringify(settings));
+    applySettings();
+  }, [settings, applySettings]);
 
   const handleThemeChange = (theme) => {
     setSettings({ ...settings, theme });

@@ -36,56 +36,53 @@ export const customCursor = () => {
   }
   if (myCursor.length) {
     if (document.body) {
-      let n,
-        i = 0,
-        o = !1;
-      (window.onmousemove = function (s) {
+      let o = false;
+      window.onmousemove = (s) => {
         // console.log(document.querySelector(this));
-        o ||
-          (t.style.transform =
-            'translate(' + s.clientX + 'px, ' + s.clientY + 'px)'),
-          (e.style.transform =
-            'translate(' + s.clientX + 'px, ' + s.clientY + 'px)'),
-          (n = s.clientY),
-          (i = s.clientX);
-      }),
-        document.body.addEventListener(
-          'mouseenter',
-          // "a,.kura_tm_topbar .trigger, .cursor-pointer",
-          function () {
-            let a = document.querySelectorAll('a'),
-              sliders = document.querySelectorAll(
-                '.owl-carousel, .swiper-container, .cursor-link'
-              ),
-              slider = document.querySelectorAll('.modal_item');
-            e.classList.add('cursor-inner'), t.classList.add('cursor-outer');
+        if (!o) {
+          t.style.transform =
+            'translate(' + s.clientX + 'px, ' + s.clientY + 'px)';
+          e.style.transform =
+            'translate(' + s.clientX + 'px, ' + s.clientY + 'px)';
+        }
+      };
+      document.body.addEventListener(
+        'mouseenter',
+        // "a,.kura_tm_topbar .trigger, .cursor-pointer",
+        function () {
+          let a = document.querySelectorAll('a'),
+            sliders = document.querySelectorAll(
+              '.owl-carousel, .swiper-container, .cursor-link'
+            ),
+            slider = document.querySelectorAll('.modal_item');
+          e.classList.add('cursor-inner'), t.classList.add('cursor-outer');
 
-            for (let i = 0; i < a.length; i++) {
-              const element = a[i];
-              mouseEvent(element);
-            }
-
-            for (let i = 0; i < sliders.length; i++) {
-              const element = sliders[i];
-              element.addEventListener('mouseenter', function () {
-                e.classList.add('cursor-slider'),
-                  t.classList.add('cursor-slider');
-              });
-              element.addEventListener('mouseleave', function () {
-                e.classList.remove('cursor-slider'),
-                  t.classList.remove('cursor-slider');
-              });
-            }
-            for (let i = 0; i < slider.length; i++) {
-              const element = slider[i];
-              mouseEvent(element);
-            }
-
-            hamburger && mouseEvent(hamburger);
-            kura_tm_topbar && mouseEvent(kura_tm_topbar);
-            pointer && mouseEvent(pointer);
+          for (let i = 0; i < a.length; i++) {
+            const element = a[i];
+            mouseEvent(element);
           }
-        ),
+
+          for (let i = 0; i < sliders.length; i++) {
+            const element = sliders[i];
+            element.addEventListener('mouseenter', function () {
+              e.classList.add('cursor-slider'),
+                t.classList.add('cursor-slider');
+            });
+            element.addEventListener('mouseleave', function () {
+              e.classList.remove('cursor-slider'),
+                t.classList.remove('cursor-slider');
+            });
+          }
+          for (let i = 0; i < slider.length; i++) {
+            const element = slider[i];
+            mouseEvent(element);
+          }
+
+          hamburger && mouseEvent(hamburger);
+          kura_tm_topbar && mouseEvent(kura_tm_topbar);
+          pointer && mouseEvent(pointer);
+        }
+      ),
         (e.style.visibility = 'visible'),
         (t.style.visibility = 'visible');
     }

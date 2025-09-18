@@ -1,11 +1,3 @@
-import SwiperCore, {
-  Autoplay,
-  EffectFade,
-  Navigation,
-  Pagination,
-} from 'swiper';
-SwiperCore.use([Pagination, Navigation, Autoplay, EffectFade]);
-
 export const portfolioSliderProps = {
   slidesPerView: 1,
   loop: true,

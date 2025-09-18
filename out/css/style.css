@@ -8,23 +8,21 @@
  04) Right Hidden Navigation
  05) Home Section
  06) About Section
- 07) CV Button
- 08) Tabs Shortcode
- 09) Boxed List
- 10) Progress Bar
- 11) Magic Cursor
- 12) Portfolio Section
- 13) Services List
- 14) Partners
- 15) Testimonials
- 16) Blog List
- 17) Pulse animation
- 18) Contact
- 19) Contact Information
- 20) Footer
- 21) Intro
- 22) Responsive
- 23) Light Version */
+ 07) Tabs Shortcode
+ 08) Boxed List
+ 09) Magic Cursor
+ 10) Portfolio Section
+ 11) Portfolio Modalbox
+ 12) Navigation
+ 13) Blog List
+ 14) Pulse animation
+ 15) Contact
+ 16) Contact Information
+ 17) Footer
+ 18) Intro
+ 19) Responsive
+ 20) Light Version 
+ 21) Accessibility Panel
 
 /*------------------------------------------------------------------*/
 /*	01) Base
@@ -151,7 +149,6 @@ a:focus {
 /*------------------------------------------------------------------*/
 /*	03) Site Right
 /*------------------------------------------------------------------*/
-/*  */
 .experience-list li::before {
   color: white;
   content: '\2022'; /* Add content: \2022 is the CSS Code/unicode for a bullet */
@@ -710,6 +707,7 @@ a:focus {
 }
 .resumo_fn_about_info .about_left {
   width: 100%;
+  padding-right: 250px;
 }
 .resumo_fn_about_info table {
   table-layout: fixed;
@@ -744,86 +742,7 @@ a:focus {
   text-transform: uppercase;
 }
 /*------------------------------------------------------------------*/
-/*	07) CV Button
-/*------------------------------------------------------------------*/
-.resumo_fn_cv_btn {
-  display: -webkit-flex;
-  display: -moz-flex;
-  display: -ms-flex;
-  display: -o-flex;
-  display: flex;
-  position: relative;
-  margin-left: 70px;
-}
-.resumo_fn_cv_btn a {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  max-width: 100%;
-  width: 340px;
-  height: 220px;
-  text-decoration: none;
-  font-size: 18px;
-  color: #888;
-  font-weight: 500;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  border: 2px solid rgba(255, 255, 255, 0.2);
-}
-.resumo_fn_cv_btn a:hover {
-  border-color: var(--mc);
-}
-.resumo_fn_cv_btn .icon {
-  position: relative;
-  padding-top: 18px;
-  color: #ddd;
-}
-.resumo_fn_cv_btn .fn__svg {
-  width: 58px;
-  height: 58px;
-  display: block;
-  margin-bottom: 14px;
-}
-.resumo_fn_cv_btn .fn__svg.arrow {
-  position: absolute;
-  left: 50%;
-  margin-left: -29px;
-  top: 8px;
-  will-change: transform;
-}
-.resumo_fn_cv_btn a:hover .fn__svg.arrow {
-  -webkit-animation: down_animation 1s ease infinite alternate;
-  -moz-animation: down_animation 1s ease infinite alternate;
-  animation: down_animation 1s ease infinite alternate;
-  transform: translateY(0px);
-}
-@keyframes down_animation {
-  100% {
-    transform: translateY(-10px);
-  }
-  0% {
-    transform: translateY(0);
-  }
-}
-@-webkit-keyframes down_animation {
-  100% {
-    transform: translateY(-10px);
-  }
-  0% {
-    transform: translateY(0);
-  }
-}
-@-moz-keyframes down_animation {
-  100% {
-    transform: translateY(-10px);
-  }
-  0% {
-    transform: translateY(0);
-  }
-}
-/*------------------------------------------------------------------*/
-/*	08) Tabs Shortcode
+/*	07) Tabs Shortcode
 /*------------------------------------------------------------------*/
 .resumo_fn_tabs {
   width: 100%;
@@ -911,7 +830,7 @@ a:focus {
   }
 }
 /*------------------------------------------------------------------*/
-/*	09) Boxed List
+/*	08) Boxed List
 /*------------------------------------------------------------------*/
 .resumo_fn_boxed_list ul {
   list-style-type: none;
@@ -988,120 +907,7 @@ a:focus {
   font-weight: 600;
 }
 /*------------------------------------------------------------------*/
-/*	10) Progress Bar
-/*------------------------------------------------------------------*/
-.resumo_fn_progress_bar {
-  margin-bottom: 36px;
-}
-.resumo_fn_progress_bar .progress_item {
-  width: 100%;
-  float: left;
-  clear: both;
-  margin-bottom: 17px;
-}
-.resumo_fn_progress_bar .progress_item:last-child {
-  margin-bottom: 0;
-}
-.resumo_fn_progress_bar .progress_percent {
-  position: absolute;
-  z-index: 2;
-  padding: 0 8px;
-  line-height: 24px;
-  font-size: 14px;
-  font-weight: 400;
-  display: block;
-  bottom: 10px;
-  right: 100%;
-  color: var(--mc);
-  background-color: rgba(255, 255, 255, 0.05);
-  transition: all 3s cubic-bezier(0.165, 0.84, 0.44, 1);
-  transform: translateX(50%);
-}
-.resumo_fn_progress_bar .progress_percent:after {
-  content: '';
-  position: absolute;
-  width: 0;
-  height: 0;
-  display: block;
-  border: 4px solid transparent;
-  border-top-color: rgba(255, 255, 255, 0.05);
-  bottom: -8px;
-  left: 50%;
-  margin-left: -4px;
-}
-.resumo_fn_progress_bar .progress_title {
-  margin: 0;
-  font-size: 18px;
-  font-weight: 400;
-  position: relative;
-  z-index: 2;
-  line-height: 40px;
-  color: #888;
-  margin-bottom: 1px;
-}
-.resumo_fn_progress_bar .item_in {
-  width: 100%;
-  position: relative;
-  overflow: hidden;
-}
-.resumo_fn_progress_bar .bg_wrap {
-  width: 100%;
-  position: relative;
-  z-index: 1;
-  height: 1px;
-  background-color: #333;
-}
-.resumo_fn_progress_bar .progress_bg {
-  width: 0;
-  position: absolute;
-  z-index: 1;
-  top: 0;
-  left: 0;
-  bottom: 0;
-}
-.resumo_fn_progress_bar .progress_bg:after {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  background-color: var(--mc);
-}
-.resumo_fn_progress_bar .open .progress_bg:after {
-  width: 100%;
-  -webkit-animation: progress_animation 3s cubic-bezier(0.165, 0.84, 0.44, 1); /* Safari 4+ */
-  -moz-animation: progress_animation 3s cubic-bezier(0.165, 0.84, 0.44, 1); /* Fx 5+ */
-  animation: progress_animation 3s cubic-bezier(0.165, 0.84, 0.44, 1); /* IE 10+ */
-}
-@-webkit-keyframes progress_animation {
-  0% {
-    width: 0%;
-  }
-  100% {
-    width: 100%;
-  }
-}
-@-moz-keyframes progress_animation {
-  0% {
-    width: 0%;
-  }
-  100% {
-    width: 100%;
-  }
-}
-@keyframes progress_animation {
-  0% {
-    width: 0%;
-  }
-  100% {
-    width: 100%;
-  }
-}
-.resumo_fn_desc p {
-  max-width: 500px;
-}
-/*------------------------------------------------------------------*/
-/*	11) Magic Cursor
+/*	09) Magic Cursor
 /*------------------------------------------------------------------*/
 .frenify-cursor[data-default='no'] {
   opacity: 0;
@@ -1274,7 +1080,7 @@ a:focus {
   transition: all 0.3s ease;
 }
 /*------------------------------------------------------------------*/
-/*	12) Portfolio Section
+/*	10) Portfolio Section
 /*------------------------------------------------------------------*/
 #portfolio {
   padding: 150px 0 39px;
@@ -1330,6 +1136,130 @@ a:focus {
   right: 0;
   widows: auto;
 }
+#portfolio .item.modal_item {
+  background-color: #181715;
+  border: 1px solid #151412;
+  padding: 20px;
+  border-radius: 6px;
+  transition: all 0.3s ease;
+}
+#portfolio .item.modal_item:hover {
+  border-color: var(--mc);
+}
+#portfolio .img_holder {
+  border-radius: 4px;
+}
+
+/*------------------------------------------------------------------*/
+/*	11) Portfolio Modalbox
+/*------------------------------------------------------------------*/
+.fn_modalbox {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.8);
+  z-index: 100;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+}
+.fn_modalbox.opened {
+  opacity: 1;
+  visibility: visible;
+}
+.fn_modalbox .box_inner {
+  position: absolute;
+  top: 70px;
+  bottom: 70px;
+  width: 800px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #1d1b19;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  z-index: 1;
+  opacity: 0;
+  transform: translateY(20px) translateX(-50%);
+  transition: all 0.3s ease;
+}
+.fn_modalbox.opened .box_inner {
+  opacity: 1;
+  transform: translateY(0) translateX(-50%);
+}
+.fn_modalbox .extra_closer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 0;
+}
+.fn_modalbox .closer {
+  position: absolute;
+  right: -40px;
+  top: -40px;
+  width: 40px;
+  height: 40px;
+  z-index: 2;
+}
+.fn_modalbox .closer span {
+  width: 2px;
+  height: 20px;
+  background-color: #fff;
+  position: absolute;
+  top: 10px;
+  left: 19px;
+  transform: rotate(45deg);
+}
+.fn_modalbox .closer span:after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #fff;
+  transform: rotate(90deg);
+}
+.fn_modalbox .modal_content {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+}
+.fn_modalbox .modal_in {
+  padding: 40px;
+}
+.modal_portfolio .portfolio_images {
+  margin-bottom: 20px;
+}
+.modal_portfolio .portfolio_desc h3 {
+  font-size: 24px;
+  margin-bottom: 15px;
+}
+.modal_portfolio .portfolio_desc p {
+  margin-bottom: 20px;
+}
+.modal_portfolio .portfolio_desc .tags {
+  margin-bottom: 20px;
+}
+.modal_portfolio .portfolio_desc .tags span {
+  background-color: rgba(255, 255, 255, 0.1);
+  padding: 5px 10px;
+  border-radius: 3px;
+  margin-right: 10px;
+  font-size: 14px;
+}
+.modal_portfolio .portfolio_desc .links a {
+  color: var(--mc);
+  text-decoration: none;
+  margin-right: 20px;
+  border-bottom: 1px solid var(--mc);
+}
+/*------------------------------------------------------------------*/
+/*	12) Nav
+/*------------------------------------------------------------------*/
 .my__nav {
   display: -webkit-flex;
   display: -moz-flex;
@@ -1417,182 +1347,7 @@ a:focus {
   transform: scale(1.23);
 }
 /*------------------------------------------------------------------*/
-/*	13) Services List
-/*------------------------------------------------------------------*/
-#services {
-  padding: 150px 0 27px;
-}
-#services .resumo_fn_main_title {
-  margin-bottom: 88px;
-}
-.resumo_fn_service_list ul {
-  margin: 0;
-  padding: 0;
-  list-style-type: none;
-}
-.resumo_fn_service_list li {
-  margin: 0;
-  padding: 0;
-  margin-bottom: 20px;
-}
-.resumo_fn_service_list .item {
-  width: 100%;
-  display: -webkit-flex;
-  display: -moz-flex;
-  display: -ms-flex;
-  display: -o-flex;
-  display: flex;
-  background-color: #181715;
-  border: 1px solid #151412;
-}
-.resumo_fn_service_list .item_right {
-  width: 30%;
-  min-width: 30%;
-  display: -webkit-flex;
-  display: -moz-flex;
-  display: -ms-flex;
-  display: -o-flex;
-  display: flex;
-  -webkit-flex-direction: column;
-  -moz-flex-direction: column;
-  -ms-flex-direction: column;
-  -o-flex-direction: column;
-  flex-direction: column;
-  -ms-align-items: center;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  border-left: 1px solid rgba(255, 255, 255, 0.05);
-  padding: 10px;
-}
-.resumo_fn_service_list .item_left {
-  padding: 42px 40px 43px;
-  position: relative;
-  width: 100%;
-}
-.resumo_fn_service_list .item_left:after {
-  content: '';
-  position: absolute;
-  width: 3px;
-  height: 50px;
-  left: -1px;
-  top: 50%;
-  transform: translateY(-50%);
-  background-color: rgba(255, 255, 255, 0.2);
-  transition: all 0.5s ease;
-}
-.resumo_fn_service_list .item_left h3 {
-  margin: 0;
-  padding: 0;
-  font-weight: 400;
-  margin-bottom: 18px;
-}
-.resumo_fn_service_list .item_left p {
-  max-width: 400px;
-  margin: 0;
-  padding: 0;
-}
-.resumo_fn_service_list .item_right p {
-  margin: 0;
-  padding: 0;
-  font-size: 16px;
-  margin-bottom: 4px;
-}
-.resumo_fn_service_list .item_right h3 {
-  margin: 0;
-  padding: 0;
-  color: var(--mc);
-  font-weight: 500;
-  font-size: 24px;
-}
-/*------------------------------------------------------------------*/
-/*	14) Partners
-/*------------------------------------------------------------------*/
-#customers {
-  padding: 150px 0 42px;
-}
-#customers .resumo_fn_main_title {
-  margin-bottom: 70px;
-}
-.resumo_fn_partners {
-  margin-bottom: 139px;
-}
-.resumo_fn_partners ul {
-  margin: 0;
-  padding: 0;
-  list-style-type: none;
-  margin-left: -10px;
-  display: -webkit-flex;
-  display: -moz-flex;
-  display: -ms-flex;
-  display: -o-flex;
-  display: flex;
-  -webkit-flex-direction: row;
-  -moz-flex-direction: row;
-  -ms-flex-direction: row;
-  -o-flex-direction: row;
-  flex-direction: row;
-  flex-wrap: wrap;
-}
-.resumo_fn_partners li {
-  margin: 0;
-  padding: 0;
-  width: 33.3333%;
-  padding-left: 10px;
-  margin-bottom: 10px;
-}
-.resumo_fn_partners a {
-  display: -webkit-flex;
-  display: -moz-flex;
-  display: -ms-flex;
-  display: -o-flex;
-  display: flex;
-  -ms-align-items: center;
-  align-items: center;
-  justify-content: center;
-  text-decoration: none;
-  height: 200px;
-  padding: 15px;
-  text-align: center;
-  background-color: #181715;
-}
-.resumo_fn_partners a:hover {
-  background-color: #111;
-}
-.resumo_fn_partners img {
-  max-width: 180px;
-}
-/*------------------------------------------------------------------*/
-/*	15) Testimonials
-/*------------------------------------------------------------------*/
-.resumo_fn_testimonials .my__nav {
-  margin-bottom: 60px;
-}
-.resumo_fn_testimonials .desc {
-  margin: 0;
-  padding: 0;
-  font-size: 30px;
-  line-height: 44px;
-  font-weight: 400;
-  margin-bottom: 52px;
-}
-.resumo_fn_testimonials .title {
-  margin: 0;
-  padding: 0;
-  font-size: 30px;
-  font-weight: 400;
-  margin-bottom: 9px;
-}
-.resumo_fn_testimonials .subtitle {
-  margin: 0;
-  padding: 0;
-  font-size: 18px;
-  color: #888;
-  font-weight: 400;
-  text-transform: uppercase;
-}
-/*------------------------------------------------------------------*/
-/*	16) Blog List
+/*	13) Blog List
 /*------------------------------------------------------------------*/
 #news {
   padding: 150px 0 47px;
@@ -1710,7 +1465,7 @@ a:focus {
   visibility: visible;
 }
 /*------------------------------------------------------------------*/
-/*	17) Pulse animation
+/*	14) Pulse animation
 /*------------------------------------------------------------------*/
 .fn__pulse {
   width: 120px;
@@ -1811,7 +1566,7 @@ a:focus {
   animation-name: fadeInTop;
 }
 /*------------------------------------------------------------------*/
-/*	18) Contact
+/*	15) Contact
 /*------------------------------------------------------------------*/
 #contact {
   padding: 150px 0 200px;
@@ -1939,7 +1694,7 @@ a:focus {
   color: #dd3936;
 }
 /*------------------------------------------------------------------*/
-/*	19) Contact Information
+/*	16) Contact Information
 /*------------------------------------------------------------------*/
 .resumo_fn_contact_info {
   padding: 95px 0 0;
@@ -1979,7 +1734,7 @@ a:focus {
   border-bottom-color: rgba(255, 255, 255, 0.4);
 }
 /*------------------------------------------------------------------*/
-/*	20) Footer
+/*	17) Footer
 /*------------------------------------------------------------------*/
 #footer {
   width: 100%;
@@ -2083,7 +1838,7 @@ a:focus {
   margin-top: 4px;
 }
 /*------------------------------------------------------------------*/
-/*	21) Intro
+/*	18) Intro
 /*------------------------------------------------------------------*/
 .resumo_fn_intro {
   padding: 0 50px 50px;
@@ -2229,7 +1984,7 @@ a:focus {
 }
 
 /*------------------------------------------------------------------*/
-/*	22) Responsive
+/*	19) Responsive
 /*------------------------------------------------------------------*/
 @media (max-width: 1400px) {
   .resumo_fn_about_info {
@@ -2244,9 +1999,6 @@ a:focus {
   }
   .resumo_fn_about_info .about_left {
     margin-bottom: 54px;
-  }
-  .resumo_fn_cv_btn a {
-    width: 100%;
   }
   .container {
     padding: 0 8%;
@@ -2486,7 +2238,7 @@ a:focus {
 }
 
 /*------------------------------------------------------------------*/
-/*	23) Light Version
+/*	20) Light Version
 /*------------------------------------------------------------------*/
 body.light {
   --mc: #e0b75d; /* Soft Gold Accent */
@@ -2782,7 +2534,7 @@ body.light .dark.cursor-inner .fn-right:before {
 }
 
 /*------------------------------------------------------------------*/
-/*	24) Accessibility Panel
+/*	21) Accessibility Panel
 /*------------------------------------------------------------------*/
 
 .fn_accessibility {
@@ -2960,130 +2712,4 @@ body.high-contrast .fn_modalbox .box_inner {
 body.motion-reduced * {
   transition: none !important;
   animation: none !important;
-}
-
-/*------------------------------------------------------------------*/
-/*	24) Portfolio Modalbox
-/*------------------------------------------------------------------*/
-.fn_modalbox {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: rgba(0, 0, 0, 0.8);
-  z-index: 100;
-  opacity: 0;
-  visibility: hidden;
-  transition: all 0.3s ease;
-}
-.fn_modalbox.opened {
-  opacity: 1;
-  visibility: visible;
-}
-.fn_modalbox .box_inner {
-  position: absolute;
-  top: 70px;
-  bottom: 70px;
-  width: 800px;
-  left: 50%;
-  transform: translateX(-50%);
-  background-color: #1d1b19;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  z-index: 1;
-  opacity: 0;
-  transform: translateY(20px) translateX(-50%);
-  transition: all 0.3s ease;
-}
-.fn_modalbox.opened .box_inner {
-  opacity: 1;
-  transform: translateY(0) translateX(-50%);
-}
-.fn_modalbox .extra_closer {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  z-index: 0;
-}
-.fn_modalbox .closer {
-  position: absolute;
-  right: -40px;
-  top: -40px;
-  width: 40px;
-  height: 40px;
-  z-index: 2;
-}
-.fn_modalbox .closer span {
-  width: 2px;
-  height: 20px;
-  background-color: #fff;
-  position: absolute;
-  top: 10px;
-  left: 19px;
-  transform: rotate(45deg);
-}
-.fn_modalbox .closer span:after {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: #fff;
-  transform: rotate(90deg);
-}
-.fn_modalbox .modal_content {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  overflow: auto;
-}
-.fn_modalbox .modal_in {
-  padding: 40px;
-}
-.modal_portfolio .portfolio_images {
-  margin-bottom: 20px;
-}
-.modal_portfolio .portfolio_desc h3 {
-  font-size: 24px;
-  margin-bottom: 15px;
-}
-.modal_portfolio .portfolio_desc p {
-  margin-bottom: 20px;
-}
-.modal_portfolio .portfolio_desc .tags {
-  margin-bottom: 20px;
-}
-.modal_portfolio .portfolio_desc .tags span {
-  background-color: rgba(255, 255, 255, 0.1);
-  padding: 5px 10px;
-  border-radius: 3px;
-  margin-right: 10px;
-  font-size: 14px;
-}
-.modal_portfolio .portfolio_desc .links a {
-  color: var(--mc);
-  text-decoration: none;
-  margin-right: 20px;
-  border-bottom: 1px solid var(--mc);
-}
-
-/*------------------------------------------------------------------*/
-/*	25) Portfolio Carousel & Headers
-/*------------------------------------------------------------------*/
-
-#portfolio .item.modal_item {
-  background-color: #181715;
-  border: 1px solid #151412;
-  padding: 20px;
-  border-radius: 6px;
-  transition: all 0.3s ease;
-}
-#portfolio .item.modal_item:hover {
-  border-color: var(--mc);
-}
-#portfolio .img_holder {
-  border-radius: 4px;
 }

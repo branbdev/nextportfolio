@@ -39,7 +39,6 @@ const About = () => {
                 </tbody>
               </table>
             </div>
-            <div className='about_right'>{/* Download CV Button */}</div>
           </div>
           {/* /About Information */}
           {/* Tabs Shortcode */}
@@ -79,23 +78,20 @@ const About = () => {
                           <span>( 2020 — Today )</span>
                         </div>
                         <h3>Freelance Web Developer</h3>
-                        <p>
-                          <ul className='experience-list'>
-                            <li>
-                              Collaborated with clients to make make user story
-                              and feature list of desired web app.
-                            </li>
-                            <li>
-                              Used tools like Figma to make mockups of different
-                              designs.
-                            </li>
-                            <li>
-                              Developed functioning web applications with
-                              industry leading technology according to client
-                              need.
-                            </li>
-                          </ul>{' '}
-                        </p>
+                        <ul className='experience-list'>
+                          <li>
+                            Collaborated with clients to make make user story
+                            and feature list of desired web app.
+                          </li>
+                          <li>
+                            Used tools like Figma to make mockups of different
+                            designs.
+                          </li>
+                          <li>
+                            Developed functioning web applications with industry
+                            leading technology according to client need.
+                          </li>
+                        </ul>{' '}
                       </div>
                     </li>
                   </ul>
@@ -237,7 +233,7 @@ const About = () => {
                   </div>
                   <div className='progress_item open' data-value={85}>
                     <div className='item_in'>
-                      <h3 className='progress_title'>Git</h3>
+                      <h3 className='progress_title'>Docker</h3>
                       <span
                         className='progress_percent'
                         style={{ right: '0%' }}>
