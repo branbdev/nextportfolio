@@ -2927,7 +2927,17 @@ body.dyslexic-font {
 }
 
 /* Make sure all text elements use relative units */
-h1, h2, h3, h4, h5, h6, p, span, a, button, input {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+span,
+a,
+button,
+input {
   font-size: inherit;
 }
 
