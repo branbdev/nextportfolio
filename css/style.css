@@ -28,6 +28,7 @@
 /*	01) Base
  /*------------------------------------------------------------------*/
 :root {
+  --base-font-size: 16px;
   --mc: #987750;
   --tc: #888;
 }
@@ -38,7 +39,7 @@ html {
 }
 body {
   font-family: 'Jost', Arial, Helvetica, sans-serif;
-  font-size: 18px;
+  font-size: var(--base-font-size);
   line-height: 1.44;
   letter-spacing: 0;
   font-weight: 400;
@@ -1156,6 +1157,40 @@ a:focus {
   border-radius: 4px;
 }
 
+/* Portfolio Items */
+.portfolio_item {
+  cursor: pointer;
+  transition: transform 0.3s ease;
+  background: #181715;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.portfolio_item:hover {
+  transform: translateY(-5px);
+}
+
+.portfolio_item .img_holder {
+  position: relative;
+  overflow: hidden;
+  border-radius: 8px 8px 0 0;
+}
+
+.portfolio_item .title_holder {
+  padding: 20px;
+}
+
+.portfolio_item .title_holder p {
+  color: var(--mc);
+  font-size: 14px;
+  margin-bottom: 8px;
+}
+
+.portfolio_item .title_holder h3 {
+  font-size: 20px;
+  margin: 0;
+}
+
 /*------------------------------------------------------------------*/
 /*	11) Portfolio Modalbox
 /*------------------------------------------------------------------*/
@@ -1262,6 +1297,128 @@ a:focus {
   text-decoration: none;
   margin-right: 20px;
   border-bottom: 1px solid var(--mc);
+}
+
+/* Modal Styles */
+.modal_overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.85);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  animation: fadeIn 0.3s ease;
+}
+
+.modal_content {
+  background: #1d1b19;
+  width: 90%;
+  max-width: 800px;
+  max-height: 80vh;
+  border-radius: 12px;
+  overflow: hidden;
+  animation: slideUp 0.3s ease;
+}
+
+.modal_header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.modal_header h2 {
+  margin: 0;
+  font-size: 24px;
+}
+
+.close_button {
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 28px;
+  cursor: pointer;
+  padding: 0 8px;
+}
+
+.modal_body {
+  padding: 20px;
+  overflow-y: auto;
+}
+
+.modal_image {
+  width: 100%;
+  border-radius: 8px;
+  overflow: hidden;
+  margin-bottom: 20px;
+}
+
+.modal_image img {
+  width: 100%;
+  height: auto;
+}
+
+.tech_stack {
+  margin-bottom: 15px;
+}
+
+.tech_tag {
+  display: inline-block;
+  padding: 5px 12px;
+  margin-right: 8px;
+  background: var(--mc);
+  color: #fff;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+.project_description {
+  margin-bottom: 20px;
+  line-height: 1.6;
+}
+
+.project_links {
+  display: flex;
+  gap: 15px;
+}
+
+.project_links a {
+  padding: 8px 20px;
+  border: 1px solid var(--mc);
+  border-radius: 4px;
+  color: var(--mc);
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.project_links a:hover {
+  background: var(--mc);
+  color: #fff;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 /*------------------------------------------------------------------*/
 /*	12) Nav
@@ -2734,4 +2891,54 @@ body.motion-reduced * {
   font-size: 18px; /* Match the font size with the rest of the section */
   font-weight: 400; /* Use a lighter font weight */
   color: #ddd; /* Match the color with the rest of the section */
+}
+
+/* Accessibility Styles */
+body.focus-mode p {
+  max-width: 60ch;
+  margin: 0 auto;
+}
+
+body.focus-mode .resumo_fn_right,
+body.focus-mode .resumo_fn_navigation {
+  opacity: 0.5;
+  transition: opacity 0.3s ease;
+}
+
+body.focus-mode .resumo_fn_right:hover,
+body.focus-mode .resumo_fn_navigation:hover {
+  opacity: 1;
+}
+
+/* Font Size Controls */
+:root {
+  --base-font-size: 16px;
+}
+
+body {
+  font-size: var(--base-font-size);
+}
+
+/* Dyslexic Font Support */
+body.dyslexic-font {
+  font-family: 'OpenDyslexic', 'Comic Sans MS', sans-serif;
+  letter-spacing: 0.05em;
+  word-spacing: 0.1em;
+}
+
+/* Make sure all text elements use relative units */
+h1, h2, h3, h4, h5, h6, p, span, a, button, input {
+  font-size: inherit;
+}
+
+.resumo_fn_main_title h3.title {
+  font-size: calc(var(--base-font-size) * 2);
+}
+
+.resumo_fn_main_title h3.subtitle {
+  font-size: calc(var(--base-font-size) * 1.125);
+}
+
+.resumo_fn_main_title p.desc {
+  font-size: calc(var(--base-font-size) * 1.875);
 }
