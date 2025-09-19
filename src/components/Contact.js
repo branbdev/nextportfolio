@@ -36,8 +36,8 @@ const Contact = () => {
       return;
     }
 
-    // 2. Check for required fields
-    if (!emailValue || !nameValue) {
+    // 2. Check for required fields, including the reCAPTCHA token
+    if (!emailValue || !nameValue || !recaptchaToken) {
       setError(true);
       setTimeout(() => setError(false), 3000);
       return;
@@ -181,13 +181,6 @@ const Contact = () => {
                 </div>
                 <div className='item'>
                   <ReCAPTCHA onVerify={setRecaptchaToken} />
-                </div>
-                <div className='item'>
-                  <input
-                    type='hidden'
-                    name='g-recaptcha-response'
-                    value={recaptchaToken}
-                  />
                 </div>
                 <div className='item'>
                   <input
