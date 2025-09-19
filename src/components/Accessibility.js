@@ -7,6 +7,8 @@ const Accessibility = () => {
     contrast: false,
     motion: false,
     fontSize: 16,
+    dyslexicFont: false,
+    focusMode: false, // Add to settings state
   });
 
   useEffect(() => {
@@ -38,6 +40,18 @@ const Accessibility = () => {
     } else {
       body.classList.remove('motion-reduced');
     }
+    // Dyslexic Font
+    if (settings.dyslexicFont) {
+      body.classList.add('dyslexic-font');
+    } else {
+      body.classList.remove('dyslexic-font');
+    }
+    // Focus Mode
+    if (settings.focusMode) {
+      body.classList.add('focus-mode');
+    } else {
+      body.classList.remove('focus-mode');
+    }
     // Font Size
     document.documentElement.style.fontSize = `${settings.fontSize}px`;
   }, [settings]);
@@ -63,6 +77,10 @@ const Accessibility = () => {
       newSize = Math.max(newSize - 2, 12);
     }
     setSettings({ ...settings, fontSize: newSize });
+    document.documentElement.style.setProperty(
+      '--base-font-size',
+      `${newSize}px`
+    );
   };
 
   return (
@@ -147,6 +165,28 @@ const Accessibility = () => {
               A+
             </button>
           </div>
+        </div>
+        <div className='panel_item'>
+          <span>Dyslexia-Friendly Font</span>
+          <label className='switch'>
+            <input
+              type='checkbox'
+              checked={settings.dyslexicFont}
+              onChange={() => handleToggleChange('dyslexicFont')}
+            />
+            <span className='slider'></span>
+          </label>
+        </div>
+        <div className='panel_item'>
+          <span>Focus Mode</span>
+          <label className='switch'>
+            <input
+              type='checkbox'
+              checked={settings.focusMode}
+              onChange={() => handleToggleChange('focusMode')}
+            />
+            <span className='slider'></span>
+          </label>
         </div>
       </div>
     </div>

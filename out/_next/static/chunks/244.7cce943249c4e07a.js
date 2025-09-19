@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunk_N_E=self.webpackChunk_N_E||[]).push([[244],{8244:(e,a,s)=>{s.r(a),s.d(a,{default:()=>c});var t=s(7876);let c=()=>(0,t.jsx)("div",{className:"g-recaptcha","data-sitekey":"6LcRNsorAAAAAGKbm9UFTZtKSna107UuUDD_UePe"})}}]);

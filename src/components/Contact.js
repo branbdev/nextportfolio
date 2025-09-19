@@ -47,7 +47,7 @@ const Contact = () => {
       await emailjs.sendForm(
         'service_aht8d0r',
         'template_ssz1szh',
-        formData,
+        e.target, // Pass the form element, NOT formData
         process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY
       );
 

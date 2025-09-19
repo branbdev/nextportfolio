@@ -6,3 +6,6 @@ const nextConfig = {
   // basePath: '/nextportfolio',
 };
 module.exports = nextConfig;
+
+// Content-Security-Policy: frame-ancestors 'self' https://www.google.com
+//Possible Github Pages limitation to Google recaptcha
