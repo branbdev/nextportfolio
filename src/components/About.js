@@ -121,144 +121,85 @@ const About = () => {
               {/* /#2 tab content */}
               {/* #3 tab content */}
               <div id='tab3' className={`tab_item ${activeList('tab3')}`}>
-                {/* Progress Bar */}
-                <div className='resumo_fn_progress_bar'>
-                  <div className='progress_item open' data-value={92}>
-                    <div className='item_in'>
-                      <h3 className='progress_title'>Javascript</h3>
-                      <span
-                        className='progress_percent'
-                        style={{ right: '0%' }}>
-                        {/* 92% */}
-                      </span>
-                      <div className='bg_wrap'>
-                        <div className='progress_bg' style={{ width: '0%' }} />
+                <div className='skills_list'>
+                  <div className='skills_grid'>
+                    <div className='skill_category'>
+                      <h3 className='category_title'>Full-Stack Development</h3>
+                      <div className='skill_group'>
+                        <h4 className='skill_type'>Languages:</h4>
+                        <ul className='skill_items'>
+                          <li className='skill_item'>JavaScript</li>
+                          <li className='skill_item'>HTML5 & CSS3</li>
+                          <li className='skill_item'>Python</li>
+                          <li className='skill_item'>C#</li>
+                        </ul>
                       </div>
                     </div>
-                  </div>
-                  <div className='progress_item open' data-value={80}>
-                    <div className='item_in'>
-                      <h3 className='progress_title'>HTML5 &amp; CSS3</h3>
-                      <span
-                        className='progress_percent'
-                        style={{ right: '0%' }}>
-                        {/* 80% */}
-                      </span>
-                      <div className='bg_wrap'>
-                        <div className='progress_bg' style={{ width: '0%' }} />
+
+                    <div className='skill_category'>
+                      <h3 className='category_title'>Front-End</h3>
+                      <div className='skill_group'>
+                        <h4 className='skill_type'>Frameworks:</h4>
+                        <ul className='skill_items'>
+                          <li className='skill_item'>Nextjs</li>
+                          <li className='skill_item'>React & Angular</li>
+                          <li className='skill_item'>jQuery</li>
+                        </ul>
                       </div>
                     </div>
-                  </div>
-                  <div className='progress_item open' data-value={95}>
-                    <div className='item_in'>
-                      <h3 className='progress_title'>React &amp; Angular</h3>
-                      <span
-                        className='progress_percent'
-                        style={{ right: '0%' }}>
-                        {/* 95% */}
-                      </span>
-                      <div className='bg_wrap'>
-                        <div className='progress_bg' style={{ width: '0%' }} />
+
+                    <div className='skill_category'>
+                      <h3 className='category_title'>Back-End</h3>
+                      <div className='skill_group'>
+                        <h4 className='skill_type'>Technologies:</h4>
+                        <ul className='skill_items'>
+                          <li className='skill_item'>
+                            Node (with Express & Nest JS)
+                          </li>
+                          <li className='skill_item'>Django</li>
+                          <li className='skill_item'>.NET</li>
+                        </ul>
                       </div>
                     </div>
-                  </div>
-                  <div className='progress_item open' data-value={80}>
-                    <div className='item_in'>
-                      <h3 className='progress_title'>
-                        Node with Express &amp; Nest JS
+
+                    <div className='skill_category'>
+                      <h3 className='category_title'>Database</h3>
+                      <div className='skill_group'>
+                        <h4 className='skill_type'>Management Systems:</h4>
+                        <ul className='skill_items'>
+                          <li className='skill_item'>PostgreSQL, MySQL</li>
+                          <li className='skill_item'>MongoDB</li>
+                        </ul>
+                      </div>
+                    </div>
+
+                    <div className='skill_category'>
+                      <h3 className='category_title'>Testing</h3>
+                      <div className='skill_group'>
+                        <h4 className='skill_type'>Libraries:</h4>
+                        <ul className='skill_items'>
+                          <li className='skill_item'>Jest</li>
+                          <li className='skill_item'>NUnit</li>
+                        </ul>
+                      </div>
+                    </div>
+
+                    <div className='skill_category'>
+                      <h3 className='category_title'>
+                        DevOps & Infrastructure
                       </h3>
-                      <span
-                        className='progress_percent'
-                        style={{ right: '0%' }}>
-                        {/* 80% */}
-                      </span>
-                      <div className='bg_wrap'>
-                        <div className='progress_bg' style={{ width: '0%' }} />
-                      </div>
-                    </div>
-                  </div>
-                  <div className='progress_item open' data-value={85}>
-                    <div className='item_in'>
-                      <h3 className='progress_title'>
-                        MongoDB, PostgreSQL &amp; MySQL
-                      </h3>
-                      <span
-                        className='progress_percent'
-                        style={{ right: '0%' }}>
-                        {/* 85% */}
-                      </span>
-                      <div className='bg_wrap'>
-                        <div className='progress_bg' style={{ width: '0%' }} />
-                      </div>
-                    </div>
-                  </div>
-                  <div className='progress_item open' data-value={85}>
-                    <div className='item_in'>
-                      <h3 className='progress_title'>Django</h3>
-                      <span
-                        className='progress_percent'
-                        style={{ right: '0%' }}>
-                        {/* 85% */}
-                      </span>
-                      <div className='bg_wrap'>
-                        <div className='progress_bg' style={{ width: '0%' }} />
-                      </div>
-                    </div>
-                  </div>
-                  <div className='progress_item open' data-value={85}>
-                    <div className='item_in'>
-                      <h3 className='progress_title'>NGINX &amp; Heroku</h3>
-                      <span
-                        className='progress_percent'
-                        style={{ right: '0%' }}>
-                        {/* 85% */}
-                      </span>
-                      <div className='bg_wrap'>
-                        <div className='progress_bg' style={{ width: '0%' }} />
-                      </div>
-                    </div>
-                  </div>
-                  <div className='progress_item open' data-value={85}>
-                    <div className='item_in'>
-                      <h3 className='progress_title'>jQuery</h3>
-                      <span
-                        className='progress_percent'
-                        style={{ right: '0%' }}>
-                        {/* 85% */}
-                      </span>
-                      <div className='bg_wrap'>
-                        <div className='progress_bg' style={{ width: '0%' }} />
-                      </div>
-                    </div>
-                  </div>
-                  <div className='progress_item open' data-value={85}>
-                    <div className='item_in'>
-                      <h3 className='progress_title'>Docker</h3>
-                      <span
-                        className='progress_percent'
-                        style={{ right: '0%' }}>
-                        {/* 85% */}
-                      </span>
-                      <div className='bg_wrap'>
-                        <div className='progress_bg' style={{ width: '0%' }} />
-                      </div>
-                    </div>
-                  </div>
-                  <div className='progress_item open' data-value={85}>
-                    <div className='item_in'>
-                      <h3 className='progress_title'>Github</h3>
-                      <span
-                        className='progress_percent'
-                        style={{ right: '0%' }}>
-                        {/* 85% */}
-                      </span>
-                      <div className='bg_wrap'>
-                        <div className='progress_bg' style={{ width: '0%' }} />
+                      <div className='skill_group'>
+                        <h4 className='skill_type'>Tools:</h4>
+                        <ul className='skill_items'>
+                          <li className='skill_item'>Docker</li>
+                          <li className='skill_item'>NGINX</li>
+                          <li className='skill_item'>Digital Ocean</li>
+                          <li className='skill_item'>Git & GitHub</li>
+                        </ul>
                       </div>
                     </div>
                   </div>
                 </div>
-
                 {/* /Progress Bar */}
               </div>
               {/* /#2 tab content */}
