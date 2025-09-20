@@ -5,3 +5,4 @@
 .env.local
 /learning-journal
 ../.history
+.fake

@@ -2,7 +2,7 @@ export const portfolioData = [
   {
     id: 1,
     title: 'B & B Real Estate',
-    tags: ['Django', 'PostgreSQL', 'JavaScript', 'NGINX'],
+    tags: ['Django', 'NGINX', 'JavaScript'],
     image: '/img/portfolio/bbrealestatehomepage.jpg',
     description:
       'Users can register, login, and contact real estate agents to enquire about property listings. Users can browse or search property listings by specific metrics such as number of bedroom/bathroom/garages, square footage, location, etc. Administers can easily add, remove, and update both homes listed and employee profiles, including adding a public distinction for Employee of the Month.',

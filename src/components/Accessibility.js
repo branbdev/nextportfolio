@@ -3,12 +3,12 @@ import { useState, useEffect, useCallback } from 'react';
 const Accessibility = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [settings, setSettings] = useState({
-    theme: 'dark',
+    theme: 'light', // Changed from 'dark' to 'light'
     contrast: false,
     motion: false,
     fontSize: 16,
     dyslexicFont: false,
-    focusMode: false, // Add to settings state
+    focusMode: false,
   });
 
   useEffect(() => {

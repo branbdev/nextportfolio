@@ -358,7 +358,7 @@ a:focus {
   position: absolute;
   z-index: 55;
   text-decoration: none;
-  color: #ddd;
+  color: inherit;
   right: 50px;
   top: 40px;
 }
@@ -2242,7 +2242,7 @@ a:focus {
     padding: 5px;
     right: 10px;
     top: 10px;
-    background-color: #181715;
+    /* background-color: #181715; */
     border: 1px solid #151412;
   }
   .resumo_fn_navigation {
@@ -2394,6 +2394,18 @@ a:focus {
 /*------------------------------------------------------------------*/
 /*	20) Light Version
 /*------------------------------------------------------------------*/
+
+/* Menu trigger styles that work in both light and dark mode */
+.resumo_fn_right .menu_trigger {
+  background-color: transparent !important;
+  border: none !important;
+  color: inherit !important;
+}
+
+.resumo_fn_right .menu_trigger .hamb span {
+  background-color: currentColor !important;
+}
+
 body.light {
   --mc: #e0b75d; /* Soft Gold Accent */
   background-color: #fff7eb; /* Creamy Background */
@@ -2892,7 +2904,7 @@ body.focus-mode p {
 
 body.focus-mode .resumo_fn_right,
 body.focus-mode .resumo_fn_navigation {
-  opacity: 0.5;
+  opacity: 0.05;
   transition: opacity 0.3s ease;
 }
 
