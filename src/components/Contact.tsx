@@ -1,35 +1,47 @@
-import { useState } from 'react';
+import React, { useState, FormEvent, ChangeEvent } from 'react';
 import emailjs from '@emailjs/browser';
 import dynamic from 'next/dynamic';
 import { siteData } from './siteData';
 
 const ReCAPTCHA = dynamic(() => import('./ReCAPTCHA'), { ssr: false });
 
-const Contact = () => {
-  const [form, setForm] = useState({
+interface FormData {
+  email: string;
+  name: string;
+  subject: string;
+  message: string;
+}
+
+type ActiveField = 'name' | 'email' | 'subject' | 'message' | null;
+
+const Contact: React.FC = () => {
+  const [form, setForm] = useState<FormData>({
     email: '',
     name: '',
     subject: '',
     message: '',
   });
-  const [recaptchaToken, setRecaptchaToken] = useState(''); // Store the reCAPTCHA token
-  const [active, setActive] = useState(null);
-  const [error, setError] = useState(false);
-  const [success, setSuccess] = useState(false);
+  const [recaptchaToken, setRecaptchaToken] = useState<string>(''); // Store the reCAPTCHA token
+  const [active, setActive] = useState<ActiveField>(null);
+  const [error, setError] = useState<boolean>(false);
+  const [success, setSuccess] = useState<boolean>(false);
 
-  const onChange = (e) => {
+  const onChange = (
+    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ): void => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
+
   const { email, name, subject, message } = form;
 
-  const onSubmit = async (e) => {
+  const onSubmit = async (e: FormEvent<HTMLFormElement>): Promise<void> => {
     e.preventDefault();
-    const formData = new FormData(e.target);
+    const formData = new FormData(e.currentTarget);
 
     // Retrieve the honeypot field value
-    const honeypot = formData.get('website'); // Check the honeypot field
-    const emailValue = formData.get('email');
-    const nameValue = formData.get('name');
+    const honeypot = formData.get('website') as string; // Check the honeypot field
+    const emailValue = formData.get('email') as string;
+    const nameValue = formData.get('name') as string;
 
     // 1. If the honeypot field is filled, it's a bot. Silently exit.
     if (honeypot) {
@@ -47,14 +59,14 @@ const Contact = () => {
       await emailjs.sendForm(
         'service_aht8d0r',
         'template_ssz1szh',
-        e.target, // Pass the form element, NOT formData
+        e.currentTarget, // Pass the form element, NOT formData
         process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY
       );
 
       setSuccess(true);
       setTimeout(() => setSuccess(false), 3000);
 
-      e.target.reset();
+      e.currentTarget.reset();
       setForm({ email: '', name: '', subject: '', message: '' });
     } catch (err) {
       console.error('FAILED...', err);
@@ -70,11 +82,12 @@ const Contact = () => {
           {/* Main Title */}
           <div className='resumo_fn_main_title'>
             <h3 className='subtitle'>Contact</h3>
-            <h3 className='title'>Get In Touch</h3>
+            <h3 className='title'>Ready to Discuss a Role?</h3>
             <p className='desc'>
-              If you have any suggestion, project ideas, or even if you want to
-              say “hi”, please fill out the form below and I will reply you
-              shortly.
+              If you are building robust systems and need a detail-oriented
+              engineer specializing in Typescript, .NET, and advanced backend
+              architecture, please reach out using the form below to schedule a
+              discussion.
             </p>
           </div>
 

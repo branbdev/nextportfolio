@@ -1,11 +1,29 @@
-import { useEffect } from 'react';
+import React, { useEffect } from 'react';
 
-const ReCAPTCHA = ({ onVerify }) => {
+interface ReCAPTCHAProps {
+  onVerify: (token: string) => void;
+}
+
+declare global {
+  interface Window {
+    grecaptcha: {
+      render: (
+        element: string | HTMLElement,
+        parameters: {
+          sitekey: string;
+          callback: (token: string) => void;
+        }
+      ) => void;
+    };
+  }
+}
+
+const ReCAPTCHA: React.FC<ReCAPTCHAProps> = ({ onVerify }) => {
   useEffect(() => {
     const loadReCAPTCHA = () => {
       if (window.grecaptcha) {
         window.grecaptcha.render('g-recaptcha', {
-          sitekey: process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY,
+          sitekey: process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY || '',
           callback: onVerify, // Callback when reCAPTCHA is completed
         });
       }
@@ -23,7 +41,7 @@ const ReCAPTCHA = ({ onVerify }) => {
     }
   }, [onVerify]);
 
-  return <div id="g-recaptcha" className="g-recaptcha" />;
+  return <div id='g-recaptcha' className='g-recaptcha' />;
 };
 
 export default ReCAPTCHA;

@@ -1,4 +1,14 @@
-export const portfolioData = [
+export interface PortfolioItem {
+  id: number;
+  title: string;
+  tags: string[];
+  image: string;
+  description: string;
+  liveUrl: string;
+  codeUrl: string;
+}
+
+export const portfolioData: PortfolioItem[] = [
   {
     id: 1,
     title: 'B & B Real Estate',

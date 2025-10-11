@@ -1,8 +1,19 @@
-import { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 
-const Accessibility = () => {
-  const [isOpen, setIsOpen] = useState(false);
-  const [settings, setSettings] = useState({
+type Theme = 'light' | 'dark';
+
+interface AccessibilitySettings {
+  theme: Theme;
+  contrast: boolean;
+  motion: boolean;
+  fontSize: number;
+  dyslexicFont: boolean;
+  focusMode: boolean;
+}
+
+const Accessibility: React.FC = () => {
+  const [isOpen, setIsOpen] = useState<boolean>(false);
+  const [settings, setSettings] = useState<AccessibilitySettings>({
     theme: 'light', // Changed from 'dark' to 'light'
     contrast: false,
     motion: false,
@@ -12,11 +23,13 @@ const Accessibility = () => {
   });
 
   useEffect(() => {
-    const savedSettings = JSON.parse(
-      localStorage.getItem('accessibilitySettings')
-    );
+    const savedSettings = localStorage.getItem('accessibilitySettings');
     if (savedSettings) {
-      setSettings(savedSettings);
+      try {
+        setSettings(JSON.parse(savedSettings));
+      } catch (error) {
+        console.error('Error parsing accessibility settings:', error);
+      }
     }
   }, []);
 
@@ -61,15 +74,17 @@ const Accessibility = () => {
     applySettings();
   }, [settings, applySettings]);
 
-  const handleThemeChange = (theme) => {
+  const handleThemeChange = (theme: Theme): void => {
     setSettings({ ...settings, theme });
   };
 
-  const handleToggleChange = (key) => {
+  const handleToggleChange = (
+    key: keyof Omit<AccessibilitySettings, 'theme' | 'fontSize'>
+  ): void => {
     setSettings({ ...settings, [key]: !settings[key] });
   };
 
-  const handleFontSizeChange = (action) => {
+  const handleFontSizeChange = (action: 'increase' | 'decrease'): void => {
     let newSize = settings.fontSize;
     if (action === 'increase') {
       newSize = Math.min(newSize + 2, 24);

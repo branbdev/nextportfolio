@@ -1,8 +1,14 @@
-const Trigger = ({ open }) => {
+import React from 'react';
+
+interface TriggerProps {
+  open: () => void;
+}
+
+const Trigger: React.FC<TriggerProps> = ({ open }) => {
   return (
     <a href='#' className='menu_trigger'>
       <span className='text'>Menu</span>
-      <span className='hamb' onClick={() => open()}>
+      <span className='hamb' onClick={open}>
         <span />
         <span />
         <span />

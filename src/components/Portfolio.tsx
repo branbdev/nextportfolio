@@ -1,12 +1,18 @@
-import { Fragment, useContext } from 'react';
+import React, { Fragment, useContext } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay, Navigation } from 'swiper/modules';
 import { portfolioSliderProps } from '../sliderProps';
 import { portfolioData } from './portfolioData';
 import { Context } from '../context/Context';
 
-const Portfolio = () => {
-  const { modalValueSet } = useContext(Context);
+const Portfolio: React.FC = () => {
+  const context = useContext(Context);
+
+  if (!context) {
+    throw new Error('Portfolio must be used within a ContextProvider');
+  }
+
+  const { modalValueSet } = context;
 
   return (
     <Fragment>
@@ -29,7 +35,7 @@ const Portfolio = () => {
               <SwiperSlide className='item modal_item' key={item.id}>
                 <div
                   className='portfolio_item'
-                  onClick={() => modalValueSet(item.id)}>
+                  onClick={() => modalValueSet(item)}>
                   <div className='img_holder'>
                     <img src={item.image} alt={item.title} />
                     <div

@@ -1,9 +1,13 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { siteData } from './siteData';
 
-const About = () => {
-  const [toggleList, setToggleList] = useState('tab1');
-  const activeList = (value) => (value === toggleList ? 'active' : '');
+type TabType = 'tab1' | 'tab2' | 'tab3';
+
+const About: React.FC = () => {
+  const [toggleList, setToggleList] = useState<TabType>('tab1');
+  const activeList = (value: TabType): string =>
+    value === toggleList ? 'active' : '';
+
   return (
     <section id='about'>
       <div className='container'>
@@ -13,7 +17,7 @@ const About = () => {
             <h3 className='subtitle'>About Me</h3>
             <h3 className='title'>Biography</h3>
             <p className='desc'>
-              {`Growing up in southern California, I was enamored with the internet from an early age. From the early days of AOL/MSN Groups to the dawn of social media, I've used the web to express myself and provide platforms for others to do the same. Since around the time of the recent pandemic, I had the opportunity to change careers and as much as a journey it has been, I can say that I'm genuinely excited to continue to apply my skills and help others make modern and scalable applications for any need.`}
+              {`Growing up in southern California, I was enamored with the internet from an early age. From the early days of AOL to the dawn of social media, I've used the web to express myself and provide platforms for others to do the same. Since around the time of the recent pandemic, I had the opportunity to change careers and as much as a journey it has been, I can say that I'm genuinely excited to continue to apply my skills and help others make modern and scalable applications for any need.`}
             </p>
           </div>
           {/* /Main Title */}
@@ -74,22 +78,28 @@ const About = () => {
                     <li>
                       <div className='item'>
                         <div className='item_top'>
-                          <h5>BB Web Solutions</h5>
+                          <h5>Arcane Logic</h5>
                           <span>( 2020 — Today )</span>
                         </div>
-                        <h3>Freelance Web Developer</h3>
+                        <h2>Freelance Web Developer</h2>
                         <ul className='experience-list'>
                           <li>
-                            Collaborated with clients to make make user story
-                            and feature list of desired web app.
+                            Developed and launched responsive marketing websites
+                            for small businesses, ensuring high performance
+                            (Google PageSpeed scores above 90) and adherence to
+                            WCAG 2.1 accessibility standards.
                           </li>
                           <li>
-                            Used tools like Figma to make mockups of different
-                            designs.
+                            Collaborated directly with clients to define project
+                            scope, create user stories, and deliver features in
+                            an Agile-like iterative process, ensuring high
+                            client satisfaction and project alignment.
                           </li>
                           <li>
-                            Developed functioning web applications with industry
-                            leading technology according to client need.
+                            Engineered and deployed a full-stack e-commerce
+                            platform for a local boutique, resulting in a
+                            substantial increase in online sales within the
+                            first quarter.
                           </li>
                         </ul>{' '}
                       </div>
@@ -107,11 +117,32 @@ const About = () => {
                     <li>
                       <div className='item'>
                         <div className='item_top'>
-                          <h5>UC Riverside</h5>
-                          <span>( 11/19-5/20 )</span>
+                          <h5>
+                            University of California Riverside Extension |
+                            Riverside, CA
+                          </h5>
+                          <span>( 2020 )</span>
                         </div>
-                        <h3>Web Development Bootcamp</h3>
-                        <p> </p>
+                        <h2>Web Development Bootcamp</h2>
+                        <p>
+                          Completed an intensive 6-month bootcamp covering the
+                          MERN stack, data structures, algorithms, and Agile
+                          project management principles in a collaborative,
+                          team-based environment.
+                        </p>
+                        <br></br>
+                        <div className='item_top'>
+                          <h5>AlgoExpert | Online Assessment</h5>
+                          <span>( 2022 )</span>
+                        </div>
+                        <a href='https://certificate.algoexpert.io/AE-e59165350c'>
+                          <h2>Certificate of Completion</h2>
+                        </a>
+                        <p>
+                          Successfully completed 100+ data structure and
+                          algorithm challenges, demonstrating proficiency in
+                          problem-solving and algorithmic thinking.
+                        </p>
                       </div>
                     </li>
                   </ul>
@@ -128,10 +159,10 @@ const About = () => {
                       <div className='skill_group'>
                         <h4 className='skill_type'>Languages:</h4>
                         <ul className='skill_items'>
-                          <li className='skill_item'>JavaScript</li>
+                          <li className='skill_item'>TypeScript, Javascript</li>
                           <li className='skill_item'>HTML5 & CSS3</li>
-                          <li className='skill_item'>Python</li>
                           <li className='skill_item'>C#</li>
+                          <li className='skill_item'>Python</li>
                         </ul>
                       </div>
                     </div>
@@ -142,7 +173,7 @@ const About = () => {
                         <h4 className='skill_type'>Frameworks:</h4>
                         <ul className='skill_items'>
                           <li className='skill_item'>Nextjs</li>
-                          <li className='skill_item'>React & Angular</li>
+                          <li className='skill_item'>Angular</li>
                           <li className='skill_item'>jQuery</li>
                         </ul>
                       </div>

@@ -1,14 +1,15 @@
+import React, { Fragment, useEffect } from 'react';
 import Head from 'next/head';
 import Link from 'next/link';
-import { Fragment, useEffect } from 'react';
 import Cursor from '../src/layouts/Cursor';
 import { customCursor } from '../src/utilits';
 
-const Intro = () => {
+const Intro: React.FC = () => {
   useEffect(() => {
     customCursor();
-    document.querySelector('body').classList.add('light');
+    document.querySelector('body')?.classList.add('light');
   }, []);
+
   return (
     <Fragment>
       <Head>

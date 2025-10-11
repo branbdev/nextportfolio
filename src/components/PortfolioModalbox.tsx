@@ -1,22 +1,31 @@
-import { useEffect, useState } from 'react';
-import { portfolioData } from './portfolioData';
+import React, { useEffect, useState } from 'react';
+import { portfolioData, PortfolioItem } from './portfolioData';
 
-const PortfolioModalbox = ({ close, value }) => {
-  const [project, setProject] = useState(null);
+interface PortfolioModalboxProps {
+  close: () => void;
+  value: PortfolioItem | null;
+}
+
+const PortfolioModalbox: React.FC<PortfolioModalboxProps> = ({
+  close,
+  value,
+}) => {
+  const [project, setProject] = useState<PortfolioItem | null>(null);
 
   useEffect(() => {
-    const projectData = portfolioData.find((p) => p.id === value);
-    setProject(projectData);
+    if (value) {
+      setProject(value);
+    }
   }, [value]);
 
   if (!project) return null;
 
   return (
-    <div className='modal_overlay' onClick={() => close(false)}>
+    <div className='modal_overlay' onClick={close}>
       <div className='modal_content' onClick={(e) => e.stopPropagation()}>
         <div className='modal_header'>
           <h2>{project.title}</h2>
-          <button className='close_button' onClick={() => close(false)}>
+          <button className='close_button' onClick={close}>
             ×
           </button>
         </div>

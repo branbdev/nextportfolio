@@ -1,5 +1,5 @@
+import React, { Fragment, useEffect, useState, useContext } from 'react';
 import Head from 'next/head';
-import { Fragment, useEffect, useState, useContext } from 'react';
 import PanelContent from '../components/PanelContent';
 import { aTagClick, customCursor, dataImage, sticky } from '../utilits';
 import Cursor from './Cursor';
@@ -10,19 +10,38 @@ import Accessibility from '../components/Accessibility';
 import { Context } from '../context/Context';
 import PortfolioModalbox from '../components/PortfolioModalbox';
 
-const Layout = ({ children }) => {
-  const { modal, modalValue, close } = useContext(Context);
-  const [trigger, setTrigger] = useState(false);
+interface LayoutProps {
+  children: React.ReactNode;
+}
+
+const Layout: React.FC<LayoutProps> = ({ children }) => {
+  const context = useContext(Context);
+
+  if (!context) {
+    throw new Error('Layout must be used within a ContextProvider');
+  }
+
+  const { modal, modalValue, close } = context;
+  const [trigger, setTrigger] = useState<boolean>(false);
+
   useEffect(() => {
     dataImage();
     customCursor();
     aTagClick();
     window.addEventListener('scroll', sticky);
+
+    return () => {
+      window.removeEventListener('scroll', sticky);
+    };
   }, []);
-  const triggerMenu = () => {
+
+  const triggerMenu = (): void => {
     setTrigger(!trigger);
-    document.querySelector('.resumo_fn_wrapper').classList.toggle('nav-opened');
+    document
+      .querySelector('.resumo_fn_wrapper')
+      ?.classList.toggle('nav-opened');
   };
+
   return (
     <Fragment>
       <Head>
@@ -45,7 +64,7 @@ const Layout = ({ children }) => {
           {/* Main Right Part */}
           <div className='resumo_fn_right'>
             {/* Menu Trigger */}
-            <Trigger open={() => triggerMenu()} />
+            <Trigger open={triggerMenu} />
             {/* /Menu Trigger */}
             {/* Panel Content */}
             <PanelContent />
@@ -54,7 +73,7 @@ const Layout = ({ children }) => {
           {/* /Main Right Part */}
         </div>
         {/* Right Hidden Navigation */}
-        <Nav close={() => triggerMenu()} trigger={trigger} />
+        <Nav close={triggerMenu} trigger={trigger} />
         {/* /Right Hidden Navigation */}
         <Cursor />
       </div>

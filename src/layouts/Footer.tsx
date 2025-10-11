@@ -1,11 +1,14 @@
-const Footer = () => {
-  const scrollTop = () => {
+import React from 'react';
+
+const Footer: React.FC = () => {
+  const scrollTop = (): void => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
+
   return (
     <footer id='footer'>
       <div className='footer_top'>
-        <a href='#' onClick={() => scrollTop()} className='resumo_fn_totop'>
+        <a href='#' onClick={scrollTop} className='resumo_fn_totop'>
           <span />
         </a>
       </div>
