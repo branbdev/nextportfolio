@@ -9,6 +9,7 @@ import Trigger from './Trigger';
 import Accessibility from '../components/Accessibility';
 import { Context } from '../context/Context';
 import PortfolioModalbox from '../components/PortfolioModalbox';
+import { GoogleAnalytics } from '@next/third-parties/google';
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -47,6 +48,9 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
       <Head>
         <title>Brandon B. | Dev Portfolio</title>
       </Head>
+      {process.env.NEXT_PUBLIC_GA_ID && (
+        <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_ID} />
+      )}
       <div className='resumo_fn_wrapper'>
         {/* MODALBOX */}
         {modal && <PortfolioModalbox close={close} value={modalValue} />}
