@@ -1,3 +1,5 @@
+// *TODO: "Fill all Fields" error is coupled with successful form submissions
+
 import React, { useState, FormEvent, ChangeEvent } from 'react';
 import emailjs from '@emailjs/browser';
 import dynamic from 'next/dynamic';
