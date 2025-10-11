@@ -38,8 +38,8 @@ const PanelContent: React.FC = () => {
         <div className='border1' />
         <div className='border2' />
         <div className='img_holder'>
-          <img src='img/thumb/me.jpg' alt='image' />
-          <div className='abs_img' data-bg-img='img/thumb/me.jpg' />
+          <img src='/img/thumb/me.webp' alt='my headshot' />
+          <div className='abs_img' data-bg-img='/img/thumb/me.webp' />
         </div>
         <div className='title_holder'>
           <h5>Hi There! I am</h5>

@@ -13,33 +13,18 @@ const Intro: React.FC = () => {
   return (
     <Fragment>
       <Head>
-        <title>Brandon B. | Portfolio</title>
+        <title>Brandon Bowen | Portfolio</title>
       </Head>
       <div className='resumo_fn_intro'>
         <div className='divider'></div>
         <div className='intro_content'>
           <div className='title_holder'>
             <h3>
-              <Link href='/intro'>Brandon B.</Link>
+              <Link href='/intro'>Brandon Bowen</Link>
             </h3>
             <p>Personal website with portfolio</p>
           </div>
-          <div className='v_list'>
-            <div className='left'>
-              <Link href='/index-light'>
-                <a target='_blank'></a>
-              </Link>
-              <img src='img/intro/light.jpg' alt='' />
-              <span>Light Version</span>
-            </div>
-            <div className='right dark-section'>
-              <Link href='/'>
-                <a target='_blank'></a>
-              </Link>
-              <img src='img/intro/dark.jpg' alt='' />
-              <span>Dark Version</span>
-            </div>
-          </div>
+          <div className='v_list'></div>
         </div>
         <footer id='footer'>
           <div className='footer_content'></div>
