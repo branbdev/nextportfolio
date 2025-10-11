@@ -31,6 +31,10 @@ function MyApp({ Component, pageProps }: AppProps) {
             content='width=device-width, initial-scale=1, shrink-to-fit=no'
           />
           <meta name='robots' content='index, follow' />
+          <meta
+            name='google-site-verification'
+            content='C4CjLzj7j9qMsKKZ4E0W4AxpsHWED17IYeQ8hgelrN0'
+          />
           <script
             src='https://www.google.com/recaptcha/api.js'
             async
