@@ -17,7 +17,7 @@ const About: React.FC = () => {
             <h3 className='subtitle'>About Me</h3>
             <h3 className='title'>Biography</h3>
             <p className='desc'>
-              {`Growing up in southern California, I was enamored with the internet from an early age. From the early days of AOL to the dawn of social media, I've used the web to express myself and provide platforms for others to do the same. Since around the time of the recent pandemic, I had the opportunity to change careers and as much as a journey it has been, I can say that I'm genuinely excited to continue to apply my skills and help others make modern and scalable applications for any need. When I'm not coding, you can find me at a local music venue, building and playing modular synths, or just watching old movies`}
+              {`Growing up in southern California, I was enamored with the internet from an early age. From the early days of AOL to the dawn of social media, I've used the web to express myself and provide platforms for others to do the same. Since around the time of the recent pandemic, I had the opportunity to change careers and as much as a journey it has been, I can say that I'm genuinely excited to continue to apply my skills and help others make modern and scalable applications for any need. When I'm not coding, you can find me at a local music venue, building and playing modular synths, or just watching old movies.`}
             </p>
           </div>
           {/* /Main Title */}

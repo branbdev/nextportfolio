@@ -38,7 +38,8 @@ const Contact: React.FC = () => {
 
   const onSubmit = async (e: FormEvent<HTMLFormElement>): Promise<void> => {
     e.preventDefault();
-    const formData = new FormData(e.currentTarget);
+    const formElement = e.currentTarget;
+    const formData = new FormData(formElement);
 
     // Retrieve the honeypot field value
     const honeypot = formData.get('website') as string; // Check the honeypot field
@@ -61,14 +62,14 @@ const Contact: React.FC = () => {
       await emailjs.sendForm(
         'service_aht8d0r',
         'template_ssz1szh',
-        e.currentTarget, // Pass the form element, NOT formData
+        formElement, // Pass the form element, NOT formData
         process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY
       );
 
       setSuccess(true);
       setTimeout(() => setSuccess(false), 3000);
 
-      e.currentTarget.reset();
+      formElement.reset();
       setForm({ email: '', name: '', subject: '', message: '' });
     } catch (err) {
       console.error('FAILED...', err);
