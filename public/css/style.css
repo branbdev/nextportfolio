@@ -915,41 +915,54 @@ a:focus {
   font-weight: 600;
 }
 /*------------------------------------------------------------------*/
-/*	09) Magic Cursor
+/*	09) Magic Cursor - Custom cursor implementation with dynamic states
 /*------------------------------------------------------------------*/
+
+/* Controls visibility of cursor based on data attributes */
 .frenify-cursor[data-default='no'] {
-  opacity: 0;
+  opacity: 0; /* Hide cursor by default if data-default="no" is set */
 }
 .frenify-cursor[data-default='no'].cursor-inner {
-  transition: opacity 0.3s ease;
+  transition: opacity 0.3s ease; /* Smooth fade in/out transition */
 }
+/* Show inner cursor on hover over interactive elements, even if default is hidden */
 .frenify-cursor[data-default='no'].cursor-inner.cursor-hover,
 .frenify-cursor[data-default='no'].cursor-inner.cursor-slider {
   opacity: 1;
 }
+/* Hide inner cursor on links if data-link="no" */
 .frenify-cursor[data-link='no'].cursor-inner.cursor-hover {
   opacity: 0;
 }
+/* Hide inner cursor on sliders if data-slider="no" */
 .frenify-cursor[data-slider='no'].cursor-inner.cursor-slider {
   opacity: 0;
 }
+
+/* Base cursor container - shared properties */
 .frenify-cursor {
   position: fixed;
   left: 0;
   top: 0;
-  pointer-events: none;
+  pointer-events: none; /* Prevents cursor from interfering with actual clicks */
   -webkit-transform: translateZ(0);
-  transform: translateZ(0);
-  visibility: hidden;
+  transform: translateZ(0); /* Force GPU acceleration for smoother animation */
+  visibility: hidden; /* Initially hidden until JS initializes it */
 }
+
+/* Scale effect when mouse button is pressed */
 .frenify-cursor.mouse-down .fn-cursor {
   transform: scale(0.9);
 }
+
+/* Hide custom cursor on mobile/smaller screens */
 @media (max-width: 1040px) {
   .frenify-cursor {
     display: none;
   }
 }
+
+/* Default link cursor styling */
 .cursor-link {
   width: 30px;
   height: 30px;
@@ -960,66 +973,94 @@ a:focus {
   -webkit-transition: all 0.08s ease-out;
   transition: all 0.08s ease-out;
 }
+
+/* Outer ring cursor styling and animation properties */
 .cursor-outer {
   z-index: 10000000;
+  /* Separate transitions for transform (position) and opacity (appearance) */
+  /* Fast movement tracking but slower fade in/out */
   -webkit-transition: transform 0.08s ease-out, opacity 1s ease;
   transition: transform 0.08s ease-out, opacity 1s ease;
 }
+
+/* The actual outer ring element */
 .cursor-outer .fn-cursor {
   position: absolute;
   top: 50%;
   left: 50%;
-  margin: -15px 0 0 -15px;
+  margin: -15px 0 0 -15px; /* Center the ring */
   width: 30px;
   height: 30px;
   border-radius: 50%;
-  border: 2px solid rgba(255, 255, 255, 0.5);
+  border: 2px solid rgba(255, 255, 255, 0.5); /* Semi-transparent ring */
 }
+
+/* The inner dot element */
 .cursor-inner .fn-cursor {
   position: absolute;
   top: 50%;
   left: 50%;
-  margin: -3px 0 0 -3px;
+  margin: -3px 0 0 -3px; /* Center the dot */
   width: 6px;
   height: 6px;
   border-radius: 50%;
-  background-color: rgba(255, 255, 255, 0.5);
-  -webkit-transition: all 0.5s ease-in-out;
+  background-color: rgba(255, 255, 255, 0.5); /* Semi-transparent dot */
+  -webkit-transition: all 0.5s ease-in-out; /* Smooth transition for size changes */
   transition: all 0.5s ease-in-out;
 }
+
+/* When hovering interactive elements, hide the outer ring */
 .cursor-outer.cursor-slider,
 .cursor-outer.cursor-hover {
   opacity: 0;
+  /* Faster transition when hovering */
   -webkit-transition: transform 0.08s ease-out, opacity 0.2s ease;
   transition: transform 0.08s ease-out, opacity 0.2s ease;
 }
+
+/* The inner cursor always stays on top */
 .cursor-inner {
-  z-index: 10000001;
-}
-.cursor-inner.cursor-hover .fn-cursor {
-  margin: -40px 0 0 -40px;
-  width: 80px;
-  height: 80px;
-  background-color: rgba(255, 255, 255, 0.1);
+  z-index: 10000001; /* Higher z-index than outer cursor */
 }
 
+/* HOVER EFFECT: Inner cursor expands to a larger, more transparent circle */
+.cursor-inner.cursor-hover .fn-cursor {
+  margin: -40px 0 0 -40px; /* Offset to keep centered while expanding */
+  width: 80px;
+  height: 80px;
+  background-color: rgba(
+    255,
+    255,
+    255,
+    0.1
+  ); /* More transparent when expanded */
+}
+
+/* SLIDER EFFECT: Special styling when hovering over carousel/slider elements */
+/* This creates the "bullseye with arrows" effect */
 .cursor-inner.cursor-slider:not(.cursor-hover) .fn-cursor {
   margin-left: -30px;
   margin-top: -30px;
   width: 60px;
   height: 60px;
-  background-color: transparent;
-  border: 5px solid rgba(255, 255, 255, 0.5);
+  background-color: transparent; /* No fill, just border */
+  border: 5px solid rgba(255, 255, 255, 0.5); /* Thicker border for emphasis */
 }
+
+/* Change arrows to white when slider and hover effects combine */
 .cursor-inner.cursor-slider.cursor-hover span:after,
 .cursor-inner.cursor-slider.cursor-hover span:before {
   background-color: #fff;
 }
+
+/* Show left/right arrow indicators when in slider mode */
 .cursor-inner.cursor-slider .fn-left,
 .cursor-inner.cursor-slider .fn-right {
   opacity: 1;
   visibility: visible;
 }
+
+/* Position adjustments for left/right arrows in slider mode */
 .cursor-inner.cursor-slider .fn-left:after {
   left: -26px;
 }
@@ -1033,18 +1074,23 @@ a:focus {
   right: -26px;
 }
 
+/* Hide the left/right arrow indicators by default */
 .cursor-inner .fn-left,
 .cursor-inner .fn-right {
   opacity: 0;
   visibility: hidden;
   transition: all 0.3s ease;
 }
+
+/* Creating the left arrow indicator with pseudo-elements */
+/* The following four blocks create the left and right arrows */
+/* Each arrow is made of two diagonal lines that form a < or > shape */
 .cursor-inner .fn-left:after {
   content: '';
   position: absolute;
   width: 2px;
   height: 12px;
-  transform: rotate(50deg);
+  transform: rotate(50deg); /* Diagonal line for arrow */
   left: -20px;
   top: 50%;
   margin-top: -10px;
@@ -1056,13 +1102,15 @@ a:focus {
   position: absolute;
   width: 2px;
   height: 12px;
-  transform: rotate(130deg);
+  transform: rotate(130deg); /* Diagonal line for arrow */
   left: -20px;
   top: 50%;
   margin-top: -2px;
   background-color: rgba(255, 255, 255, 0.5);
   transition: all 0.3s ease;
 }
+
+/* Creating the right arrow indicator with pseudo-elements */
 .cursor-inner .fn-right:after {
   content: '';
   position: absolute;

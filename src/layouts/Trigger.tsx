@@ -6,14 +6,18 @@ interface TriggerProps {
 
 const Trigger: React.FC<TriggerProps> = ({ open }) => {
   return (
-    <a href='#' className='menu_trigger'>
+    <div className='menu_trigger'>
       <span className='text'>Menu</span>
-      <span className='hamb' onClick={open}>
+      <button
+        type='button'
+        className='hamb'
+        onClick={open}
+        aria-label='Open Menu'>
         <span />
         <span />
         <span />
-      </span>
-    </a>
+      </button>
+    </div>
   );
 };
 
