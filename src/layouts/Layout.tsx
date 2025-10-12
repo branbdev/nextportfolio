@@ -46,7 +46,9 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
   return (
     <Fragment>
       <Head>
-        <title>Brandon B. | Dev Portfolio</title>
+        <title>
+          Brandon Bowen - Full-Stack Software Engineer | .NET & React
+        </title>
       </Head>
       {process.env.NEXT_PUBLIC_GA_ID && (
         <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_ID} />

@@ -1,47 +1,24 @@
-import React, { useEffect } from 'react';
+import React from 'react';
+import ReCAPTCHAComponent from 'react-google-recaptcha';
 
 interface ReCAPTCHAProps {
-  onVerify: (token: string) => void;
-}
-
-declare global {
-  interface Window {
-    grecaptcha: {
-      render: (
-        element: string | HTMLElement,
-        parameters: {
-          sitekey: string;
-          callback: (token: string) => void;
-        }
-      ) => void;
-    };
-  }
+  onVerify: (token: string | null) => void;
 }
 
 const ReCAPTCHA: React.FC<ReCAPTCHAProps> = ({ onVerify }) => {
-  useEffect(() => {
-    const loadReCAPTCHA = () => {
-      if (window.grecaptcha) {
-        window.grecaptcha.render('g-recaptcha', {
-          sitekey: process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY || '',
-          callback: onVerify, // Callback when reCAPTCHA is completed
-        });
-      }
-    };
+  const siteKey = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY;
 
-    if (!window.grecaptcha) {
-      const script = document.createElement('script');
-      script.src = 'https://www.google.com/recaptcha/api.js';
-      script.async = true;
-      script.defer = true;
-      script.onload = loadReCAPTCHA;
-      document.body.appendChild(script);
-    } else {
-      loadReCAPTCHA();
-    }
-  }, [onVerify]);
+  if (!siteKey) {
+    console.error('reCAPTCHA site key is not configured in environment variables.');
+    return <div>reCAPTCHA not configured.</div>;
+  }
 
-  return <div id='g-recaptcha' className='g-recaptcha' />;
+  return (
+    <ReCAPTCHAComponent
+      sitekey={siteKey}
+      onChange={onVerify}
+    />
+  );
 };
 
 export default ReCAPTCHA;

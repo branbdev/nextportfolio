@@ -24,7 +24,7 @@ function MyApp({ Component, pageProps }: AppProps) {
           <link rel='icon' href='/svg/favicon.svg' />
           <meta
             name='description'
-            content='Portfolio of Brandon Bowen, a full-stack developer specializing in JavaScript, C#, and Python. Showcasing projects in front-end, back-end, and full-stack development.'
+            content='Portfolio for Brandon Bowen, a Full-Stack software engineer based in Corona, CA, specializing in building scalable enterprise applications with .NET, React, and Python. Available for contract, freelance projects and full-time opportunities.'
           />
           <meta
             name='viewport'
@@ -35,10 +35,6 @@ function MyApp({ Component, pageProps }: AppProps) {
             name='google-site-verification'
             content='C4CjLzj7j9qMsKKZ4E0W4AxpsHWED17IYeQ8hgelrN0'
           />
-          <script
-            src='https://www.google.com/recaptcha/api.js'
-            async
-            defer></script>
         </Head>
         <Layout>
           <Component {...pageProps} />

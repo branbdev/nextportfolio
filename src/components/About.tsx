@@ -17,7 +17,7 @@ const About: React.FC = () => {
             <h3 className='subtitle'>About Me</h3>
             <h3 className='title'>Biography</h3>
             <p className='desc'>
-              {`Growing up in southern California, I was enamored with the internet from an early age. From the early days of AOL to the dawn of social media, I've used the web to express myself and provide platforms for others to do the same. Since around the time of the recent pandemic, I had the opportunity to change careers and as much as a journey it has been, I can say that I'm genuinely excited to continue to apply my skills and help others make modern and scalable applications for any need.`}
+              {`Growing up in southern California, I was enamored with the internet from an early age. From the early days of AOL to the dawn of social media, I've used the web to express myself and provide platforms for others to do the same. Since around the time of the recent pandemic, I had the opportunity to change careers and as much as a journey it has been, I can say that I'm genuinely excited to continue to apply my skills and help others make modern and scalable applications for any need. When I'm not coding, you can find me at a local music venue, building and playing modular synths, or just watching old movies`}
             </p>
           </div>
           {/* /Main Title */}
@@ -98,7 +98,7 @@ const About: React.FC = () => {
                           <li>
                             Engineered and deployed a full-stack e-commerce
                             platform for a local boutique, resulting in a
-                            substantial increase in online sales within the
+                            significant increase in online sales within the
                             first quarter.
                           </li>
                         </ul>{' '}
@@ -159,10 +159,11 @@ const About: React.FC = () => {
                       <div className='skill_group'>
                         <h4 className='skill_type'>Languages:</h4>
                         <ul className='skill_items'>
-                          <li className='skill_item'>TypeScript, Javascript</li>
-                          <li className='skill_item'>HTML5 & CSS3</li>
                           <li className='skill_item'>C#</li>
+                          <li className='skill_item'>Javascript (ES6+)</li>
+                          <li className='skill_item'>TypeScript</li>
                           <li className='skill_item'>Python</li>
+                          <li className='skill_item'>HTML5 & CSS3</li>
                         </ul>
                       </div>
                     </div>
@@ -172,8 +173,11 @@ const About: React.FC = () => {
                       <div className='skill_group'>
                         <h4 className='skill_type'>Frameworks:</h4>
                         <ul className='skill_items'>
-                          <li className='skill_item'>Nextjs</li>
+                          <li className='skill_item'>React</li>
+                          <li className='skill_item'>Next.js</li>
                           <li className='skill_item'>Angular</li>
+                          <li className='skill_item'>Blazor</li>
+                          <li className='skill_item'>Tailwind CSS</li>
                           <li className='skill_item'>jQuery</li>
                         </ul>
                       </div>
@@ -184,11 +188,12 @@ const About: React.FC = () => {
                       <div className='skill_group'>
                         <h4 className='skill_type'>Technologies:</h4>
                         <ul className='skill_items'>
-                          <li className='skill_item'>
-                            Node (with Express & Nest JS)
-                          </li>
-                          <li className='skill_item'>Django</li>
                           <li className='skill_item'>.NET</li>
+                          <li className='skill_item'>Node.js</li>
+                          <li className='skill_item'>Express</li>
+                          <li className='skill_item'>NestJS</li>
+                          <li className='skill_item'>GraphQL</li>
+                          <li className='skill_item'>Django</li>
                         </ul>
                       </div>
                     </div>
@@ -200,6 +205,12 @@ const About: React.FC = () => {
                         <ul className='skill_items'>
                           <li className='skill_item'>PostgreSQL, MySQL</li>
                           <li className='skill_item'>MongoDB</li>
+                          <li className='skill_item'>neo4j</li>
+
+                          <h4 className='skill_type'>ORM:</h4>
+                          <li className='skill_item'>Prisma</li>
+                          <li className='skill_item'>Mongoose</li>
+                          <li className='skill_item'>Entity Framework</li>
                         </ul>
                       </div>
                     </div>
@@ -209,23 +220,68 @@ const About: React.FC = () => {
                       <div className='skill_group'>
                         <h4 className='skill_type'>Libraries:</h4>
                         <ul className='skill_items'>
-                          <li className='skill_item'>Jest</li>
                           <li className='skill_item'>NUnit</li>
+                          <li className='skill_item'>Jest</li>
+                          <li className='skill_item'>React Testing Library</li>
                         </ul>
                       </div>
                     </div>
 
                     <div className='skill_category'>
-                      <h3 className='category_title'>
-                        DevOps & Infrastructure
-                      </h3>
+                      <h3 className='category_title'>Infrastructure</h3>
                       <div className='skill_group'>
-                        <h4 className='skill_type'>Tools:</h4>
+                        <h4 className='skill_type'>Cloud Services:</h4>
                         <ul className='skill_items'>
+                          <li className='skill_item'>
+                            Azure, Google Cloud, Digital Ocean
+                          </li>
+
+                          <h4 className='skill_type'>
+                            Containerization & Orchestration:
+                          </h4>
                           <li className='skill_item'>Docker</li>
+                          <li className='skill_item'>Kubernetes</li>
+
+                          <h4 className='skill_type'>Web Server:</h4>
                           <li className='skill_item'>NGINX</li>
-                          <li className='skill_item'>Digital Ocean</li>
-                          <li className='skill_item'>Git & GitHub</li>
+                        </ul>
+                      </div>
+                    </div>
+
+                    <div className='skill_category'>
+                      <h3 className='category_title'>DevOps</h3>
+                      <div className='skill_group'>
+                        <h4 className='skill_type'>Version Control:</h4>
+                        <ul className='skill_items'>
+                          <li className='skill_item'>Git, Github</li>
+
+                          <h4 className='skill_type'>CI/CD:</h4>
+                          <li className='skill_item'>Jenkins</li>
+                          <li className='skill_item'>Github Pages</li>
+                        </ul>
+                      </div>
+                    </div>
+
+                    <div className='skill_category'>
+                      <h3 className='category_title'>Core Principles</h3>
+                      <div className='skill_group'>
+                        <h4 className='skill_type'>Architectural Patterns:</h4>
+                        <ul className='skill_items'>
+                          <li className='skill_item'>
+                            Microservices, Event-Driven, & Serverless
+                          </li>
+
+                          <h4 className='skill_type'>Design:</h4>
+                          <li className='skill_item'>
+                            SOLID, OOP & Separation of Concerns
+                          </li>
+
+                          <h4 className='skill_type'>Methodologies:</h4>
+                          <li className='skill_item'>Agile / Scrum</li>
+                          <li className='skill_item'>
+                            Test-Driven Development
+                          </li>
+                          <li className='skill_item'>Domain-Driven Design</li>
                         </ul>
                       </div>
                     </div>
