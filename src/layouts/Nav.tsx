@@ -1,4 +1,5 @@
 import React, { Fragment, useEffect, useState } from 'react';
+import styles from './Nav.module.css';
 
 interface NavProps {
   close: () => void;
@@ -19,13 +20,21 @@ const Nav: React.FC<NavProps> = ({ close, trigger }) => {
 
   return (
     <Fragment>
-      <a href='#' className='resumo_fn_nav_overlay' onClick={close} />
-      <div className='resumo_fn_navigation'>
-        <a href='#' className='closer' onClick={close} />
+      <button
+        className={styles.navOverlay}
+        onClick={close}
+        aria-label='Close Menu'
+      />
+      <div className={`${styles.navigation} navigation`}>
+        <button
+          className={styles.closer}
+          onClick={close}
+          aria-label='Close Menu'
+        />
         {/* Navigation Content */}
-        <div className='nav_in'>
-          <nav id='nav'>
-            <h3 className='label'>Menu</h3>
+        <div className={styles.navIn}>
+          <nav id='nav' className={styles.navContent}>
+            <h3 className={styles.label}>Menu</h3>
             <ul>
               <li style={{ transitionDelay: !trigger ? '0ms' : '700ms' }}>
                 <a href='#home' onClick={close}>
@@ -54,7 +63,10 @@ const Nav: React.FC<NavProps> = ({ close, trigger }) => {
               </li>
             </ul>
           </nav>
-          <div className={`nav_footer ${toggle_}`}>
+          <div
+            className={`${styles.navFooter} ${
+              toggle_ === 'ready' ? styles.ready : ''
+            }`}>
             <p>© 2025 Brandon B.</p>
           </div>
         </div>

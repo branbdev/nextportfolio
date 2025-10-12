@@ -4,6 +4,7 @@ import Contact from '../src/components/Contact';
 import Home from '../src/components/Home';
 import Portfolio from '../src/components/Portfolio';
 import { Fragment } from 'react';
+import LatestArticles from '../src/components/LatestArticles';
 
 const Index: React.FC = () => {
   return (
@@ -11,6 +12,7 @@ const Index: React.FC = () => {
       <Home />
       <About />
       <Portfolio />
+      <LatestArticles />
       <Contact />
     </Fragment>
   );

@@ -1,5 +1,43 @@
 import React, { useEffect, useState } from 'react';
 import { portfolioData, PortfolioItem } from './portfolioData';
+import { 
+  IconReact, 
+  IconNextjs, 
+  IconTypescript, 
+  IconDjango, 
+  IconNodejs, 
+  IconExpress, 
+  IconMongoDB,
+  IconExternal,
+  IconGithub
+} from './Icons';
+
+// Helper function to get icon for technology
+const getTechIcon = (tag: string) => {
+  const iconSize = 16;
+  const iconColor = 'currentColor';
+  
+  switch(tag.toLowerCase()) {
+    case 'react':
+      return <Icons.IconReact size={iconSize} color={iconColor} className="tech-icon" />;
+    case 'next.js':
+    case 'nextjs':
+      return <Icons.IconNextjs size={iconSize} color={iconColor} className="tech-icon" />;
+    case 'typescript':
+      return <Icons.IconTypescript size={iconSize} color={iconColor} className="tech-icon" />;
+    case 'django':
+      return <Icons.IconDjango size={iconSize} color={iconColor} className="tech-icon" />;
+    case 'node':
+    case 'node.js':
+      return <Icons.IconNodejs size={iconSize} color={iconColor} className="tech-icon" />;
+    case 'express':
+      return <Icons.IconExpress size={iconSize} color={iconColor} className="tech-icon" />;
+    case 'mongodb':
+      return <Icons.IconMongoDB size={iconSize} color={iconColor} className="tech-icon" />;
+    default:
+      return null;
+  }
+};
 
 interface PortfolioModalboxProps {
   close: () => void;
