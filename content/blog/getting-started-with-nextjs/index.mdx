@@ -1,0 +1,95 @@
+---
+title: "Getting Started with Next.js"
+date: "2025-10-05"
+excerpt: "Learn how to build modern React applications with Next.js, the production-ready framework for React."
+author: "Brandon Bowen"
+tags: ["React", "Next.js", "JavaScript", "Web Development"]
+coverImage: "/img/blog/nextjs-cover.jpg"
+---
+
+# Getting Started with Next.js
+
+Next.js is a powerful React framework that provides a great developer experience with all the features you need for production: hybrid static & server rendering, TypeScript support, smart bundling, route pre-fetching, and more.
+
+## Why Next.js?
+
+Next.js solves many common React development challenges out of the box:
+
+- **Server-side rendering** - For better SEO and initial load performance
+- **Static site generation** - Build ultra-fast static sites
+- **Automatic code splitting** - Only load what's necessary for each page
+- **Built-in CSS and Sass support** - Style your application with ease
+- **Fast refresh** - Instant feedback during development
+
+## Getting Started
+
+First, let's create a new Next.js project:
+
+```bash
+npx create-next-app my-next-app
+cd my-next-app
+npm run dev
+```
+
+This will create a new Next.js project with everything set up for you, including:
+- A `pages` directory for your routes
+- Basic styling with CSS Modules
+- Fast refresh during development
+
+## Creating Pages
+
+Next.js uses a file-based routing system. To create a new page, simply add a file to the `pages` directory:
+
+```jsx
+// pages/about.js
+export default function About() {
+  return (
+    <div>
+      <h1>About Us</h1>
+      <p>This is the about page</p>
+    </div>
+  )
+}
+```
+
+You can now access this page at `/about`.
+
+## Data Fetching
+
+Next.js provides several ways to fetch data for your pages:
+
+### getStaticProps
+
+Use this to fetch data at build time:
+
+```jsx
+export async function getStaticProps() {
+  const res = await fetch('https://api.example.com/data')
+  const data = await res.json()
+  
+  return {
+    props: { data }
+  }
+}
+```
+
+### getServerSideProps
+
+Use this to fetch data on each request:
+
+```jsx
+export async function getServerSideProps() {
+  const res = await fetch('https://api.example.com/data')
+  const data = await res.json()
+  
+  return {
+    props: { data }
+  }
+}
+```
+
+## Conclusion
+
+Next.js provides an excellent developer experience while ensuring your applications are performant and SEO-friendly. It's a great choice for building modern web applications with React.
+
+In future articles, we'll explore more advanced features of Next.js, including API routes, authentication, and deployment strategies.

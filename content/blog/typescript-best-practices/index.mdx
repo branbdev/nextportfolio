@@ -1,0 +1,148 @@
+---
+title: "TypeScript Best Practices for React Applications"
+date: "2025-09-28"
+excerpt: "Improve your React codebase with these TypeScript best practices for type safety and better developer experience."
+author: "Brandon Bowen"
+tags: ["React", "TypeScript", "JavaScript", "Web Development"]
+coverImage: "/img/blog/typescript-cover.jpg"
+---
+
+# TypeScript Best Practices for React Applications
+
+TypeScript has become the standard choice for building scalable React applications, providing type safety and enhancing developer experience. In this post, I'll share some best practices I've learned while working on enterprise-scale React applications.
+
+## Using Proper Component Types
+
+When defining React components, use appropriate types:
+
+```tsx
+// Function component with props
+interface ButtonProps {
+  text: string;
+  onClick: () => void;
+  variant?: 'primary' | 'secondary';
+}
+
+// Using React.FC (Function Component) type
+const Button: React.FC<ButtonProps> = ({ text, onClick, variant = 'primary' }) => {
+  return (
+    <button 
+      className={`btn btn-${variant}`} 
+      onClick={onClick}
+    >
+      {text}
+    </button>
+  );
+};
+
+// Alternative without React.FC
+function Button({ text, onClick, variant = 'primary' }: ButtonProps) {
+  return (
+    <button 
+      className={`btn btn-${variant}`} 
+      onClick={onClick}
+    >
+      {text}
+    </button>
+  );
+}
+```
+
+## Typing Hooks
+
+Properly typing React hooks improves code readability and catches errors:
+
+```tsx
+// useState with proper typing
+const [user, setUser] = useState<User | null>(null);
+
+// useRef with proper typing
+const inputRef = useRef<HTMLInputElement>(null);
+
+// useReducer with proper typing
+type State = { count: number };
+type Action = { type: 'increment' | 'decrement'; payload?: number };
+
+const reducer = (state: State, action: Action): State => {
+  switch (action.type) {
+    case 'increment':
+      return { count: state.count + (action.payload || 1) };
+    case 'decrement':
+      return { count: state.count - (action.payload || 1) };
+    default:
+      return state;
+  }
+};
+
+const [state, dispatch] = useReducer(reducer, { count: 0 });
+```
+
+## Event Handling
+
+Use proper TypeScript types for event handlers:
+
+```tsx
+// Button click event
+const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+  e.preventDefault();
+  // Handle click
+};
+
+// Input change event
+const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  setValue(e.target.value);
+};
+
+// Form submit event
+const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  e.preventDefault();
+  // Handle form submission
+};
+```
+
+## Type Guards for Conditional Rendering
+
+Use type guards to handle different states in your components:
+
+```tsx
+interface LoadingState {
+  status: 'loading';
+}
+
+interface SuccessState {
+  status: 'success';
+  data: User[];
+}
+
+interface ErrorState {
+  status: 'error';
+  error: Error;
+}
+
+type State = LoadingState | SuccessState | ErrorState;
+
+function UserList({ state }: { state: State }) {
+  if (state.status === 'loading') {
+    return <Spinner />;
+  }
+
+  if (state.status === 'error') {
+    return <ErrorMessage error={state.error} />;
+  }
+
+  // TypeScript knows state is SuccessState here
+  return (
+    <ul>
+      {state.data.map(user => (
+        <li key={user.id}>{user.name}</li>
+      ))}
+    </ul>
+  );
+}
+```
+
+## Conclusion
+
+Using TypeScript effectively in React applications can significantly improve code quality and developer experience. By following these best practices, you'll catch errors earlier, make your code more maintainable, and provide better documentation for other developers on your team.
+
+In future articles, we'll explore more advanced TypeScript patterns like generics, mapped types, and conditional types in the context of React applications.

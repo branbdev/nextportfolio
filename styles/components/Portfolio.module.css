@@ -1,0 +1,79 @@
+.tech_stack {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+}
+
+.tech_tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background-color: rgba(0, 0, 0, 0.05);
+  color: var(--desc-color);
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  font-size: 0.875rem;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.tech_tag:hover {
+  background-color: var(--mc);
+  color: #fff;
+}
+
+.tech_tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.project_links {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.demo_link,
+.code_link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.6rem 1.2rem;
+  border-radius: 4px;
+  text-decoration: none;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.demo_link {
+  background-color: var(--mc);
+  color: #fff;
+}
+
+.code_link {
+  background-color: rgba(0, 0, 0, 0.05);
+  color: var(--color);
+}
+
+.demo_link:hover {
+  opacity: 0.9;
+}
+
+.code_link:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+/* Dark theme adjustments */
+:root[data-theme="dark"] .tech_tag {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+:root[data-theme="dark"] .code_link {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+:root[data-theme="dark"] .code_link:hover {
+  background-color: rgba(255, 255, 255, 0.15);
+}
