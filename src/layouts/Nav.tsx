@@ -1,4 +1,6 @@
 import React, { Fragment, useEffect, useState } from 'react';
+import Link from 'next/link';
+import { useRouter } from 'next/router';
 import styles from './Nav.module.css';
 
 interface NavProps {
@@ -8,6 +10,30 @@ interface NavProps {
 
 const Nav: React.FC<NavProps> = ({ close, trigger }) => {
   const [toggle_, setToggle_] = useState<string>('');
+  const router = useRouter();
+
+  // Function to handle navigation with proper routing
+  const handleNavigation = (
+    e: React.MouseEvent<HTMLAnchorElement>,
+    path: string
+  ) => {
+    e.preventDefault();
+    close();
+
+    // If path is a hash link on the homepage
+    if (path.startsWith('/#')) {
+      // If we're already on the home page, just scroll to the anchor
+      if (router.pathname === '/') {
+        window.location.hash = path.substring(2);
+      } else {
+        // Otherwise navigate to home page with the hash
+        router.push(path);
+      }
+    } else {
+      // For non-hash links like /blog, use normal navigation
+      router.push(path);
+    }
+  };
 
   useEffect(() => {
     !trigger && setToggle_('');
@@ -37,27 +63,38 @@ const Nav: React.FC<NavProps> = ({ close, trigger }) => {
             <h3 className={styles.label}>Menu</h3>
             <ul>
               <li style={{ transitionDelay: !trigger ? '0ms' : '700ms' }}>
-                <a href='#home' onClick={close}>
+                {/* Hash links are handled programmatically; allow anchor but disable Next.js rule */}
+                {/* eslint-disable-next-line @next/next/no-html-link-for-pages */}
+                <a href='/#home' onClick={(e) => handleNavigation(e, '/#home')}>
                   Home
                 </a>
               </li>
               <li style={{ transitionDelay: !trigger ? '0ms' : '900ms' }}>
-                <a onClick={close} href='#about'>
+                {/* eslint-disable-next-line @next/next/no-html-link-for-pages */}
+                <a
+                  href='/#about'
+                  onClick={(e) => handleNavigation(e, '/#about')}>
                   About
                 </a>
               </li>
               <li style={{ transitionDelay: !trigger ? '0ms' : '1100ms' }}>
-                <a onClick={close} href='#portfolio'>
+                {/* eslint-disable-next-line @next/next/no-html-link-for-pages */}
+                <a
+                  href='/#portfolio'
+                  onClick={(e) => handleNavigation(e, '/#portfolio')}>
                   Portfolio
                 </a>
               </li>
               <li style={{ transitionDelay: !trigger ? '0ms' : '1300ms' }}>
-                <a onClick={close} href='#blog'>
-                  Blog - Coming Soon!
-                </a>
+                <Link href='/blog' onClick={close} className={styles.link}>
+                  Blog
+                </Link>
               </li>
               <li style={{ transitionDelay: !trigger ? '0ms' : '1500ms' }}>
-                <a onClick={close} href='#contact'>
+                {/* eslint-disable-next-line @next/next/no-html-link-for-pages */}
+                <a
+                  href='/#contact'
+                  onClick={(e) => handleNavigation(e, '/#contact')}>
                   Contact
                 </a>
               </li>

@@ -4,6 +4,8 @@ import { Autoplay, Navigation } from 'swiper/modules';
 import { portfolioSliderProps } from '../sliderProps';
 import { portfolioData } from './portfolioData';
 import { Context } from '../context/Context';
+import { getTechIcon } from './Icons';
+import styles from '../../styles/components/Portfolio.module.css';
 
 const Portfolio: React.FC = () => {
   const context = useContext(Context);
@@ -44,7 +46,15 @@ const Portfolio: React.FC = () => {
                     />
                   </div>
                   <div className='title_holder'>
-                    <p>{item.tags.slice(0, 2).join(' • ')}</p>
+                    <p className={styles.tech_tags}>
+                      {item.tags.slice(0, 2).map((tag, index) => (
+                        <span key={index} className={styles.tech_tag}>
+                          {getTechIcon(tag, 14)}
+                          <span>{tag}</span>
+                          {index === 0 && ' • '}
+                        </span>
+                      ))}
+                    </p>
                     <h3>{item.title}</h3>
                   </div>
                 </div>

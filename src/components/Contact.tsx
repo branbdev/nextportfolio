@@ -196,7 +196,9 @@ const Contact: React.FC = () => {
                   </div>
                 </div>
                 <div className='item'>
-                  <ReCAPTCHA onVerify={setRecaptchaToken} />
+                  <ReCAPTCHA
+                    onVerify={(token) => setRecaptchaToken(token ?? '')}
+                  />
                 </div>
                 <div className='item'>
                   <input

@@ -48,9 +48,9 @@ Next.js provides several benefits over a plain React application:
 
 Let's start by creating a new Next.js project:
 
-\`\`\`bash
+~~~bash
 npx create-next-app my-next-app
-\`\`\`
+~~~
 
 This will create a new Next.js project with all the necessary dependencies and configuration.
 
@@ -60,7 +60,7 @@ In Next.js, pages are React components exported from files in the \`pages\` dire
 
 For example, create a file at \`pages/about.js\`:
 
-\`\`\`jsx
+~~~jsx
 export default function About() {
   return (
     <div>
@@ -69,7 +69,7 @@ export default function About() {
     </div>
   );
 }
-\`\`\`
+~~~
 
 Now you can access this page at \`/about\`.
 
@@ -81,7 +81,7 @@ Next.js provides several methods for data fetching:
 
 For static site generation (SSG):
 
-\`\`\`jsx
+~~~jsx
 export async function getStaticProps() {
   const data = await fetchData();
   
@@ -91,13 +91,13 @@ export async function getStaticProps() {
     },
   };
 }
-\`\`\`
+~~~
 
 ### getServerSideProps
 
 For server-side rendering (SSR):
 
-\`\`\`jsx
+~~~jsx
 export async function getServerSideProps() {
   const data = await fetchData();
   
@@ -107,7 +107,7 @@ export async function getServerSideProps() {
     },
   };
 }
-\`\`\`
+~~~
 
 ## Conclusion
 
@@ -140,21 +140,21 @@ TypeScript has become increasingly popular in the React ecosystem, offering impr
 
 If you're starting a new project, you can use Create React App with the TypeScript template:
 
-\`\`\`bash
+~~~bash
 npx create-react-app my-app --template typescript
-\`\`\`
+~~~
 
 For Next.js:
 
-\`\`\`bash
+~~~bash
 npx create-next-app --typescript
-\`\`\`
+~~~
 
 ## Typing Component Props
 
 One of the most important aspects of using TypeScript with React is properly typing your component props:
 
-\`\`\`tsx
+~~~tsx
 interface ButtonProps {
   text: string;
   onClick: () => void;
@@ -178,26 +178,26 @@ const Button: React.FC<ButtonProps> = ({
     </button>
   );
 };
-\`\`\`
+~~~
 
 ## Hooks with TypeScript
 
 ### useState
 
-\`\`\`tsx
+~~~tsx
 const [count, setCount] = useState<number>(0);
 const [user, setUser] = useState<User | null>(null);
-\`\`\`
+~~~
 
 ### useRef
 
-\`\`\`tsx
+~~~tsx
 const inputRef = useRef<HTMLInputElement>(null);
-\`\`\`
+~~~
 
 ### useContext
 
-\`\`\`tsx
+~~~tsx
 interface ThemeContextType {
   theme: 'light' | 'dark';
   toggleTheme: () => void;
@@ -207,13 +207,13 @@ const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 
 // Usage
 const { theme, toggleTheme } = useContext(ThemeContext)!;
-\`\`\`
+~~~
 
 ## Common TypeScript Patterns in React
 
 ### Typing Event Handlers
 
-\`\`\`tsx
+~~~tsx
 const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
   setName(e.target.value);
 };
@@ -222,11 +222,11 @@ const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
   e.preventDefault();
   // Submit form
 };
-\`\`\`
+~~~
 
 ### Children Props
 
-\`\`\`tsx
+~~~tsx
 interface LayoutProps {
   children: React.ReactNode;
 }
@@ -234,11 +234,11 @@ interface LayoutProps {
 const Layout: React.FC<LayoutProps> = ({ children }) => {
   return <div className="layout">{children}</div>;
 };
-\`\`\`
+~~~
 
 ### Function Props with Parameters
 
-\`\`\`tsx
+~~~tsx
 interface ItemProps {
   item: Item;
   onDelete: (id: number) => void;
@@ -252,13 +252,13 @@ const ItemComponent: React.FC<ItemProps> = ({ item, onDelete }) => {
     </div>
   );
 };
-\`\`\`
+~~~
 
 ## Advanced Types
 
 ### Discriminated Unions for State Management
 
-\`\`\`tsx
+~~~tsx
 type State =
   | { status: 'idle' }
   | { status: 'loading' }
@@ -275,7 +275,7 @@ if (state.status === 'loading') {
 } else if (state.status === 'error') {
   return <ErrorMessage error={state.error} />;
 }
-\`\`\`
+~~~
 
 ## Conclusion
 

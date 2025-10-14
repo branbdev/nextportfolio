@@ -1,43 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { portfolioData, PortfolioItem } from './portfolioData';
-import { 
-  IconReact, 
-  IconNextjs, 
-  IconTypescript, 
-  IconDjango, 
-  IconNodejs, 
-  IconExpress, 
-  IconMongoDB,
-  IconExternal,
-  IconGithub
-} from './Icons';
-
-// Helper function to get icon for technology
-const getTechIcon = (tag: string) => {
-  const iconSize = 16;
-  const iconColor = 'currentColor';
-  
-  switch(tag.toLowerCase()) {
-    case 'react':
-      return <Icons.IconReact size={iconSize} color={iconColor} className="tech-icon" />;
-    case 'next.js':
-    case 'nextjs':
-      return <Icons.IconNextjs size={iconSize} color={iconColor} className="tech-icon" />;
-    case 'typescript':
-      return <Icons.IconTypescript size={iconSize} color={iconColor} className="tech-icon" />;
-    case 'django':
-      return <Icons.IconDjango size={iconSize} color={iconColor} className="tech-icon" />;
-    case 'node':
-    case 'node.js':
-      return <Icons.IconNodejs size={iconSize} color={iconColor} className="tech-icon" />;
-    case 'express':
-      return <Icons.IconExpress size={iconSize} color={iconColor} className="tech-icon" />;
-    case 'mongodb':
-      return <Icons.IconMongoDB size={iconSize} color={iconColor} className="tech-icon" />;
-    default:
-      return null;
-  }
-};
+import { IconGithub, IconExternal, getTechIcon } from './Icons';
+import styles from '../../styles/components/Portfolio.module.css';
 
 interface PortfolioModalboxProps {
   close: () => void;
@@ -72,28 +36,31 @@ const PortfolioModalbox: React.FC<PortfolioModalboxProps> = ({
             <img src={project.image} alt={project.title} />
           </div>
           <div className='modal_info'>
-            <div className='tech_stack'>
-              {project.tags.slice(0, 2).map((tag, index) => (
-                <span key={index} className='tech_tag'>
-                  {tag}
+            <div className={styles.tech_stack}>
+              {project.tags.map((tag, index) => (
+                <span key={index} className={styles.tech_tag}>
+                  {getTechIcon(tag, 16)}
+                  <span>{tag}</span>
                 </span>
               ))}
             </div>
             <p className='project_description'>{project.description}</p>
-            <div className='project_links'>
+            <div className={styles.project_links}>
               <a
                 href={project.liveUrl}
                 target='_blank'
                 rel='noreferrer'
-                className='demo_link'>
-                Live Demo
+                className={styles.demo_link}>
+                <IconExternal size={18} />
+                <span>Live Demo</span>
               </a>
               <a
                 href={project.codeUrl}
                 target='_blank'
                 rel='noreferrer'
-                className='code_link'>
-                Source Code
+                className={styles.code_link}>
+                <IconGithub size={18} />
+                <span>Source Code</span>
               </a>
             </div>
           </div>
