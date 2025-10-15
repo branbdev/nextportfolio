@@ -12,8 +12,8 @@ import {
 
 const CONTENT_ROOT = path.join(process.cwd(), 'content');
 const POSTS_DIR = path.join(CONTENT_ROOT, 'posts');
-const PROJECTS_DIR = path.join(CONTENT_ROOT, 'projects');
-const TECHNOLOGIES_DIR = path.join(CONTENT_ROOT, 'technologies');
+const PROJECTS_DIR = path.join(CONTENT_ROOT, 'projects', '[project-slug]');
+const TECHNOLOGIES_DIR = path.join(CONTENT_ROOT, 'technologies', '[technology-slug]');
 
 function readSlugs(dir: string): string[] {
   if (!fs.existsSync(dir)) return [];
@@ -32,7 +32,10 @@ function readMdx<TFrontmatter extends object>(dir: string, slug: string) {
 
 export function loadAllTechnologies(): Technology[] {
   return readSlugs(TECHNOLOGIES_DIR).map((slug) => {
-    const { frontmatter } = readMdx<TechnologyFrontmatter>(TECHNOLOGIES_DIR, slug);
+    const { frontmatter } = readMdx<TechnologyFrontmatter>(
+      TECHNOLOGIES_DIR,
+      slug
+    );
     return {
       slug,
       name: frontmatter.name,
@@ -44,7 +47,10 @@ export function loadAllTechnologies(): Technology[] {
 export function loadTechnologyBySlug(slug: string): Technology | null {
   const filePath = path.join(TECHNOLOGIES_DIR, `${slug}.mdx`);
   if (!fs.existsSync(filePath)) return null;
-  const { frontmatter } = readMdx<TechnologyFrontmatter>(TECHNOLOGIES_DIR, slug);
+  const { frontmatter } = readMdx<TechnologyFrontmatter>(
+    TECHNOLOGIES_DIR,
+    slug
+  );
   return { slug, name: frontmatter.name, logo: frontmatter.logo };
 }
 
@@ -62,7 +68,10 @@ export function loadAllPosts({ includeContent = false } = {}): Post[] {
   });
 }
 
-export function loadPostBySlug(slug: string, { includeContent = false } = {}): Post | null {
+export function loadPostBySlug(
+  slug: string,
+  { includeContent = false } = {}
+): Post | null {
   const filePath = path.join(POSTS_DIR, `${slug}.mdx`);
   if (!fs.existsSync(filePath)) return null;
   const { frontmatter, content } = readMdx<PostFrontmatter>(POSTS_DIR, slug);
@@ -78,7 +87,10 @@ export function loadPostBySlug(slug: string, { includeContent = false } = {}): P
 
 export function loadAllProjects({ includeContent = false } = {}): Project[] {
   return readSlugs(PROJECTS_DIR).map((slug) => {
-    const { frontmatter, content } = readMdx<ProjectFrontmatter>(PROJECTS_DIR, slug);
+    const { frontmatter, content } = readMdx<ProjectFrontmatter>(
+      PROJECTS_DIR,
+      slug
+    );
     return {
       slug,
       name: frontmatter.name,
@@ -86,15 +98,22 @@ export function loadAllProjects({ includeContent = false } = {}): Project[] {
       repositoryUrl: frontmatter.repositoryUrl,
       liveUrl: frontmatter.liveUrl,
       technologySlugs: frontmatter.technologies || [],
+      image: frontmatter.image,
       content: includeContent ? content : undefined,
     } satisfies Project;
   });
 }
 
-export function loadProjectBySlug(slug: string, { includeContent = false } = {}): Project | null {
+export function loadProjectBySlug(
+  slug: string,
+  { includeContent = false } = {}
+): Project | null {
   const filePath = path.join(PROJECTS_DIR, `${slug}.mdx`);
   if (!fs.existsSync(filePath)) return null;
-  const { frontmatter, content } = readMdx<ProjectFrontmatter>(PROJECTS_DIR, slug);
+  const { frontmatter, content } = readMdx<ProjectFrontmatter>(
+    PROJECTS_DIR,
+    slug
+  );
   return {
     slug,
     name: frontmatter.name,
@@ -102,6 +121,7 @@ export function loadProjectBySlug(slug: string, { includeContent = false } = {})
     repositoryUrl: frontmatter.repositoryUrl,
     liveUrl: frontmatter.liveUrl,
     technologySlugs: frontmatter.technologies || [],
+    image: frontmatter.image,
     content: includeContent ? content : undefined,
   };
 }

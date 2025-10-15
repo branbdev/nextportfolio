@@ -38,6 +38,7 @@ export interface ProjectFrontmatter {
   repositoryUrl?: string;
   liveUrl?: string;
   technologies: Slug[];
+  image?: string;
 }
 
 export interface Project {
@@ -47,5 +48,6 @@ export interface Project {
   repositoryUrl?: string;
   liveUrl?: string;
   technologySlugs: Slug[];
+  image?: string;
   content?: string;
 }

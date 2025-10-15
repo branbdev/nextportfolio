@@ -55,7 +55,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
       )}
       <div className='resumo_fn_wrapper'>
         {/* MODALBOX */}
-        {modal && <PortfolioModalbox close={close} value={modalValue} />}
+        {/* {modal && <PortfolioModalbox close={close} value={modalValue} />} */}
         {/* /MODALBOX */}
         <Accessibility />
         <div className='resumo_fn_content'>

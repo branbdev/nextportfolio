@@ -1,3 +1,5 @@
+'use client';
+
 // *TODO: "Fill all Fields" error is coupled with successful form submissions
 
 import React, { useState, FormEvent, ChangeEvent } from 'react';

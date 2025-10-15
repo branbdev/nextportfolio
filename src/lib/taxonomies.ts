@@ -1,3 +1,5 @@
+import { Project, Technology } from '../types/content';
+
 export interface BlogPost {
   slug: string;
   title: string;
@@ -5,6 +7,33 @@ export interface BlogPost {
   date: string;
   author: string;
   tags: string[];
+}
+
+// Enriched project type with full Technology entities
+export interface EnrichedProject extends Omit<Project, 'technologySlugs'> {
+  technologies: Technology[];
+}
+
+/**
+ * Hydrates projects with full Technology entities based on their technologySlugs
+ */
+export function enrichProjectsWithTechnologies(
+  projects: Project[],
+  technologies: Technology[]
+): EnrichedProject[] {
+  const techMap = new Map(technologies.map(tech => [tech.slug, tech]));
+  
+  return projects.map(project => {
+    const technologies = project.technologySlugs
+      .map(slug => techMap.get(slug))
+      .filter((tech): tech is Technology => tech !== undefined);
+    
+    const { technologySlugs, ...rest } = project;
+    return {
+      ...rest,
+      technologies,
+    };
+  });
 }
 
 // Function to extract tags from both blog posts and portfolio items
