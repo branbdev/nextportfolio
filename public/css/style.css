@@ -1240,6 +1240,49 @@ a:focus {
   margin: 0;
 }
 
+/* Add some animation for the cards */
+@keyframes cardFloat {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+body.light .portfolio_item {
+  animation: cardFloat 6s ease-in-out infinite;
+}
+
+/* Hover effect for images */
+body.light .portfolio_item .img_holder {
+  position: relative;
+  overflow: hidden;
+}
+
+body.light .portfolio_item .img_holder:after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    135deg,
+    rgba(158, 227, 255, 0.2),
+    rgba(44, 83, 100, 0.2)
+  );
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+body.light .portfolio_item:hover .img_holder:after {
+  opacity: 1;
+}
+
 /*------------------------------------------------------------------*/
 /*	11) Portfolio Modalbox
 /*------------------------------------------------------------------*/
@@ -3224,47 +3267,4 @@ body.light .project_links a:hover {
   color: #0f2027;
   transform: translateY(-2px);
   box-shadow: 0 5px 15px rgba(158, 227, 255, 0.3);
-}
-
-/* Add some animation for the cards */
-@keyframes cardFloat {
-  0% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-10px);
-  }
-  100% {
-    transform: translateY(0);
-  }
-}
-
-body.light .portfolio_item {
-  animation: cardFloat 6s ease-in-out infinite;
-}
-
-/* Hover effect for images */
-body.light .portfolio_item .img_holder {
-  position: relative;
-  overflow: hidden;
-}
-
-body.light .portfolio_item .img_holder:after {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: linear-gradient(
-    135deg,
-    rgba(158, 227, 255, 0.2),
-    rgba(44, 83, 100, 0.2)
-  );
-  opacity: 0;
-  transition: opacity 0.3s ease;
-}
-
-body.light .portfolio_item:hover .img_holder:after {
-  opacity: 1;
 }
