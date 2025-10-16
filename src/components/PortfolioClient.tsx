@@ -14,7 +14,8 @@ interface PortfolioClientProps {
 }
 
 const PortfolioClient: React.FC<PortfolioClientProps> = ({ projects }) => {
-  const [selectedProject, setSelectedProject] = useState<EnrichedProject | null>(null);
+  const [selectedProject, setSelectedProject] =
+    useState<EnrichedProject | null>(null);
 
   const handleOpenModal = (project: EnrichedProject) => {
     setSelectedProject(project);
@@ -60,10 +61,7 @@ const PortfolioClient: React.FC<PortfolioClientProps> = ({ projects }) => {
       </Swiper>
 
       {selectedProject && (
-        <PortfolioModalbox 
-          value={selectedProject} 
-          close={handleCloseModal} 
-        />
+        <PortfolioModalbox value={selectedProject} close={handleCloseModal} />
       )}
     </>
   );

@@ -10,14 +10,11 @@ const inter = Inter({
 
 export const metadata = {
   title: 'Brandon Bowen - Full-Stack Software Engineer | .NET & React',
-  description: 'Full-stack software engineer specializing in .NET, React, and modern web development',
+  description:
+    'Full-stack software engineer specializing in .NET, React, and modern web development',
 };
 
-export default function RootLayout({
-  children,
-}: {
-  children: ReactNode;
-}) {
+export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang='en' className={inter.className}>
       <body>

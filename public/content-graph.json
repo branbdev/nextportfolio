@@ -1,0 +1,253 @@
+{
+  "projects": [
+    {
+      "slug": "alchemy",
+      "name": "Alchemy",
+      "description": "This application is meant to match users up with potential partners based on their preferences.",
+      "repositoryUrl": "https://github.com/branbdev/alchemy",
+      "liveUrl": "https://github.com/branbdev/",
+      "image": "/img/portfolio/alchemy.jpg",
+      "technologies": [
+        {
+          "slug": "angular",
+          "name": "Angular",
+          "logo": "/svg/tech/angular.svg"
+        },
+        {
+          "slug": "csharp",
+          "name": "C#",
+          "logo": "/svg/tech/csharp.svg"
+        }
+      ]
+    },
+    {
+      "slug": "bbRealEstate",
+      "name": "B & B Real Estate",
+      "description": "Users can register, login, and contact real estate agents to enquire about property listings. Users can browse or search property listings by specific metrics such as number of bedroom/bathroom/garages, square footage, location, etc. Administers can easily add, remove, and update both homes listed and employee profiles, including adding a public distinction for Employee of the Month.",
+      "repositoryUrl": "https://github.com/branbdev/bt_realestate",
+      "liveUrl": "http://146.190.32.74/",
+      "image": "/img/portfolio/bbrealestatehomepage.jpg",
+      "technologies": [
+        {
+          "slug": "django",
+          "name": "Django",
+          "logo": "/svg/tech/django.svg"
+        },
+        {
+          "slug": "nginx",
+          "name": "NGINX",
+          "logo": "/svg/tech/nginx.svg"
+        },
+        {
+          "slug": "javascript",
+          "name": "JavaScript",
+          "logo": "/svg/tech/javascript.svg"
+        }
+      ]
+    },
+    {
+      "slug": "devcon",
+      "name": "DevCon",
+      "description": "A Simple social media application for web developers. Users can register, login, and add relevant information reguarding their experience, education, and expertise. Users can post, comment and send likes to different user posts.",
+      "repositoryUrl": "https://github.com/branbdev/devcon",
+      "liveUrl": "https://devcon-et5h.onrender.com/",
+      "image": "/img/portfolio/devcon.jpg",
+      "technologies": [
+        {
+          "slug": "react",
+          "name": "React",
+          "logo": "/svg/tech/react.svg"
+        },
+        {
+          "slug": "node",
+          "name": "Node.js",
+          "logo": "/svg/tech/node.svg"
+        },
+        {
+          "slug": "express",
+          "name": "Express",
+          "logo": "/svg/tech/express.svg"
+        },
+        {
+          "slug": "mongodb",
+          "name": "MongoDB",
+          "logo": "/svg/tech/mongodb.svg"
+        }
+      ]
+    },
+    {
+      "slug": "flybuy",
+      "name": "FlyBuy",
+      "description": "An E Commerce site where users can browse item listings and add them to a shopping cart before checking out",
+      "repositoryUrl": "https://github.com/branbdev/flybuy",
+      "liveUrl": "https://github.com/branbdev/",
+      "image": "/img/portfolio/flybuy.jpg",
+      "technologies": [
+        {
+          "slug": "react",
+          "name": "React",
+          "logo": "/svg/tech/react.svg"
+        },
+        {
+          "slug": "django",
+          "name": "Django",
+          "logo": "/svg/tech/django.svg"
+        }
+      ]
+    },
+    {
+      "slug": "index",
+      "technologies": []
+    }
+  ],
+  "technologies": [
+    {
+      "slug": "angular",
+      "name": "Angular",
+      "logo": "/svg/tech/angular.svg"
+    },
+    {
+      "slug": "csharp",
+      "name": "C#",
+      "logo": "/svg/tech/csharp.svg"
+    },
+    {
+      "slug": "django",
+      "name": "Django",
+      "logo": "/svg/tech/django.svg"
+    },
+    {
+      "slug": "express",
+      "name": "Express",
+      "logo": "/svg/tech/express.svg"
+    },
+    {
+      "slug": "javascript",
+      "name": "JavaScript",
+      "logo": "/svg/tech/javascript.svg"
+    },
+    {
+      "slug": "mongodb",
+      "name": "MongoDB",
+      "logo": "/svg/tech/mongodb.svg"
+    },
+    {
+      "slug": "nginx",
+      "name": "NGINX",
+      "logo": "/svg/tech/nginx.svg"
+    },
+    {
+      "slug": "node",
+      "name": "Node.js",
+      "logo": "/svg/tech/node.svg"
+    },
+    {
+      "slug": "react",
+      "name": "React",
+      "logo": "/svg/tech/react.svg"
+    }
+  ],
+  "posts": [
+    {
+      "slug": "app-router-migration-journey",
+      "title": "Complete App Router Migration: From Build Errors to Production-Ready Architecture",
+      "publishedAt": "2025-10-15",
+      "summary": "A comprehensive deep-dive into migrating a Next.js portfolio from Pages Router to App Router, fixing server/client component boundaries, implementing data enrichment patterns, and building a three-tier content architecture with MDX, TypeScript, and static generation.",
+      "technologySlugs": [
+        "react",
+        "next.js",
+        "typescript",
+        "graphql",
+        "node"
+      ]
+    },
+    {
+      "slug": "getting-started-with-nextjs",
+      "title": "Getting Started with Next.js",
+      "technologySlugs": []
+    },
+    {
+      "slug": "typescript-best-practices",
+      "title": "TypeScript Best Practices for React Applications",
+      "technologySlugs": []
+    }
+  ],
+  "relationships": {
+    "projectsByTechnology": {
+      "angular": [
+        "alchemy"
+      ],
+      "csharp": [
+        "alchemy"
+      ],
+      "django": [
+        "bbRealEstate",
+        "flybuy"
+      ],
+      "nginx": [
+        "bbRealEstate"
+      ],
+      "javascript": [
+        "bbRealEstate"
+      ],
+      "react": [
+        "devcon",
+        "flybuy"
+      ],
+      "node": [
+        "devcon"
+      ],
+      "express": [
+        "devcon"
+      ],
+      "mongodb": [
+        "devcon"
+      ]
+    },
+    "technologiesByProject": {
+      "alchemy": [
+        "angular",
+        "csharp"
+      ],
+      "bbRealEstate": [
+        "django",
+        "nginx",
+        "javascript"
+      ],
+      "devcon": [
+        "react",
+        "node",
+        "express",
+        "mongodb"
+      ],
+      "flybuy": [
+        "react",
+        "django"
+      ],
+      "index": []
+    },
+    "postsByTechnology": {
+      "react": [
+        "app-router-migration-journey"
+      ],
+      "next.js": [
+        "app-router-migration-journey"
+      ],
+      "typescript": [
+        "app-router-migration-journey"
+      ],
+      "graphql": [
+        "app-router-migration-journey"
+      ],
+      "node": [
+        "app-router-migration-journey"
+      ]
+    }
+  },
+  "metadata": {
+    "generatedAt": "2025-10-15T23:28:55.599Z",
+    "totalProjects": 5,
+    "totalTechnologies": 9,
+    "totalPosts": 3
+  }
+}

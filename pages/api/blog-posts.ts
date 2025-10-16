@@ -1,17 +1,17 @@
 import { NextApiRequest, NextApiResponse } from 'next';
-import { getAllBlogPosts, getBlogPostBySlug } from '../../src/lib/mdx';
+import { loadAllPosts, loadPostBySlug } from '../../src/lib/contentLoader';
 
-// API endpoint to serve blog posts without GraphQL
+// API endpoint to serve blog posts
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
   try {
-    const { slug } = req.query;
+    const { slug, limit } = req.query;
 
     // Get a single blog post by slug
     if (slug && typeof slug === 'string') {
-      const post = getBlogPostBySlug(slug);
+      const post = loadPostBySlug(slug);
 
       if (!post) {
         return res.status(404).json({
@@ -22,26 +22,50 @@ export default async function handler(
 
       return res.status(200).json({
         success: true,
-        post,
+        post: {
+          slug: post.slug,
+          title: post.title,
+          excerpt: post.summary || '',
+          date: post.publishedAt || new Date().toISOString(),
+          author: 'Brandon Bowen',
+          tags: post.technologySlugs || [],
+        },
       });
     }
 
-    // Get all blog posts (with optional limit)
-    const limit = req.query.limit
-      ? parseInt(req.query.limit as string, 10)
-      : undefined;
-    const allPosts = getAllBlogPosts();
-    const posts = limit ? allPosts.slice(0, limit) : allPosts;
+    // Get all blog posts
+    const allPosts = loadAllPosts();
 
-    // Extract unique tags for filtering
-    const allTags = posts.flatMap((post) => post.tags);
+    // Sort by published date (newest first)
+    const sortedPosts = allPosts.sort((a, b) => {
+      const dateA = a.publishedAt ? new Date(a.publishedAt).getTime() : 0;
+      const dateB = b.publishedAt ? new Date(b.publishedAt).getTime() : 0;
+      return dateB - dateA;
+    });
+
+    // Apply limit if provided
+    const limitNum = limit ? parseInt(limit as string, 10) : undefined;
+    const posts = limitNum ? sortedPosts.slice(0, limitNum) : sortedPosts;
+
+    // Convert to expected format for LatestArticles component
+    const formattedPosts = posts.map((post) => ({
+      slug: post.slug,
+      title: post.title,
+      excerpt: post.summary || '',
+      date: post.publishedAt || new Date().toISOString(),
+      author: 'Brandon Bowen',
+      tags: post.technologySlugs || [],
+    }));
+
+    // Extract unique tags
+    const allTags = formattedPosts.flatMap((post) => post.tags);
     const tags = [...new Set(allTags)].sort();
 
     return res.status(200).json({
       success: true,
-      posts,
+      posts: formattedPosts,
       tags,
-      count: posts.length,
+      count: formattedPosts.length,
     });
   } catch (error) {
     console.error('Error in blog-posts API:', error);

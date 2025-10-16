@@ -13,18 +13,41 @@ import {
 const CONTENT_ROOT = path.join(process.cwd(), 'content');
 const POSTS_DIR = path.join(CONTENT_ROOT, 'posts');
 const PROJECTS_DIR = path.join(CONTENT_ROOT, 'projects', '[project-slug]');
-const TECHNOLOGIES_DIR = path.join(CONTENT_ROOT, 'technologies', '[technology-slug]');
+const TECHNOLOGIES_DIR = path.join(
+  CONTENT_ROOT,
+  'technologies',
+  '[technology-slug]'
+);
 
 function readSlugs(dir: string): string[] {
   if (!fs.existsSync(dir)) return [];
-  return fs
-    .readdirSync(dir)
-    .filter((f) => f.endsWith('.mdx'))
-    .map((f) => f.replace(/\.mdx$/, ''));
+
+  const entries = fs.readdirSync(dir, { withFileTypes: true });
+  const slugs: string[] = [];
+
+  for (const entry of entries) {
+    if (entry.isFile() && entry.name.endsWith('.mdx')) {
+      // Direct MDX files (e.g., technology.mdx)
+      slugs.push(entry.name.replace(/\.mdx$/, ''));
+    } else if (entry.isDirectory()) {
+      // Directory with index.mdx (e.g., post-slug/index.mdx)
+      const indexPath = path.join(dir, entry.name, 'index.mdx');
+      if (fs.existsSync(indexPath)) {
+        slugs.push(entry.name);
+      }
+    }
+  }
+
+  return slugs;
 }
 
 function readMdx<TFrontmatter extends object>(dir: string, slug: string) {
-  const filePath = path.join(dir, `${slug}.mdx`);
+  // Try directory structure first (slug/index.mdx)
+  const indexPath = path.join(dir, slug, 'index.mdx');
+  const directPath = path.join(dir, `${slug}.mdx`);
+
+  const filePath = fs.existsSync(indexPath) ? indexPath : directPath;
+
   const raw = fs.readFileSync(filePath, 'utf8');
   const { data, content } = matter(raw);
   return { frontmatter: data as TFrontmatter, content };
@@ -72,8 +95,11 @@ export function loadPostBySlug(
   slug: string,
   { includeContent = false } = {}
 ): Post | null {
-  const filePath = path.join(POSTS_DIR, `${slug}.mdx`);
-  if (!fs.existsSync(filePath)) return null;
+  const indexPath = path.join(POSTS_DIR, slug, 'index.mdx');
+  const directPath = path.join(POSTS_DIR, `${slug}.mdx`);
+
+  if (!fs.existsSync(indexPath) && !fs.existsSync(directPath)) return null;
+
   const { frontmatter, content } = readMdx<PostFrontmatter>(POSTS_DIR, slug);
   return {
     slug,

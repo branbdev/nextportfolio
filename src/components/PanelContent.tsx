@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import Image from 'next/image';
 
 declare global {
   interface Window {
@@ -38,8 +39,12 @@ const PanelContent: React.FC = () => {
         <div className='border1' />
         <div className='border2' />
         <div className='img_holder'>
-          <img src='/img/thumb/me.webp' alt='my headshot' />
-          <div className='abs_img' data-bg-img='/img/thumb/me.webp' />
+          <Image
+            src='/img/thumb/headshot.jpg'
+            alt='my headshot'
+            width={200}
+            height={200}
+          />
         </div>
         <div className='title_holder'>
           <h5>Hi There! I am</h5>

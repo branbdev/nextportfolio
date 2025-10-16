@@ -6,7 +6,10 @@ import PortfolioClient from './PortfolioClient';
 const Portfolio = async () => {
   const projects = loadAllProjects();
   const technologies = loadAllTechnologies();
-  const enrichedProjects = enrichProjectsWithTechnologies(projects, technologies);
+  const enrichedProjects = enrichProjectsWithTechnologies(
+    projects,
+    technologies
+  );
 
   return (
     <Fragment>

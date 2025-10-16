@@ -23,7 +23,7 @@ export const portfolioData: PortfolioItem[] = [
     id: 2,
     title: 'Alchemy',
     tags: ['Angular', 'C#'],
-    image: '/img/portfolio/alchemy.jpg', // Image Name
+    image: '#', // Image Name
     description:
       'This application is meant to match users up with potential partners based on their preferences.',
     liveUrl: 'https://github.com/branbdev/', // Placeholder
@@ -43,7 +43,7 @@ export const portfolioData: PortfolioItem[] = [
     id: 4,
     title: 'FlyBuy',
     tags: ['React', 'Django'],
-    image: '/img/portfolio/flybuy.jpg', // Image Name
+    image: '#', // Image Name
     description:
       'An E Commerce site where users can browse item listings and add them to a shopping cart before checking out',
     liveUrl: 'https://github.com/branbdev/', // Placeholder

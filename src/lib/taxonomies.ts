@@ -21,13 +21,13 @@ export function enrichProjectsWithTechnologies(
   projects: Project[],
   technologies: Technology[]
 ): EnrichedProject[] {
-  const techMap = new Map(technologies.map(tech => [tech.slug, tech]));
-  
-  return projects.map(project => {
+  const techMap = new Map(technologies.map((tech) => [tech.slug, tech]));
+
+  return projects.map((project) => {
     const technologies = project.technologySlugs
-      .map(slug => techMap.get(slug))
+      .map((slug) => techMap.get(slug))
       .filter((tech): tech is Technology => tech !== undefined);
-    
+
     const { technologySlugs, ...rest } = project;
     return {
       ...rest,
@@ -38,7 +38,7 @@ export function enrichProjectsWithTechnologies(
 
 // Function to extract tags from both blog posts and portfolio items
 export const extractTags = (items: { tags?: string[] }[]): string[] => {
-  const allTags = items.flatMap(item => item.tags || []);
+  const allTags = items.flatMap((item) => item.tags || []);
   return [...new Set(allTags)].sort();
 };
 
@@ -47,7 +47,7 @@ export const filterByTag = <T extends { tags?: string[] }>(
   items: T[],
   tag: string
 ): T[] => {
-  return tag ? items.filter(item => item.tags?.includes(tag)) : items;
+  return tag ? items.filter((item) => item.tags?.includes(tag)) : items;
 };
 
 // Function to suggest related content based on tags
@@ -59,18 +59,19 @@ export const getRelatedContent = <T extends { tags?: string[]; slug?: string }>(
   if (!item.tags || item.tags.length === 0) return [];
 
   // Filter out the current item
-  const otherItems = allItems.filter(other => other.slug !== item.slug);
-  
+  const otherItems = allItems.filter((other) => other.slug !== item.slug);
+
   // Calculate tag overlap score
-  const scoredItems = otherItems.map(other => {
-    const overlapCount = other.tags?.filter(tag => item.tags?.includes(tag)).length || 0;
+  const scoredItems = otherItems.map((other) => {
+    const overlapCount =
+      other.tags?.filter((tag) => item.tags?.includes(tag)).length || 0;
     return { item: other, score: overlapCount };
   });
 
   // Sort by score and return top N
   return scoredItems
     .sort((a, b) => b.score - a.score)
-    .filter(i => i.score > 0)
+    .filter((i) => i.score > 0)
     .slice(0, maxItems)
-    .map(i => i.item);
+    .map((i) => i.item);
 };
