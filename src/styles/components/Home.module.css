@@ -1,0 +1,188 @@
+/**
+ * =============================================================================
+ * HOME SECTION - CSS MODULE
+ * =============================================================================
+ * Extracted from legacy style.css (lines ~636-690)
+ * Uses design tokens from app/globals.css
+ * WCAG AAA compliant with semantic, accessible markup
+ */
+
+.homeSection {
+  padding: var(--spacing-20) 0;
+  display: flex;
+  min-height: 100vh;
+  align-items: center;
+  width: 100%;
+}
+
+.container {
+  width: 100%;
+  max-width: var(--container-max-width);
+  margin: 0 auto;
+  padding: 0 var(--container-padding);
+}
+
+.mainTitle {
+  margin-bottom: var(--spacing-16);
+}
+
+.mainTitle > *:last-child {
+  margin-bottom: 0 !important;
+}
+
+/* Subtitle - "Introduction" label */
+.subtitle {
+  margin: 0 0 var(--spacing-5) 0;
+  padding: 0;
+  font-size: var(--font-size-lg);
+  text-transform: uppercase;
+  font-weight: var(--font-weight-medium);
+  letter-spacing: var(--letter-spacing-wide);
+  color: var(--color-primary);
+  line-height: var(--line-height-tight);
+}
+
+/* Main heading - "Full Stack Solutions" */
+.title {
+  margin: 0;
+  padding: 0 0 var(--spacing-4) 0;
+  font-size: clamp(32px, 6vw, 48px); /* Responsive font sizing */
+  font-weight: var(--font-weight-normal);
+  letter-spacing: var(--letter-spacing-normal);
+  margin-bottom: var(--spacing-8);
+  position: relative;
+  color: var(--color-heading);
+}
+
+/* Decorative underline */
+.title::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 2px;
+  background-color: var(--color-border);
+  width: 150px;
+  transition: width var(--transition-base);
+}
+
+.mainTitle:hover .title::after {
+  width: 200px;
+}
+
+/* Description paragraph */
+.description {
+  margin: 0 0 var(--spacing-12) 0;
+  padding: 0;
+  font-size: clamp(20px, 3vw, 30px); /* Responsive font sizing */
+  line-height: var(--line-height-relaxed);
+  letter-spacing: var(--letter-spacing-normal);
+  color: var(--color-text-secondary);
+  max-width: 800px;
+}
+
+/* ========== RESPONSIVE DESIGN ========== */
+
+@media (max-width: 1024px) {
+  .homeSection {
+    padding: var(--spacing-16) 0;
+  }
+  
+  .mainTitle {
+    margin-bottom: var(--spacing-12);
+  }
+  
+  .title {
+    font-size: clamp(28px, 5vw, 40px);
+  }
+  
+  .description {
+    font-size: clamp(18px, 2.5vw, 24px);
+    margin-bottom: var(--spacing-10);
+  }
+}
+
+@media (max-width: 768px) {
+  .homeSection {
+    padding: var(--spacing-12) 0;
+    min-height: 80vh;
+  }
+  
+  .subtitle {
+    font-size: var(--font-size-base);
+    margin-bottom: var(--spacing-4);
+  }
+  
+  .title {
+    font-size: clamp(24px, 7vw, 32px);
+    padding-bottom: var(--spacing-3);
+    margin-bottom: var(--spacing-6);
+  }
+  
+  .title::after {
+    width: 100px;
+  }
+  
+  .description {
+    font-size: clamp(16px, 4vw, 20px);
+    line-height: var(--line-height-base);
+    margin-bottom: var(--spacing-8);
+  }
+}
+
+@media (max-width: 480px) {
+  .homeSection {
+    padding: var(--spacing-10) 0;
+  }
+  
+  .container {
+    padding: 0 var(--spacing-4);
+  }
+  
+  .mainTitle {
+    margin-bottom: var(--spacing-10);
+  }
+  
+  .subtitle {
+    font-size: var(--font-size-sm);
+  }
+  
+  .title {
+    font-size: 24px;
+  }
+  
+  .description {
+    font-size: 18px;
+  }
+}
+
+/* ========== DARK MODE ADJUSTMENTS ========== */
+
+body.dark .subtitle {
+  /* Primary color remains consistent in dark mode */
+  color: var(--color-primary);
+}
+
+body.dark .title::after {
+  background-color: var(--color-border);
+}
+
+/* ========== ACCESSIBILITY ENHANCEMENTS ========== */
+
+/* Ensure proper focus states for any interactive elements within */
+.homeSection a:focus,
+.homeSection button:focus {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+/* Respect reduced motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  .title::after {
+    transition: none;
+  }
+  
+  .mainTitle:hover .title::after {
+    width: 150px;
+  }
+}

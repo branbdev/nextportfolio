@@ -1,301 +1,438 @@
 'use client';
 
+/**
+ * =========================================================================
+ * ABOUT SECTION COMPONENT
+ * =========================================================================
+ * Displays personal biography, contact info, and tabbed content for:
+ * - Professional Experience
+ * - Education
+ * - Technical Skills
+ *
+ * Uses CSS Modules for scoped styling and semantic HTML for accessibility.
+ * Implements keyboard navigation and ARIA attributes for WCAG AAA compliance.
+ */
+
 import React, { useState } from 'react';
 import { siteData } from './siteData';
+import styles from '@/styles/components/About.module.css';
 
-type TabType = 'tab1' | 'tab2' | 'tab3';
+type TabType = 'experience' | 'education' | 'skills';
 
 const About: React.FC = () => {
-  const [toggleList, setToggleList] = useState<TabType>('tab1');
-  const activeList = (value: TabType): string =>
-    value === toggleList ? 'active' : '';
+  const [activeTab, setActiveTab] = useState<TabType>('experience');
+
+  const isActive = (tab: TabType): boolean => tab === activeTab;
+
+  const handleTabClick = (
+    e: React.MouseEvent<HTMLAnchorElement>,
+    tab: TabType
+  ) => {
+    e.preventDefault();
+    setActiveTab(tab);
+  };
+
+  const handleKeyPress = (
+    e: React.KeyboardEvent<HTMLAnchorElement>,
+    tab: TabType
+  ) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      setActiveTab(tab);
+    }
+  };
 
   return (
-    <section id='about'>
-      <div className='container'>
-        <div className='roww'>
-          {/* Main Title */}
-          <div className='resumo_fn_main_title'>
-            <h3 className='subtitle'>About Me</h3>
-            <h3 className='title'>Biography</h3>
-            <p className='desc'>
-              {`Growing up in southern California, I was enamored with the internet from an early age. From the early days of AOL to the dawn of social media, I've used the web to express myself and provide platforms for others to do the same. Since around the time of the recent pandemic, I had the opportunity to change careers and as much as a journey it has been, I can say that I'm genuinely excited to continue to apply my skills and help others make modern and scalable applications for any need. When I'm not coding, you can find me at a local music venue, building and playing modular synths, or just watching old movies.`}
-            </p>
+    <section
+      id='about'
+      className={styles.aboutSection}
+      aria-labelledby='about-title'>
+      <div className={styles.container}>
+        {/* Main Title */}
+        <div className={styles.mainTitle}>
+          <p className={styles.subtitle} aria-label='Section label'>
+            About Me
+          </p>
+          <h2 id='about-title' className={styles.title}>
+            Biography
+          </h2>
+          <p className={styles.description}>
+            Growing up in southern California, I was enamored with the internet
+            from an early age. From the early days of AOL to the dawn of social
+            media, I have used the web to express myself and provide platforms
+            for others to do the same. Since around the time of the recent
+            pandemic, I had the opportunity to change careers and as much as a
+            journey it has been, I can say that I am genuinely excited to
+            continue to apply my skills and help others make modern and scalable
+            applications for any need. When I am not coding, you can find me at
+            a local music venue, building and playing modular synths, or just
+            watching old movies.
+          </p>
+        </div>
+
+        {/* Contact Information Table */}
+        <div className={styles.aboutInfo}>
+          <div className={styles.aboutLeft}>
+            <table className={styles.infoTable}>
+              <tbody>
+                <tr>
+                  <th scope='row'>Name</th>
+                  <th>{siteData.name}</th>
+                </tr>
+                <tr>
+                  <th scope='row'>Address</th>
+                  <th>{siteData.location}</th>
+                </tr>
+                <tr>
+                  <th scope='row'>Email</th>
+                  <th>
+                    <a
+                      href={'mailto:' + siteData.email}
+                      aria-label={'Email ' + siteData.name}>
+                      {siteData.email}
+                    </a>
+                  </th>
+                </tr>
+              </tbody>
+            </table>
           </div>
-          {/* /Main Title */}
-          {/* About Information */}
-          <div className='resumo_fn_about_info'>
-            <div className='about_left'>
-              <table>
-                <tbody>
-                  <tr>
-                    <th>Name</th>
-                    <th>{siteData.name}</th>
-                  </tr>
-                  <tr>
-                    <th>Address</th>
-                    <th>{siteData.location}</th>
-                  </tr>
-                  <tr>
-                    <th>Email</th>
-                    <th>
-                      <a href={`mailto:${siteData.email}`}>{siteData.email}</a>
-                    </th>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
-          {/* /About Information */}
-          {/* Tabs Shortcode */}
-          <div className='resumo_fn_tabs'>
-            {/* Tab: Header */}
-            <div className='tab_header'>
-              <ul>
-                <li className={activeList('tab1')}>
-                  <a href='#' onClick={() => setToggleList('tab1')}>
-                    Experience
-                  </a>
-                </li>
-                <li className={activeList('tab2')}>
-                  <a href='#' onClick={() => setToggleList('tab2')}>
-                    Education
-                  </a>
-                </li>
-                <li className={activeList('tab3')}>
-                  <a href='#' onClick={() => setToggleList('tab3')}>
-                    Skills
-                  </a>
-                </li>
-              </ul>
-            </div>
-            {/* /Tab: Header */}
-            {/* Tab: Content */}
-            <div className='tab_content'>
-              {/* #1 tab content */}
-              <div id='tab1' className={`tab_item ${activeList('tab1')}`}>
-                {/* Boxed List */}
-                <div className='resumo_fn_boxed_list'>
-                  <ul>
-                    <li>
-                      <div className='item'>
-                        <div className='item_top'>
-                          <h5>Arcane Logic</h5>
-                          <span>( 2020 — Today )</span>
-                        </div>
-                        <h2>Freelance Web Developer</h2>
-                        <ul className='experience-list'>
-                          <li>
-                            Developed and launched responsive marketing websites
-                            for small businesses, ensuring high performance
-                            (Google PageSpeed scores above 90) and adherence to
-                            WCAG 2.1 accessibility standards.
-                          </li>
-                          <li>
-                            Collaborated directly with clients to define project
-                            scope, create user stories, and deliver features in
-                            an Agile-like iterative process, ensuring high
-                            client satisfaction and project alignment.
-                          </li>
-                          <li>
-                            Engineered and deployed a full-stack e-commerce
-                            platform for a local boutique, resulting in a
-                            significant increase in online sales within the
-                            first quarter.
-                          </li>
-                        </ul>{' '}
+        </div>
+
+        {/* Tabbed Content */}
+        <div className={styles.tabs}>
+          {/* Tab Navigation */}
+          <nav className={styles.tabHeader} aria-label='About content tabs'>
+            <ul className={styles.tabList} role='tablist'>
+              <li
+                className={
+                  styles.tabButton +
+                  (isActive('experience') ? ' ' + styles.active : '')
+                }
+                role='presentation'>
+                <a
+                  href='#experience'
+                  className={styles.tabLink}
+                  onClick={(e) => handleTabClick(e, 'experience')}
+                  onKeyPress={(e) => handleKeyPress(e, 'experience')}
+                  role='tab'
+                  aria-selected={isActive('experience')}
+                  aria-controls='experience-panel'
+                  tabIndex={isActive('experience') ? 0 : -1}>
+                  Experience
+                </a>
+              </li>
+              <li
+                className={
+                  styles.tabButton +
+                  (isActive('education') ? ' ' + styles.active : '')
+                }
+                role='presentation'>
+                <a
+                  href='#education'
+                  className={styles.tabLink}
+                  onClick={(e) => handleTabClick(e, 'education')}
+                  onKeyPress={(e) => handleKeyPress(e, 'education')}
+                  role='tab'
+                  aria-selected={isActive('education')}
+                  aria-controls='education-panel'
+                  tabIndex={isActive('education') ? 0 : -1}>
+                  Education
+                </a>
+              </li>
+              <li
+                className={
+                  styles.tabButton +
+                  (isActive('skills') ? ' ' + styles.active : '')
+                }
+                role='presentation'>
+                <a
+                  href='#skills'
+                  className={styles.tabLink}
+                  onClick={(e) => handleTabClick(e, 'skills')}
+                  onKeyPress={(e) => handleKeyPress(e, 'skills')}
+                  role='tab'
+                  aria-selected={isActive('skills')}
+                  aria-controls='skills-panel'
+                  tabIndex={isActive('skills') ? 0 : -1}>
+                  Skills
+                </a>
+              </li>
+            </ul>
+          </nav>
+
+          {/* Tab Panels */}
+          <div className={styles.tabContent}>
+            {/* Experience Tab */}
+            <div
+              id='experience-panel'
+              className={
+                styles.tabPanel +
+                (isActive('experience') ? ' ' + styles.active : '')
+              }
+              role='tabpanel'
+              aria-labelledby='experience'
+              hidden={!isActive('experience')}>
+              <div className={styles.boxedList}>
+                <ul>
+                  <li>
+                    <article className={styles.boxedItem}>
+                      <div className={styles.itemTop}>
+                        <h5>Arcane Logic</h5>
+                        <span>( 2020 — Today )</span>
                       </div>
-                    </li>
-                  </ul>
-                </div>
-                {/* /Boxed List */}
+                      <h3>Freelance Web Developer</h3>
+                      <ul className={styles.experienceList}>
+                        <li>
+                          Developed and launched responsive marketing websites
+                          for small businesses, ensuring high performance
+                          (Google PageSpeed scores above 90) and adherence to
+                          WCAG 2.1 accessibility standards.
+                        </li>
+                        <li>
+                          Collaborated directly with clients to define project
+                          scope, create user stories, and deliver features in an
+                          Agile-like iterative process, ensuring high client
+                          satisfaction and project alignment.
+                        </li>
+                        <li>
+                          Engineered and deployed a full-stack e-commerce
+                          platform for a local boutique, resulting in a
+                          significant increase in online sales within the first
+                          quarter.
+                        </li>
+                      </ul>
+                    </article>
+                  </li>
+                </ul>
               </div>
-              {/* /#1 tab content */}
-              {/* #2 tab content */}
-              <div id='tab2' className={`tab_item ${activeList('tab2')}`}>
-                {/* Boxed List */}
-                <div className='resumo_fn_boxed_list'>
-                  <ul>
-                    <li>
-                      <div className='item'>
-                        <div className='item_top'>
-                          <h5>
-                            University of California Riverside Extension |
-                            Riverside, CA
-                          </h5>
-                          <span>( 2020 )</span>
-                        </div>
-                        <h2>Web Development Bootcamp</h2>
-                        <p>
-                          Completed an intensive 6-month bootcamp covering the
-                          MERN stack, data structures, algorithms, and Agile
-                          project management principles in a collaborative,
-                          team-based environment.
-                        </p>
-                        <br></br>
-                        <div className='item_top'>
-                          <h5>AlgoExpert | Online Assessment</h5>
-                          <span>( 2022 )</span>
-                        </div>
-                        <a href='https://certificate.algoexpert.io/AE-e59165350c'>
-                          <h2>Certificate of Completion</h2>
+            </div>
+
+            {/* Education Tab */}
+            <div
+              id='education-panel'
+              className={
+                styles.tabPanel +
+                (isActive('education') ? ' ' + styles.active : '')
+              }
+              role='tabpanel'
+              aria-labelledby='education'
+              hidden={!isActive('education')}>
+              <div className={styles.boxedList}>
+                <ul>
+                  <li>
+                    <article className={styles.boxedItem}>
+                      <div className={styles.itemTop}>
+                        <h5>
+                          University of California Riverside Extension |
+                          Riverside, CA
+                        </h5>
+                        <span>( 2020 )</span>
+                      </div>
+                      <h3>Web Development Bootcamp</h3>
+                      <p>
+                        Completed an intensive 6-month bootcamp covering the
+                        MERN stack, data structures, algorithms, and Agile
+                        project management principles in a collaborative,
+                        team-based environment.
+                      </p>
+
+                      <div
+                        className={styles.itemTop}
+                        style={{ marginTop: 'var(--spacing-8)' }}>
+                        <h5>AlgoExpert | Online Assessment</h5>
+                        <span>( 2022 )</span>
+                      </div>
+                      <h3>
+                        <a
+                          href='https://certificate.algoexpert.io/AE-e59165350c'
+                          target='_blank'
+                          rel='noopener noreferrer'
+                          aria-label='View AlgoExpert certificate (opens in new tab)'>
+                          Certificate of Completion
                         </a>
-                        <p>
-                          Successfully completed 100+ data structure and
-                          algorithm challenges, demonstrating proficiency in
-                          problem-solving and algorithmic thinking.
-                        </p>
-                      </div>
-                    </li>
-                  </ul>
-                </div>
-                {/* /Boxed List */}
+                      </h3>
+                      <p>
+                        Successfully completed 100+ data structure and algorithm
+                        challenges, demonstrating proficiency in problem-solving
+                        and algorithmic thinking.
+                      </p>
+                    </article>
+                  </li>
+                </ul>
               </div>
-              {/* /#2 tab content */}
-              {/* #3 tab content */}
-              <div id='tab3' className={`tab_item ${activeList('tab3')}`}>
-                <div className='skills_list'>
-                  <div className='skills_grid'>
-                    <div className='skill_category'>
-                      <h3 className='category_title'>Full-Stack Development</h3>
-                      <div className='skill_group'>
-                        <h4 className='skill_type'>Languages:</h4>
-                        <ul className='skill_items'>
-                          <li className='skill_item'>C#</li>
-                          <li className='skill_item'>Javascript (ES6+)</li>
-                          <li className='skill_item'>TypeScript</li>
-                          <li className='skill_item'>Python</li>
-                          <li className='skill_item'>HTML5 & CSS3</li>
-                        </ul>
-                      </div>
+            </div>
+
+            {/* Skills Tab */}
+            <div
+              id='skills-panel'
+              className={
+                styles.tabPanel +
+                (isActive('skills') ? ' ' + styles.active : '')
+              }
+              role='tabpanel'
+              aria-labelledby='skills'
+              hidden={!isActive('skills')}>
+              <div className={styles.skillsList}>
+                <div className={styles.skillsGrid}>
+                  {/* Full-Stack Development */}
+                  <div className={styles.skillCategory}>
+                    <h3 className={styles.categoryTitle}>
+                      Full-Stack Development
+                    </h3>
+                    <div className={styles.skillGroup}>
+                      <h4 className={styles.skillType}>Languages:</h4>
+                      <ul className={styles.skillItems}>
+                        <li className={styles.skillItem}>C#</li>
+                        <li className={styles.skillItem}>Javascript (ES6+)</li>
+                        <li className={styles.skillItem}>TypeScript</li>
+                        <li className={styles.skillItem}>Python</li>
+                        <li className={styles.skillItem}>HTML5 & CSS3</li>
+                      </ul>
                     </div>
+                  </div>
 
-                    <div className='skill_category'>
-                      <h3 className='category_title'>Front-End</h3>
-                      <div className='skill_group'>
-                        <h4 className='skill_type'>Frameworks:</h4>
-                        <ul className='skill_items'>
-                          <li className='skill_item'>React</li>
-                          <li className='skill_item'>Next.js</li>
-                          <li className='skill_item'>Angular</li>
-                          <li className='skill_item'>Blazor</li>
-                          <li className='skill_item'>Tailwind CSS</li>
-                          <li className='skill_item'>jQuery</li>
-                        </ul>
-                      </div>
+                  {/* Front-End */}
+                  <div className={styles.skillCategory}>
+                    <h3 className={styles.categoryTitle}>Front-End</h3>
+                    <div className={styles.skillGroup}>
+                      <h4 className={styles.skillType}>Frameworks:</h4>
+                      <ul className={styles.skillItems}>
+                        <li className={styles.skillItem}>React</li>
+                        <li className={styles.skillItem}>Next.js</li>
+                        <li className={styles.skillItem}>Angular</li>
+                        <li className={styles.skillItem}>Blazor</li>
+                        <li className={styles.skillItem}>Tailwind CSS</li>
+                        <li className={styles.skillItem}>jQuery</li>
+                      </ul>
                     </div>
+                  </div>
 
-                    <div className='skill_category'>
-                      <h3 className='category_title'>Back-End</h3>
-                      <div className='skill_group'>
-                        <h4 className='skill_type'>Technologies:</h4>
-                        <ul className='skill_items'>
-                          <li className='skill_item'>.NET</li>
-                          <li className='skill_item'>Node.js</li>
-                          <li className='skill_item'>Express</li>
-                          <li className='skill_item'>NestJS</li>
-                          <li className='skill_item'>GraphQL</li>
-                          <li className='skill_item'>Django</li>
-                        </ul>
-                      </div>
+                  {/* Back-End */}
+                  <div className={styles.skillCategory}>
+                    <h3 className={styles.categoryTitle}>Back-End</h3>
+                    <div className={styles.skillGroup}>
+                      <h4 className={styles.skillType}>Technologies:</h4>
+                      <ul className={styles.skillItems}>
+                        <li className={styles.skillItem}>.NET</li>
+                        <li className={styles.skillItem}>Node.js</li>
+                        <li className={styles.skillItem}>Express</li>
+                        <li className={styles.skillItem}>NestJS</li>
+                        <li className={styles.skillItem}>GraphQL</li>
+                        <li className={styles.skillItem}>Django</li>
+                      </ul>
                     </div>
+                  </div>
 
-                    <div className='skill_category'>
-                      <h3 className='category_title'>Database</h3>
-                      <div className='skill_group'>
-                        <h4 className='skill_type'>Management Systems:</h4>
-                        <ul className='skill_items'>
-                          <li className='skill_item'>PostgreSQL, MySQL</li>
-                          <li className='skill_item'>MongoDB</li>
-                          <li className='skill_item'>neo4j</li>
-
-                          <h4 className='skill_type'>ORM:</h4>
-                          <li className='skill_item'>Prisma</li>
-                          <li className='skill_item'>Mongoose</li>
-                          <li className='skill_item'>Entity Framework</li>
-                        </ul>
-                      </div>
+                  {/* Database */}
+                  <div className={styles.skillCategory}>
+                    <h3 className={styles.categoryTitle}>Database</h3>
+                    <div className={styles.skillGroup}>
+                      <h4 className={styles.skillType}>Management Systems:</h4>
+                      <ul className={styles.skillItems}>
+                        <li className={styles.skillItem}>PostgreSQL</li>
+                        <li className={styles.skillItem}>MySQL</li>
+                        <li className={styles.skillItem}>MongoDB</li>
+                        <li className={styles.skillItem}>neo4j</li>
+                      </ul>
+                      <h4 className={styles.skillType}>ORM:</h4>
+                      <ul className={styles.skillItems}>
+                        <li className={styles.skillItem}>Prisma</li>
+                        <li className={styles.skillItem}>Mongoose</li>
+                        <li className={styles.skillItem}>Entity Framework</li>
+                      </ul>
                     </div>
+                  </div>
 
-                    <div className='skill_category'>
-                      <h3 className='category_title'>Testing</h3>
-                      <div className='skill_group'>
-                        <h4 className='skill_type'>Libraries:</h4>
-                        <ul className='skill_items'>
-                          <li className='skill_item'>NUnit</li>
-                          <li className='skill_item'>Jest</li>
-                          <li className='skill_item'>React Testing Library</li>
-                        </ul>
-                      </div>
+                  {/* Testing */}
+                  <div className={styles.skillCategory}>
+                    <h3 className={styles.categoryTitle}>Testing</h3>
+                    <div className={styles.skillGroup}>
+                      <h4 className={styles.skillType}>Libraries:</h4>
+                      <ul className={styles.skillItems}>
+                        <li className={styles.skillItem}>NUnit</li>
+                        <li className={styles.skillItem}>Jest</li>
+                        <li className={styles.skillItem}>
+                          React Testing Library
+                        </li>
+                      </ul>
                     </div>
+                  </div>
 
-                    <div className='skill_category'>
-                      <h3 className='category_title'>Infrastructure</h3>
-                      <div className='skill_group'>
-                        <h4 className='skill_type'>Cloud Services:</h4>
-                        <ul className='skill_items'>
-                          <li className='skill_item'>
-                            Azure, Google Cloud, Digital Ocean
-                          </li>
-
-                          <h4 className='skill_type'>
-                            Containerization & Orchestration:
-                          </h4>
-                          <li className='skill_item'>Docker</li>
-                          <li className='skill_item'>Kubernetes</li>
-
-                          <h4 className='skill_type'>Web Server:</h4>
-                          <li className='skill_item'>NGINX</li>
-                        </ul>
-                      </div>
+                  {/* Infrastructure */}
+                  <div className={styles.skillCategory}>
+                    <h3 className={styles.categoryTitle}>Infrastructure</h3>
+                    <div className={styles.skillGroup}>
+                      <h4 className={styles.skillType}>Cloud Services:</h4>
+                      <ul className={styles.skillItems}>
+                        <li className={styles.skillItem}>Azure</li>
+                        <li className={styles.skillItem}>Google Cloud</li>
+                        <li className={styles.skillItem}>Digital Ocean</li>
+                      </ul>
+                      <h4 className={styles.skillType}>Containerization:</h4>
+                      <ul className={styles.skillItems}>
+                        <li className={styles.skillItem}>Docker</li>
+                        <li className={styles.skillItem}>Kubernetes</li>
+                      </ul>
+                      <h4 className={styles.skillType}>Web Server:</h4>
+                      <ul className={styles.skillItems}>
+                        <li className={styles.skillItem}>NGINX</li>
+                      </ul>
                     </div>
+                  </div>
 
-                    <div className='skill_category'>
-                      <h3 className='category_title'>DevOps</h3>
-                      <div className='skill_group'>
-                        <h4 className='skill_type'>Version Control:</h4>
-                        <ul className='skill_items'>
-                          <li className='skill_item'>Git, Github</li>
-
-                          <h4 className='skill_type'>CI/CD:</h4>
-                          <li className='skill_item'>Jenkins</li>
-                          <li className='skill_item'>Github Pages</li>
-                        </ul>
-                      </div>
+                  {/* DevOps */}
+                  <div className={styles.skillCategory}>
+                    <h3 className={styles.categoryTitle}>DevOps</h3>
+                    <div className={styles.skillGroup}>
+                      <h4 className={styles.skillType}>Version Control:</h4>
+                      <ul className={styles.skillItems}>
+                        <li className={styles.skillItem}>Git</li>
+                        <li className={styles.skillItem}>Github</li>
+                      </ul>
+                      <h4 className={styles.skillType}>CI/CD:</h4>
+                      <ul className={styles.skillItems}>
+                        <li className={styles.skillItem}>Jenkins</li>
+                        <li className={styles.skillItem}>Github Actions</li>
+                      </ul>
                     </div>
+                  </div>
 
-                    <div className='skill_category'>
-                      <h3 className='category_title'>Core Principles</h3>
-                      <div className='skill_group'>
-                        <h4 className='skill_type'>Architectural Patterns:</h4>
-                        <ul className='skill_items'>
-                          <li className='skill_item'>
-                            Microservices, Event-Driven, & Serverless
-                          </li>
-
-                          <h4 className='skill_type'>Design:</h4>
-                          <li className='skill_item'>
-                            SOLID, OOP & Separation of Concerns
-                          </li>
-
-                          <h4 className='skill_type'>Methodologies:</h4>
-                          <li className='skill_item'>Agile / Scrum</li>
-                          <li className='skill_item'>
-                            Test-Driven Development
-                          </li>
-                          <li className='skill_item'>Domain-Driven Design</li>
-                        </ul>
-                      </div>
+                  {/* Core Principles */}
+                  <div className={styles.skillCategory}>
+                    <h3 className={styles.categoryTitle}>Core Principles</h3>
+                    <div className={styles.skillGroup}>
+                      <h4 className={styles.skillType}>
+                        Architectural Patterns:
+                      </h4>
+                      <ul className={styles.skillItems}>
+                        <li className={styles.skillItem}>Microservices</li>
+                        <li className={styles.skillItem}>Event-Driven</li>
+                        <li className={styles.skillItem}>Serverless</li>
+                      </ul>
+                      <h4 className={styles.skillType}>Design:</h4>
+                      <ul className={styles.skillItems}>
+                        <li className={styles.skillItem}>SOLID</li>
+                        <li className={styles.skillItem}>OOP</li>
+                        <li className={styles.skillItem}>
+                          Separation of Concerns
+                        </li>
+                      </ul>
+                      <h4 className={styles.skillType}>Methodologies:</h4>
+                      <ul className={styles.skillItems}>
+                        <li className={styles.skillItem}>Agile / Scrum</li>
+                        <li className={styles.skillItem}>
+                          Test-Driven Development
+                        </li>
+                        <li className={styles.skillItem}>
+                          Domain-Driven Design
+                        </li>
+                      </ul>
                     </div>
                   </div>
                 </div>
-                {/* /Progress Bar */}
               </div>
-              {/* /#2 tab content */}
             </div>
-            {/* /Tab: Content */}
           </div>
-          {/* /Tabs Shortcode */}
         </div>
       </div>
     </section>

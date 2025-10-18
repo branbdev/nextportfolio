@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
+import Image from 'next/image';
 import { EnrichedProject } from '../lib/taxonomies';
 import { IconGithub, IconExternal, getTechIcon } from './Icons';
-import styles from '../../styles/components/Portfolio.module.css';
+import styles from '@/styles/components/Portfolio.module.css';
 
 interface PortfolioModalboxProps {
   close: () => void;
@@ -33,7 +34,32 @@ const PortfolioModalbox: React.FC<PortfolioModalboxProps> = ({
         </div>
         <div className='modal_body'>
           <div className='modal_image'>
-            <img src={project.image} alt={project.name} />
+            {project.image &&
+            project.image !== '#' &&
+            project.image.startsWith('/') ? (
+              <Image
+                src={project.image}
+                alt={`${project.name} project screenshot`}
+                width={800}
+                height={500}
+                style={{ width: '100%', height: 'auto' }}
+                quality={90}
+                priority // Modal images should load quickly
+              />
+            ) : (
+              <div
+                style={{
+                  width: '100%',
+                  height: '300px',
+                  background: 'var(--color-background-secondary)',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  color: 'var(--color-text-secondary)',
+                }}>
+                No image available
+              </div>
+            )}
           </div>
           <div className='modal_info'>
             <div className={styles.tech_stack}>

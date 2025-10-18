@@ -1,0 +1,233 @@
+/* Navigation.module.css - Hidden navigation panel */
+
+/* Overlay (darkens background when nav is open) */
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity var(--transition-base), visibility var(--transition-base);
+  z-index: var(--z-index-nav);
+  cursor: pointer;
+}
+
+.overlayVisible {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Navigation Panel */
+.nav {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 450px;
+  height: 100vh;
+  background-color: var(--color-surface);
+  transform: translateX(100%);
+  transition: transform var(--transition-base);
+  z-index: calc(var(--z-index-nav) + 1);
+  overflow-y: auto;
+  box-shadow: -4px 0 20px rgba(0, 0, 0, 0.1);
+}
+
+.navOpen {
+  transform: translateX(0);
+}
+
+@media (max-width: 768px) {
+  .nav {
+    width: 300px;
+  }
+}
+
+@media (max-width: 480px) {
+  .nav {
+    width: 85vw;
+  }
+}
+
+/* Close Button */
+.closeButton {
+  position: absolute;
+  top: var(--spacing-lg);
+  right: var(--spacing-lg);
+  width: 40px;
+  height: 40px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  z-index: 10;
+  transition: transform var(--transition-base);
+}
+
+.closeButton:hover {
+  transform: rotate(90deg);
+}
+
+.closeButton:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 4px;
+  border-radius: var(--border-radius-sm);
+}
+
+.closeLine {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 24px;
+  height: 2px;
+  background-color: var(--color-text-primary);
+  transition: background-color var(--transition-base);
+}
+
+.closeLine:first-child {
+  transform: translate(-50%, -50%) rotate(45deg);
+}
+
+.closeLine:last-child {
+  transform: translate(-50%, -50%) rotate(-45deg);
+}
+
+.closeButton:hover .closeLine {
+  background-color: var(--color-primary);
+}
+
+/* Content Container */
+.content {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 100vh;
+  padding: var(--spacing-2xl) var(--spacing-xl);
+}
+
+.menu {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.label {
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: var(--color-text-secondary);
+  margin-bottom: var(--spacing-xl);
+  font-weight: var(--font-weight-medium);
+}
+
+/* Navigation List */
+.list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.item {
+  margin-bottom: var(--spacing-md);
+  opacity: 0;
+  transform: translateX(30px);
+  transition: opacity var(--transition-base), transform var(--transition-base);
+}
+
+.navOpen .item {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.link {
+  display: block;
+  font-size: clamp(28px, 4vw, 36px);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-primary);
+  text-decoration: none;
+  padding: var(--spacing-sm) 0;
+  position: relative;
+  transition: color var(--transition-base);
+}
+
+.link::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 0;
+  height: 2px;
+  background-color: var(--color-primary);
+  transition: width var(--transition-base);
+}
+
+.link:hover {
+  color: var(--color-primary);
+}
+
+.link:hover::before {
+  width: 100%;
+}
+
+.link:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 4px;
+  border-radius: var(--border-radius-sm);
+}
+
+/* Footer */
+.footer {
+  padding-top: var(--spacing-xl);
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity var(--transition-slow), transform var(--transition-slow);
+  transition-delay: 0s;
+}
+
+.navOpen .footer {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 600ms;
+}
+
+.copyright {
+  color: var(--color-text-secondary);
+  font-size: 14px;
+  margin: 0;
+}
+
+/* Accessibility: Respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .nav,
+  .overlay,
+  .item,
+  .footer {
+    transition-duration: 0.01ms !important;
+  }
+
+  .item {
+    opacity: 1 !important;
+    transform: translateX(0) !important;
+  }
+}
+
+/* Scrollbar styling for navigation panel */
+.nav::-webkit-scrollbar {
+  width: 6px;
+}
+
+.nav::-webkit-scrollbar-track {
+  background: var(--color-background);
+}
+
+.nav::-webkit-scrollbar-thumb {
+  background: var(--color-border);
+  border-radius: 3px;
+}
+
+.nav::-webkit-scrollbar-thumb:hover {
+  background: var(--color-text-secondary);
+}

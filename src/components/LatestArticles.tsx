@@ -6,6 +6,7 @@ import { BlogPost } from '../lib/taxonomies';
 import { getLatestBlogPosts } from '../lib/mdx';
 import { IconExternal } from './Icons';
 import { GET_LATEST_BLOG_POSTS } from '../lib/graphql/queries';
+import styles from '@/styles/components/LatestArticles.module.css';
 
 const LatestArticles: React.FC = () => {
   // State for articles and loading
@@ -77,51 +78,53 @@ const LatestArticles: React.FC = () => {
   }, []);
 
   return (
-    <div className='resumo_fn_section' id='latest-articles'>
-      <div className='container'>
-        <div className='resumo_fn_main_title'>
-          <h3 className='subtitle'>From The Blog</h3>
-          <h3 className='title'>Latest Articles</h3>
+    <div className={styles.section} id='latest-articles'>
+      <div className={styles.container}>
+        <div className={styles.titleWrapper}>
+          <h3 className={styles.subtitle}>From The Blog</h3>
+          <h3 className={styles.title}>Latest Articles</h3>
         </div>
-        <div className='blog_list'>
+        <div className={styles.blogList}>
           {loading ? (
-            <p>Loading latest articles...</p>
+            <p className={styles.loading}>Loading latest articles...</p>
           ) : articles.length > 0 ? (
-            <div className='blog_list_items'>
+            <div className={styles.blogItems}>
               {articles.map((article, index) => (
-                <div key={index} className='blog_item'>
-                  <span className='blog_date'>
+                <div key={index} className={styles.blogItem}>
+                  <span className={styles.blogDate}>
                     {new Date(article.date).toLocaleDateString()}
                   </span>
-                  <h3 className='blog_title'>
+                  <h3 className={styles.blogTitle}>
                     <Link href={`/blog/${article.slug}`}>{article.title}</Link>
                   </h3>
-                  <p className='blog_excerpt'>{article.excerpt}</p>
-                  <div className='blog_tags'>
+                  <p className={styles.blogExcerpt}>{article.excerpt}</p>
+                  <div className={styles.blogTags}>
                     {article.tags.slice(0, 3).map((tag, tagIndex) => (
-                      <span key={tagIndex} className='blog_tag'>
+                      <span key={tagIndex} className={styles.blogTag}>
                         {tag}
                       </span>
                     ))}
                   </div>
-                  <Link href={`/blog/${article.slug}`} className='read_more'>
+                  <Link
+                    href={`/blog/${article.slug}`}
+                    className={styles.readMore}>
                     Read More <IconExternal size={14} />
                   </Link>
                 </div>
               ))}
             </div>
           ) : (
-            <div className='no_posts'>
+            <div className={styles.noPosts}>
               <p>No articles found. Check back soon!</p>
-              <Link href='/blog' className='blog_link'>
+              <Link href='/blog' className={styles.blogLink}>
                 View Blog
               </Link>
             </div>
           )}
         </div>
         {articles.length > 0 && (
-          <div className='blog_view_all'>
-            <Link href='/blog' className='blog_link'>
+          <div className={styles.viewAll}>
+            <Link href='/blog' className={styles.blogLink}>
               View All Articles
             </Link>
           </div>

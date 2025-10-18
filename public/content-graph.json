@@ -6,7 +6,7 @@
       "description": "This application is meant to match users up with potential partners based on their preferences.",
       "repositoryUrl": "https://github.com/branbdev/alchemy",
       "liveUrl": "https://github.com/branbdev/",
-      "image": "/img/portfolio/alchemy.jpg",
+      "image": "#",
       "technologies": [
         {
           "slug": "angular",
@@ -245,7 +245,7 @@
     }
   },
   "metadata": {
-    "generatedAt": "2025-10-15T23:28:55.599Z",
+    "generatedAt": "2025-10-18T12:13:57.878Z",
     "totalProjects": 5,
     "totalTechnologies": 9,
     "totalPosts": 3

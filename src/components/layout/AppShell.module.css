@@ -1,0 +1,94 @@
+/* AppShell.module.css - Main application wrapper */
+
+/**
+ * This replaces the old .resumo_fn_wrapper and .resumo_fn_content styles
+ * with modern, scoped CSS Module classes.
+ */
+
+.wrapper {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  font-family: var(--font-family-main);
+  font-size: var(--font-size-base);
+  line-height: var(--line-height-base);
+}
+
+/* When navigation is open */
+.navOpened {
+  overflow: hidden;
+}
+
+.content {
+  display: flex;
+  width: 100%;
+  min-height: 100vh;
+}
+
+/* Left Panel - Main Content Area */
+.left {
+  flex: 1;
+  width: 100%;
+  max-width: 100%;
+  padding-right: 450px; /* Space for right panel */
+  position: relative;
+
+  /* Ensure content is above background elements */
+  z-index: var(--z-index-base);
+}
+
+@media (max-width: 1040px) {
+  .left {
+    padding-right: 0;
+  }
+}
+
+/* Page Content Container */
+.page {
+  width: 100%;
+  padding: var(--spacing-xl) var(--spacing-md);
+  min-height: calc(100vh - 200px); /* Account for footer */
+}
+
+/* Right Panel - Fixed Sidebar */
+.right {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 450px;
+  height: 100vh;
+  background-color: var(--color-surface);
+  border-left: 1px solid var(--color-border);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: var(--z-index-sticky);
+  overflow: hidden;
+}
+
+@media (max-width: 1040px) {
+  .right {
+    width: 100%;
+    height: 80px;
+    position: relative;
+    border-left: none;
+    border-bottom: 1px solid var(--color-border);
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .page {
+    padding: var(--spacing-md) var(--spacing-sm);
+  }
+}
+
+/* Accessibility: Respect reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+  .wrapper * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

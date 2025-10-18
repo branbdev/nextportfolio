@@ -1,0 +1,81 @@
+/* Footer.module.css - Footer component styling */
+
+.footer {
+  width: 100%;
+  margin-top: var(--spacing-2xl);
+  background-color: var(--color-surface);
+  border-top: 1px solid var(--color-border);
+}
+
+.topButton {
+  text-align: center;
+  padding: var(--spacing-md) 0;
+}
+
+.scrollToTop {
+  position: relative;
+  width: 50px;
+  height: 50px;
+  border: 2px solid var(--color-primary);
+  border-radius: 50%;
+  background: transparent;
+  cursor: pointer;
+  transition: all var(--transition-base);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.scrollToTop:hover {
+  background-color: var(--color-primary);
+  transform: translateY(-5px);
+}
+
+.scrollToTop:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 4px;
+}
+
+/* Arrow icon */
+.arrow {
+  display: block;
+  width: 12px;
+  height: 12px;
+  border-top: 2px solid var(--color-primary);
+  border-right: 2px solid var(--color-primary);
+  transform: rotate(-45deg);
+  margin-top: 4px;
+  transition: border-color var(--transition-base);
+}
+
+.scrollToTop:hover .arrow {
+  border-color: #fff;
+}
+
+.content {
+  padding: var(--spacing-lg) 0;
+}
+
+.container {
+  max-width: var(--container-max-width);
+  margin: 0 auto;
+  padding: 0 var(--spacing-md);
+}
+
+.copyright {
+  text-align: center;
+  color: var(--color-text-secondary);
+  font-size: 14px;
+  margin: 0;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .footer {
+    margin-top: var(--spacing-xl);
+  }
+
+  .content {
+    padding: var(--spacing-md) 0;
+  }
+}

@@ -2,6 +2,7 @@ import { loadAllPosts, loadPostBySlug } from '@/lib/contentLoader';
 import { loadAllTechnologies } from '@/lib/contentLoader';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
+import Image from 'next/image';
 import type { Metadata } from 'next';
 
 interface PageProps {
@@ -79,7 +80,14 @@ export default async function BlogPostPage({ params }: PageProps) {
                 key={tech!.slug}
                 className='flex items-center gap-2 px-3 py-1 bg-gray-100 rounded-full text-sm'>
                 {tech!.logo && (
-                  <img src={tech!.logo} alt={tech!.name} className='w-4 h-4' />
+                  <Image
+                    src={tech!.logo}
+                    alt={`${tech!.name} logo`}
+                    width={16}
+                    height={16}
+                    className='w-4 h-4'
+                    loading='lazy'
+                  />
                 )}
                 <span>{tech!.name}</span>
               </span>

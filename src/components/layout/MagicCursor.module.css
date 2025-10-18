@@ -1,0 +1,156 @@
+/* MagicCursor.module.css - Custom cursor styling */
+
+/**
+ * This replaces the old .frenify-cursor styles from style.css
+ * with modern, scoped CSS Module classes.
+ */
+
+/* Base cursor containers */
+.cursorOuter,
+.cursorInner {
+  position: fixed;
+  top: 0;
+  left: 0;
+  pointer-events: none; /* Don't interfere with mouse events */
+  z-index: var(--z-index-cursor);
+
+  /* Performance: Tell browser this element will transform frequently */
+  will-change: transform;
+
+  /* Start offscreen until mouse moves */
+  transform: translate3d(-100px, -100px, 0);
+
+  /* Smooth transitions */
+  transition: opacity var(--transition-fast);
+}
+
+/* Outer ring cursor */
+.cursorOuter {
+  width: 40px;
+  height: 40px;
+  margin-left: -20px; /* Center on cursor */
+  margin-top: -20px;
+}
+
+.cursorRing {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border: 2px solid var(--color-primary);
+  border-radius: 50%;
+  transition: transform var(--transition-base),
+    border-color var(--transition-base);
+}
+
+/* Inner dot cursor */
+.cursorInner {
+  width: 8px;
+  height: 8px;
+  margin-left: -4px; /* Center on cursor */
+  margin-top: -4px;
+  z-index: calc(var(--z-index-cursor) + 1); /* Above outer ring */
+}
+
+.cursorDot {
+  display: block;
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background-color: var(--color-primary);
+  border-radius: 50%;
+  transition: transform var(--transition-base),
+    background-color var(--transition-base);
+}
+
+/* Hover state - expand cursor on interactive elements */
+.hoverState .cursorRing {
+  transform: scale(1.5);
+  border-color: var(--color-primary);
+}
+
+.hoverState .cursorDot {
+  transform: scale(3);
+  background-color: var(--color-primary);
+  opacity: 0.5;
+}
+
+/* Slider state - show arrow indicators */
+.sliderState .arrowLeft,
+.sliderState .arrowRight {
+  opacity: 1;
+}
+
+/* Arrow indicators (hidden by default) */
+.arrowLeft,
+.arrowRight {
+  position: absolute;
+  width: 2px;
+  height: 12px;
+  background-color: rgba(255, 255, 255, 0.8);
+  opacity: 0;
+  transition: opacity var(--transition-base);
+}
+
+/* Left arrow (made with two rotated bars) */
+.arrowLeft::before,
+.arrowLeft::after {
+  content: '';
+  position: absolute;
+  width: 2px;
+  height: 8px;
+  background-color: rgba(255, 255, 255, 0.8);
+}
+
+.arrowLeft::before {
+  transform: rotate(40deg);
+  left: -20px;
+  top: 50%;
+  margin-top: 2px;
+}
+
+.arrowLeft::after {
+  transform: rotate(-40deg);
+  left: -20px;
+  top: 50%;
+  margin-top: -10px;
+}
+
+/* Right arrow */
+.arrowRight::before,
+.arrowRight::after {
+  content: '';
+  position: absolute;
+  width: 2px;
+  height: 8px;
+  background-color: rgba(255, 255, 255, 0.8);
+}
+
+.arrowRight::before {
+  transform: rotate(130deg);
+  right: -20px;
+  top: 50%;
+  margin-top: 2px;
+}
+
+.arrowRight::after {
+  transform: rotate(-130deg);
+  right: -20px;
+  top: 50%;
+  margin-top: -10px;
+}
+
+/* Accessibility: Respect reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+  .cursorOuter,
+  .cursorInner {
+    display: none !important;
+  }
+}
+
+/* Don't show custom cursor on touch devices (handled in component) */
+@media (hover: none) and (pointer: coarse) {
+  .cursorOuter,
+  .cursorInner {
+    display: none;
+  }
+}
