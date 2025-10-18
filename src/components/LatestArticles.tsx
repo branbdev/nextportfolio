@@ -2,10 +2,8 @@
 
 import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
-import { BlogPost } from '../lib/taxonomies';
-import { getLatestBlogPosts } from '../lib/mdx';
+import type { BlogPost } from '../lib/taxonomies';
 import { IconExternal } from './Icons';
-import { GET_LATEST_BLOG_POSTS } from '../lib/graphql/queries';
 import styles from '@/styles/components/LatestArticles.module.css';
 
 const LatestArticles: React.FC = () => {

@@ -1,8 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import {
-  GET_ALL_BLOG_POSTS,
-  GET_LATEST_BLOG_POSTS,
-} from '../lib/graphql/queries';
 
 interface ApiResponse {
   success: boolean;

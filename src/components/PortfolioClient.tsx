@@ -20,6 +20,9 @@ import { EnrichedProject } from '../lib/taxonomies';
 import { getTechIcon } from './Icons';
 import PortfolioModalbox from './PortfolioModalbox';
 import styles from '@/styles/components/Portfolio.module.css';
+// Swiper core styles (scoped globally by Swiper)
+import 'swiper/css';
+import 'swiper/css/navigation';
 
 // Lazy-load Swiper components with SSR disabled for better performance
 // This prevents Swiper from blocking the main thread during initial page load
@@ -38,7 +41,7 @@ const SwiperSlide = dynamic(
 );
 
 // Import Swiper modules
-import { Autoplay, Navigation } from 'swiper/modules';
+import { Autoplay, Navigation, A11y, Keyboard } from 'swiper/modules';
 
 interface PortfolioClientProps {
   projects: EnrichedProject[];
@@ -81,18 +84,28 @@ const PortfolioSkeleton = () => (
 const PortfolioClient: React.FC<PortfolioClientProps> = ({ projects }) => {
   const [selectedProject, setSelectedProject] =
     useState<EnrichedProject | null>(null);
+  const [lastActiveElement, setLastActiveElement] =
+    useState<HTMLElement | null>(null);
 
   const handleOpenModal = (project: EnrichedProject) => {
+    // Remember the element that had focus so we can restore it on close
+    if (typeof document !== 'undefined') {
+      setLastActiveElement(document.activeElement as HTMLElement | null);
+    }
     setSelectedProject(project);
   };
 
   const handleCloseModal = () => {
     setSelectedProject(null);
+    // Restore focus on the previously focused element after modal unmounts
+    setTimeout(() => {
+      lastActiveElement?.focus?.();
+    }, 0);
   };
 
   // Swiper configuration
   const swiperConfig = {
-    modules: [Autoplay, Navigation],
+    modules: [Autoplay, Navigation, A11y, Keyboard],
     slidesPerView: 1,
     spaceBetween: 30,
     loop: true,
@@ -102,6 +115,12 @@ const PortfolioClient: React.FC<PortfolioClientProps> = ({ projects }) => {
       pauseOnMouseEnter: true,
     },
     navigation: true,
+    a11y: {
+      enabled: true,
+    },
+    keyboard: {
+      enabled: true,
+    },
     breakpoints: {
       640: {
         slidesPerView: 1,
@@ -152,9 +171,9 @@ const PortfolioClient: React.FC<PortfolioClientProps> = ({ projects }) => {
                     - fill + object-fit: Prevents layout shift
                   */}
                   <div className={styles.imageHolder}>
-                    {project.image && 
-                     project.image !== '#' && 
-                     project.image.startsWith('/') ? (
+                    {project.image &&
+                    project.image !== '#' &&
+                    project.image.startsWith('/') ? (
                       <Image
                         src={project.image}
                         alt={`${project.name} project screenshot`}
@@ -175,11 +194,30 @@ const PortfolioClient: React.FC<PortfolioClientProps> = ({ projects }) => {
                           justifyContent: 'center',
                           color: 'var(--color-text-tertiary)',
                           fontSize: '14px',
-                        }}
-                      >
+                        }}>
                         No preview available
                       </div>
                     )}
+                    {/* Floating tech chips overlay (top-left) */}
+                    {project.technologies?.length ? (
+                      <div className={styles.imageTechOverlay}>
+                        {project.technologies.slice(0, 3).map((tech) => (
+                          <span
+                            key={tech.slug}
+                            className={styles.imageTechChip}>
+                            {getTechIcon(tech.slug, 12)}
+                            <span className={styles.imageTechLabel}>
+                              {tech.name}
+                            </span>
+                          </span>
+                        ))}
+                        {project.technologies.length > 3 && (
+                          <span className={styles.imageTechMore}>
+                            +{project.technologies.length - 3}
+                          </span>
+                        )}
+                      </div>
+                    ) : null}
                   </div>
 
                   {/* Card Content */}

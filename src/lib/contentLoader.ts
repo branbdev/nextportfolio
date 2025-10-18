@@ -28,12 +28,18 @@ function readSlugs(dir: string): string[] {
   for (const entry of entries) {
     if (entry.isFile() && entry.name.endsWith('.mdx')) {
       // Direct MDX files (e.g., technology.mdx)
-      slugs.push(entry.name.replace(/\.mdx$/, ''));
+      const base = entry.name.replace(/\.mdx$/, '');
+      if (base.toLowerCase() !== 'index') {
+        slugs.push(base);
+      }
     } else if (entry.isDirectory()) {
       // Directory with index.mdx (e.g., post-slug/index.mdx)
       const indexPath = path.join(dir, entry.name, 'index.mdx');
       if (fs.existsSync(indexPath)) {
-        slugs.push(entry.name);
+        const base = entry.name;
+        if (base.toLowerCase() !== 'index') {
+          slugs.push(base);
+        }
       }
     }
   }

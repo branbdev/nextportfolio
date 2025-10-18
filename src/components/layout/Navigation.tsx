@@ -23,10 +23,14 @@ interface NavigationProps {
 export function Navigation({ isOpen, onClose }: NavigationProps) {
   const pathname = usePathname();
 
-  // Close nav on route change
+  // Close nav on route change (but not on initial mount)
   useEffect(() => {
-    onClose();
-  }, [pathname, onClose]);
+    if (isOpen) {
+      onClose();
+    }
+    // We only want to run this when pathname changes, not when onClose changes
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [pathname]);
 
   // Handle hash link navigation (for homepage sections)
   const handleHashClick = (

@@ -6,10 +6,10 @@ document.addEventListener('DOMContentLoaded', function () {
 
   // Function to apply theme
   const applyTheme = (theme: string): void => {
-    if (theme === 'light') {
-      body.classList.add('light');
+    if (theme === 'dark') {
+      body.classList.add('dark');
     } else {
-      body.classList.remove('light');
+      body.classList.remove('dark');
     }
   };
 
@@ -23,12 +23,12 @@ document.addEventListener('DOMContentLoaded', function () {
   if (switcherBtn) {
     switcherBtn.addEventListener('click', () => {
       let newTheme: string;
-      if (body.classList.contains('light')) {
-        body.classList.remove('light');
-        newTheme = 'dark';
-      } else {
-        body.classList.add('light');
+      if (body.classList.contains('dark')) {
+        body.classList.remove('dark');
         newTheme = 'light';
+      } else {
+        body.classList.add('dark');
+        newTheme = 'dark';
       }
       // Save the new theme to localStorage
       localStorage.setItem('theme', newTheme);

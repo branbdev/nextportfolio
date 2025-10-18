@@ -1,0 +1,17 @@
+.container {
+  position: fixed;
+  top: 72px; /* below the hamburger (which is ~20-40px) */
+  right: 20px;
+  z-index: var(--z-index-menu-trigger);
+  pointer-events: none; /* let inner control manage interactions */
+}
+
+/* re-enable interactions for the inner control */
+.container :global(.fn_accessibility) {
+  pointer-events: auto;
+}
+
+/* Ensure the floating button has proper elevation */
+.container :global(.accessibility_button) {
+  z-index: var(--z-index-menu-trigger);
+}

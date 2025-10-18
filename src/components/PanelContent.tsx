@@ -1,12 +1,6 @@
 import React, { useEffect } from 'react';
 import Image from 'next/image';
 
-declare global {
-  interface Window {
-    Typed?: any;
-  }
-}
-
 const PanelContent: React.FC = () => {
   useEffect(() => {
     const initTyped = async () => {

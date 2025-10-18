@@ -1,0 +1,4 @@
+/* Re-export placeholder: keep all Portfolio styles consolidated at '@/styles/components/Portfolio.module.css'.
+   Import this file in components if you prefer local path semantics in the future.
+*/
+@import url('../styles/components/Portfolio.module.css');

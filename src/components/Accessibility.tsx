@@ -36,10 +36,10 @@ const Accessibility: React.FC = () => {
   const applySettings = useCallback(() => {
     const body = document.body;
     // Theme
-    if (settings.theme === 'light') {
-      body.classList.add('light');
+    if (settings.theme === 'dark') {
+      body.classList.add('dark');
     } else {
-      body.classList.remove('light');
+      body.classList.remove('dark');
     }
     // Contrast
     if (settings.contrast) {

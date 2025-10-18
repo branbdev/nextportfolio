@@ -21,33 +21,13 @@ import {
   SiLinkedin,
   SiGmail,
   SiNginx,
-  SiPostgresql,
-  SiMysql,
-  SiRedis,
-  SiDocker,
-  SiKubernetes,
-  SiGraphql,
   SiNextdotjs,
   SiVuedotjs,
   SiTailwindcss,
 } from 'react-icons/si';
 
 // UI Icons from Lucide React
-import {
-  ExternalLink,
-  Mail,
-  MapPin,
-  ArrowUp,
-  Send,
-  Check,
-  AlertCircle,
-  Calendar,
-  Tag,
-  Code,
-  Database,
-  Server,
-  Globe,
-} from 'lucide-react';
+import { ExternalLink, Mail, MapPin, ArrowUp, Send } from 'lucide-react';
 
 export interface IconProps {
   size?: number | string;

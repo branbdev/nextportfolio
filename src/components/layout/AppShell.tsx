@@ -1,6 +1,6 @@
 'use client';
 
-import React, { ReactNode, useEffect, useState } from 'react';
+import React, { ReactNode, useEffect, useState, useCallback } from 'react';
 import { dataImage, customCursor, aTagClick, sticky } from '@/utilits';
 import { MagicCursor } from './MagicCursor';
 import { Footer } from './Footer';
@@ -48,9 +48,15 @@ export function AppShell({ children }: AppShellProps) {
     };
   }, []);
 
-  const toggleMenu = () => {
+  // Use useCallback to memoize these functions and prevent infinite loops
+  // in child components that use them as dependencies in useEffect
+  const toggleMenu = useCallback(() => {
     setIsNavOpen((prev) => !prev);
-  };
+  }, []);
+
+  const closeMenu = useCallback(() => {
+    setIsNavOpen(false);
+  }, []);
 
   return (
     <div className={`${styles.wrapper} ${isNavOpen ? styles.navOpened : ''}`}>
@@ -69,7 +75,7 @@ export function AppShell({ children }: AppShellProps) {
       </div>
 
       {/* Hidden Navigation - Slides in from right */}
-      <Navigation isOpen={isNavOpen} onClose={toggleMenu} />
+      <Navigation isOpen={isNavOpen} onClose={closeMenu} />
 
       {/* Magic Cursor - Custom cursor effect */}
       <MagicCursor />

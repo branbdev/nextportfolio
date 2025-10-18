@@ -28,9 +28,11 @@ export function enrichProjectsWithTechnologies(
       .map((slug) => techMap.get(slug))
       .filter((tech): tech is Technology => tech !== undefined);
 
-    const { technologySlugs, ...rest } = project;
+    // Return the project data without technologySlugs
+    // eslint-disable-next-line no-unused-vars
+    const { technologySlugs: _omit, ...projectBase } = project;
     return {
-      ...rest,
+      ...projectBase,
       technologies,
     };
   });

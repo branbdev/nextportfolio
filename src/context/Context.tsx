@@ -4,6 +4,7 @@ import { PortfolioItem } from '../components/portfolioData';
 interface ContextType {
   modal: boolean;
   modalValue: PortfolioItem | null;
+  // eslint-disable-next-line no-unused-vars
   modalValueSet: (value: PortfolioItem) => void;
   close: () => void;
 }

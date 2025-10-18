@@ -2,6 +2,7 @@
 
 import React from 'react';
 import AccessibilityOld from '@/components/Accessibility';
+import styles from './Accessibility.module.css';
 
 /**
  * Accessibility Component Wrapper
@@ -12,5 +13,9 @@ import AccessibilityOld from '@/components/Accessibility';
  * TODO: Refactor into a proper CSS Module component with improved styling
  */
 export function Accessibility() {
-  return <AccessibilityOld />;
+  return (
+    <div className={styles.container} aria-label="Accessibility controls">
+      <AccessibilityOld />
+    </div>
+  );
 }

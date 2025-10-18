@@ -6,7 +6,7 @@
       "description": "This application is meant to match users up with potential partners based on their preferences.",
       "repositoryUrl": "https://github.com/branbdev/alchemy",
       "liveUrl": "https://github.com/branbdev/",
-      "image": "#",
+      "image": "",
       "technologies": [
         {
           "slug": "angular",
@@ -81,7 +81,7 @@
       "description": "An E Commerce site where users can browse item listings and add them to a shopping cart before checking out",
       "repositoryUrl": "https://github.com/branbdev/flybuy",
       "liveUrl": "https://github.com/branbdev/",
-      "image": "/img/portfolio/flybuy.jpg",
+      "image": "",
       "technologies": [
         {
           "slug": "react",
@@ -94,10 +94,6 @@
           "logo": "/svg/tech/django.svg"
         }
       ]
-    },
-    {
-      "slug": "index",
-      "technologies": []
     }
   ],
   "technologies": [
@@ -223,8 +219,7 @@
       "flybuy": [
         "react",
         "django"
-      ],
-      "index": []
+      ]
     },
     "postsByTechnology": {
       "react": [
@@ -245,8 +240,8 @@
     }
   },
   "metadata": {
-    "generatedAt": "2025-10-18T12:13:57.878Z",
-    "totalProjects": 5,
+    "generatedAt": "2025-10-18T20:17:37.022Z",
+    "totalProjects": 4,
     "totalTechnologies": 9,
     "totalPosts": 3
   }

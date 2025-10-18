@@ -136,6 +136,11 @@
   --z-index-popover: 1060;
   --z-index-tooltip: 1070;
   --z-index-notification: 1080;
+  /* Custom app-specific layers */
+  --z-index-nav-overlay: 1050;
+  --z-index-nav: 1055;
+  --z-index-menu-trigger: 1100;
+  --z-index-cursor: 9999;
 
   /* ========== BREAKPOINTS (for reference in JS) ========== */
   --breakpoint-sm: 640px;
@@ -445,5 +450,35 @@ select {
   .swiper-button-next:hover,
   .swiper-button-prev:hover {
     transform: none;
+  }
+}
+
+/* ========== OPTIONAL PULSE ANIMATION (small, subtle) ========== */
+.pulse {
+  position: relative;
+}
+
+.pulse::after {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  border-radius: 9999px;
+  border: 2px solid var(--color-primary);
+  opacity: 0.5;
+  animation: pulse 1.5s ease-out infinite;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+    opacity: 0.6;
+  }
+  70% {
+    transform: scale(1.6);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 0;
   }
 }

@@ -93,8 +93,8 @@ const getMDXData = (
       content,
       frontMatter,
     };
-  } catch (error) {
-    console.error(`Error reading MDX file: ${slug} in directory ${dir}`, error);
+  } catch (err) {
+    console.error(`Error reading MDX file: ${slug} in directory ${dir}`, err);
     return null;
   }
 };
@@ -147,7 +147,7 @@ export const getBlogPostBySlug = (slug: string) => {
     if (!mdx) return null;
     const { content, frontMatter } = mdx;
     return { content, frontMatter, slug };
-  } catch (error) {
+  } catch {
     return null;
   }
 };
