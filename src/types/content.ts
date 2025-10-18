@@ -17,9 +17,14 @@ export interface Technology {
 // Post content (from /content/posts/*.mdx)
 export interface PostFrontmatter {
   title: string;
-  publishedAt: string; // ISO date
-  summary: string;
-  technologies: Slug[]; // technology slugs
+  publishedAt?: string; // ISO date
+  date?: string; // fallback key
+  summary?: string;
+  excerpt?: string; // fallback key
+  technologies?: Slug[]; // technology slugs
+  tags?: Slug[]; // fallback key
+  coverImage?: string;
+  featured?: boolean;
 }
 
 export interface Post {
@@ -28,6 +33,8 @@ export interface Post {
   publishedAt: string;
   summary: string;
   technologySlugs: Slug[];
+  coverImage?: string;
+  featured?: boolean;
   content?: string; // raw MDX content if needed
 }
 

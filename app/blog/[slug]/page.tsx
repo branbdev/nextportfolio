@@ -4,6 +4,11 @@ import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import Image from 'next/image';
 import type { Metadata } from 'next';
+import { compileMDX } from 'next-mdx-remote/rsc';
+import React from 'react';
+import { mdxComponents } from '../../../mdx-components';
+import rehypePrettyCode from 'rehype-pretty-code';
+import remarkGfm from 'remark-gfm';
 
 interface PageProps {
   params: Promise<{
@@ -40,7 +45,7 @@ export async function generateMetadata({
 
 export default async function BlogPostPage({ params }: PageProps) {
   const { slug } = await params;
-  const post = loadPostBySlug(slug);
+  const post = loadPostBySlug(slug, { includeContent: true });
   const technologies = loadAllTechnologies();
 
   if (!post) {
@@ -53,6 +58,44 @@ export default async function BlogPostPage({ params }: PageProps) {
         .map((slug) => technologies.find((t) => t.slug === slug))
         .filter(Boolean)
     : [];
+
+  // Compile MDX to React Server Components
+  let compiled: React.ReactNode = null;
+  if (post.content) {
+    try {
+      // Some authored MDX may include ESM export blocks (e.g., `export const metadata = {...}`)
+      // which are not supported by next-mdx-remote's compiler. Strip them before compiling.
+      const stripMDXExports = (src: string): string =>
+        src
+          // Remove export const <name> = { ... };
+          .replace(/export\s+const\s+\w+\s*=\s*{[\s\S]*?};?\s*/g, '')
+          // Remove any remaining bare export statements
+          .replace(/^export\s+\{[^}]*\};?\s*$/gm, '')
+          .replace(/^export\s+default\s+[^;]+;?\s*$/gm, '')
+          .trim();
+
+      const source = stripMDXExports(post.content);
+      const mdx = await compileMDX<{ title?: string }>({
+        source,
+        options: {
+          mdxOptions: {
+            remarkPlugins: [remarkGfm],
+            rehypePlugins: [[rehypePrettyCode, { theme: 'github-dark' }]],
+          },
+        },
+        components: { ...mdxComponents },
+      });
+      compiled = mdx.content;
+    } catch (err) {
+      // Graceful fallback: render raw content in a pre block to avoid build failures
+      compiled = (
+        <div>
+          <p>Note: MDX rendering encountered an issue; showing raw content.</p>
+          <pre style={{ whiteSpace: 'pre-wrap' }}>{post.content}</pre>
+        </div>
+      );
+    }
+  }
 
   return (
     <article className='container mx-auto px-4 py-12 max-w-4xl'>
@@ -96,10 +139,7 @@ export default async function BlogPostPage({ params }: PageProps) {
         )}
       </header>
 
-      <div
-        className='prose prose-lg max-w-none'
-        dangerouslySetInnerHTML={{ __html: post.content || '' }}
-      />
+      <div className='prose prose-lg max-w-none'>{compiled}</div>
 
       <footer className='mt-12 pt-8 border-t'>
         <Link href='/blog' className='text-blue-600 hover:underline'>

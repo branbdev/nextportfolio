@@ -160,12 +160,26 @@
     {
       "slug": "getting-started-with-nextjs",
       "title": "Getting Started with Next.js",
-      "technologySlugs": []
+      "publishedAt": "2025-10-05",
+      "summary": "Learn how to build modern React applications with Next.js, the production-ready framework for React.",
+      "technologySlugs": [
+        "React",
+        "Next.js",
+        "JavaScript",
+        "Web Development"
+      ]
     },
     {
       "slug": "typescript-best-practices",
       "title": "TypeScript Best Practices for React Applications",
-      "technologySlugs": []
+      "publishedAt": "2025-09-28",
+      "summary": "Improve your React codebase with these TypeScript best practices for type safety and better developer experience.",
+      "technologySlugs": [
+        "React",
+        "TypeScript",
+        "JavaScript",
+        "Web Development"
+      ]
     }
   ],
   "relationships": {
@@ -236,11 +250,29 @@
       ],
       "node": [
         "app-router-migration-journey"
+      ],
+      "React": [
+        "getting-started-with-nextjs",
+        "typescript-best-practices"
+      ],
+      "Next.js": [
+        "getting-started-with-nextjs"
+      ],
+      "JavaScript": [
+        "getting-started-with-nextjs",
+        "typescript-best-practices"
+      ],
+      "Web Development": [
+        "getting-started-with-nextjs",
+        "typescript-best-practices"
+      ],
+      "TypeScript": [
+        "typescript-best-practices"
       ]
     }
   },
   "metadata": {
-    "generatedAt": "2025-10-18T21:44:54.678Z",
+    "generatedAt": "2025-10-18T22:48:08.191Z",
     "totalProjects": 4,
     "totalTechnologies": 9,
     "totalPosts": 3

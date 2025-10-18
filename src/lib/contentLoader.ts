@@ -86,12 +86,17 @@ export function loadTechnologyBySlug(slug: string): Technology | null {
 export function loadAllPosts({ includeContent = false } = {}): Post[] {
   return readSlugs(POSTS_DIR).map((slug) => {
     const { frontmatter, content } = readMdx<PostFrontmatter>(POSTS_DIR, slug);
+    const publishedAt = frontmatter.publishedAt || frontmatter.date || '';
+    const summary = frontmatter.summary || frontmatter.excerpt || '';
+    const technologySlugs = frontmatter.technologies || frontmatter.tags || [];
     return {
       slug,
       title: frontmatter.title,
-      publishedAt: frontmatter.publishedAt,
-      summary: frontmatter.summary,
-      technologySlugs: frontmatter.technologies || [],
+      publishedAt,
+      summary,
+      technologySlugs,
+      coverImage: frontmatter.coverImage,
+      featured: frontmatter.featured,
       content: includeContent ? content : undefined,
     } satisfies Post;
   });
@@ -107,12 +112,17 @@ export function loadPostBySlug(
   if (!fs.existsSync(indexPath) && !fs.existsSync(directPath)) return null;
 
   const { frontmatter, content } = readMdx<PostFrontmatter>(POSTS_DIR, slug);
+  const publishedAt = frontmatter.publishedAt || frontmatter.date || '';
+  const summary = frontmatter.summary || frontmatter.excerpt || '';
+  const technologySlugs = frontmatter.technologies || frontmatter.tags || [];
   return {
     slug,
     title: frontmatter.title,
-    publishedAt: frontmatter.publishedAt,
-    summary: frontmatter.summary,
-    technologySlugs: frontmatter.technologies || [],
+    publishedAt,
+    summary,
+    technologySlugs,
+    coverImage: frontmatter.coverImage,
+    featured: frontmatter.featured,
     content: includeContent ? content : undefined,
   };
 }

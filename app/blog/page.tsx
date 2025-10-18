@@ -18,6 +18,8 @@ export default async function BlogPage() {
     return dateB - dateA;
   });
 
+  const featured = sortedPosts.filter((p) => p.featured);
+
   return (
     <div className='container mx-auto px-4 py-12'>
       <h1 className='text-4xl font-bold mb-8'>Blog</h1>
@@ -25,6 +27,29 @@ export default async function BlogPage() {
         Technical articles on modern web development, architecture patterns, and
         performance optimization.
       </p>
+
+      {featured.length > 0 && (
+        <section className='mb-12'>
+          <h2 className='text-2xl font-semibold mb-4'>Featured</h2>
+          <div className='grid gap-6 md:grid-cols-2'>
+            {featured.map((post) => (
+              <Link
+                key={post.slug}
+                href={`/blog/${post.slug}`}
+                className='block p-6 border rounded-lg hover:shadow-lg transition-shadow bg-yellow-50 dark:bg-zinc-900'>
+                <article>
+                  <h3 className='text-xl font-bold'>{post.title}</h3>
+                  {post.summary && (
+                    <p className='text-gray-600 dark:text-zinc-400 mt-2'>
+                      {post.summary}
+                    </p>
+                  )}
+                </article>
+              </Link>
+            ))}
+          </div>
+        </section>
+      )}
 
       <div className='grid gap-8 md:grid-cols-2 lg:grid-cols-3'>
         {sortedPosts.map((post) => (

@@ -115,3 +115,5 @@ declare global {
 export function useMDXComponents(): MDXProvidedComponents {
   return components;
 }
+
+export const mdxComponents: MDXProvidedComponents = components;
