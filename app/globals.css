@@ -9,8 +9,9 @@
 
 :root {
   /* ========== TYPOGRAPHY ========== */
-  --font-family-primary: 'Jost', -apple-system, BlinkMacSystemFont, 'Segoe UI',
-    'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
+  /* Variables --font-sans and --font-slab are injected by next/font on <html> */
+  --font-family-primary: var(--font-sans), -apple-system, BlinkMacSystemFont,
+    'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', system-ui, sans-serif;
   --font-family-fallback: Arial, Helvetica, sans-serif;
 
   --font-size-base: 16px;
@@ -20,6 +21,80 @@
   --font-size-2xl: 32px;
   --font-size-3xl: 48px;
 
+  /* Accessibility global helpers */
+  body.high-contrast {
+    --color-background: #000000;
+    --color-surface: #000000;
+    --color-text-primary: #ffffff;
+    --color-text-secondary: #f2f2f2;
+    --color-text-tertiary: #e6e6e6;
+    --color-link: #00e5ff; /* vivid cyan */
+    --color-link-hover: #7c4dff; /* electric purple */
+    color: var(--color-text-primary) !important;
+    background: var(--color-background) !important;
+  }
+
+  /* Reduce motion: dampen transitions and animations */
+  body.reduce-motion * {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  /* Large text scaling */
+  body.large-text {
+    font-size: calc(var(--font-size-base) * 1.125);
+  }
+  @media (min-width: 768px) {
+    body.large-text {
+      font-size: calc(var(--font-size-base) * 1.2);
+    }
+  }
+
+  /* Dyslexia-friendly font: fall back to OpenDyslexic if available */
+  @font-face {
+    font-family: 'OpenDyslexic';
+    src: local('OpenDyslexic');
+    font-display: swap;
+  }
+  body.dyslexia {
+    font-family: 'OpenDyslexic', var(--font-family-fallback);
+  }
+
+  /* Always show focus outlines for keyboard users */
+  body.focus-visible-always
+    :where(
+      a,
+      button,
+      input,
+      select,
+      textarea,
+      [tabindex]:not([tabindex='-1'])
+    ):focus {
+    outline: 3px solid #ffbf47 !important;
+    outline-offset: 2px !important;
+  }
+
+  /* Underline all links for clarity */
+  body.underline-links a {
+    text-decoration: underline !important;
+    text-underline-offset: 3px;
+  }
+
+  /* Progressive font scaling applied site-wide */
+  html {
+    font-size: calc(var(--font-size-base) * var(--a11y-font-scale, 1));
+  }
+
+  /* Neon theme groundwork (auto when dark + high-contrast). Adjust accents for legibility */
+  body.neon {
+    --color-primary: #39ff14; /* neon green */
+    --color-link: #00e5ff; /* neon cyan */
+    --color-link-hover: #ff00e5; /* neon magenta */
+    --color-border: rgba(255, 255, 255, 0.35);
+    text-shadow: 0 0 2px rgba(255, 255, 255, 0.2);
+  }
   --font-weight-light: 300;
   --font-weight-normal: 400;
   --font-weight-medium: 500;
@@ -220,7 +295,15 @@ body {
 /* ========== TYPOGRAPHY ELEMENTS ========== */
 h1,
 h2,
-h3,
+h3 {
+  line-height: var(--line-height-tight);
+  font-weight: var(--font-weight-semibold);
+  font-family: var(--font-slab), var(--font-family-primary);
+  color: var(--color-heading);
+  margin: 0;
+  padding: 0;
+}
+
 h4,
 h5,
 h6 {

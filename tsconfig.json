@@ -31,5 +31,14 @@
     "next-env.d.ts",
     ".next/types/**/*.ts"
   ],
-  "exclude": ["node_modules", "scripts/**/*.ts"]
+  "exclude": [
+    "node_modules",
+    "scripts/**/*.ts",
+    "jest.config.*",
+    "jest.setup.ts",
+    "tsconfig.test.json",
+    "src/**/*.test.*",
+    "src/**/*.spec.*",
+    "src/**/__tests__/**"
+  ]
 }

@@ -1,0 +1,127 @@
+.root {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  z-index: var(--z-index-menu-trigger);
+  font-family: inherit;
+}
+
+.trigger {
+  appearance: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 12px;
+  border-radius: 8px;
+  background: #111;
+  color: #fff;
+  border: 2px solid #ffc107;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.triggerCompact {
+  appearance: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 9999px;
+  background: #111;
+  color: #fff;
+  border: 2px solid #ffc107;
+  cursor: pointer;
+  font-weight: 700;
+}
+
+.trigger:focus-visible {
+  outline: 3px solid #ffbf47;
+  outline-offset: 2px;
+}
+
+.panel {
+  margin-top: 10px;
+  width: 320px;
+  max-width: calc(100vw - 40px);
+  background: #1f1f1f;
+  color: #eee;
+  border: 2px solid #ffc107;
+  border-radius: 10px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+  padding: 14px;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+.title {
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.section {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 8px;
+}
+
+.control {
+  display: grid;
+  grid-template-columns: 24px 1fr;
+  gap: 10px;
+  align-items: start;
+}
+
+.checkbox {
+  width: 20px;
+  height: 20px;
+}
+
+.actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.btn {
+  appearance: none;
+  padding: 8px 10px;
+  border-radius: 8px;
+  border: 2px solid #ffc107;
+  background: #111;
+  color: #fff;
+  cursor: pointer;
+}
+
+.btn:focus-visible {
+  outline: 3px solid #ffbf47;
+  outline-offset: 2px;
+}
+
+.visuallyHidden {
+  position: absolute !important;
+  height: 1px;
+  width: 1px;
+  overflow: hidden;
+  clip: rect(1px, 1px, 1px, 1px);
+  white-space: nowrap;
+}
+
+.srOnly {
+  position: absolute !important;
+  height: 1px;
+  width: 1px;
+  overflow: hidden;
+  clip: rect(1px, 1px, 1px, 1px);
+  white-space: nowrap;
+}
+
+.hint {
+  font-size: 12px;
+  color: #ccc;
+}

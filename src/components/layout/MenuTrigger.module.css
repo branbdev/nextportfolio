@@ -16,6 +16,7 @@
   letter-spacing: 2px;
   color: var(--color-text-secondary);
   font-weight: var(--font-weight-medium);
+  font-family: var(--font-slab), var(--font-family-primary);
 }
 
 .hamburger {

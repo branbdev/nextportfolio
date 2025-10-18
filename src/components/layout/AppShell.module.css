@@ -9,7 +9,7 @@
   position: relative;
   width: 100%;
   min-height: 100vh;
-  font-family: var(--font-family-main);
+  font-family: var(--font-family-primary);
   font-size: var(--font-size-base);
   line-height: var(--line-height-base);
 }

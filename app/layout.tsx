@@ -1,5 +1,5 @@
 import type { ReactNode } from 'react';
-import { Jost } from 'next/font/google';
+import { Source_Sans_3, Arvo } from 'next/font/google';
 import { GoogleAnalytics } from '@next/third-parties/google';
 import Script from 'next/script';
 import './globals.css';
@@ -9,13 +9,23 @@ import { AppProviders } from './providers';
 import { AppShell } from '@/components/layout/AppShell';
 import { Accessibility } from '@/components/layout/Accessibility';
 
-// Font Configuration - Jost is your primary font
-const jost = Jost({
+// Font Configuration - Performant, self-hosted via next/font
+// Primary sans: Source Sans (modern successor to Source Sans Pro)
+const sourceSans = Source_Sans_3({
   subsets: ['latin'],
-  weight: ['100', '200', '300', '400', '500', '600', '700', '800', '900'],
+  weight: ['400', '600', '700'], // minimal weights for performance
   style: ['normal', 'italic'],
   display: 'swap',
-  variable: '--font-jost',
+  variable: '--font-sans',
+});
+
+// Slab-serif for headings and menu bars: Arvo
+const arvo = Arvo({
+  subsets: ['latin'],
+  weight: ['400', '700'],
+  style: ['normal', 'italic'],
+  display: 'swap',
+  variable: '--font-slab',
 });
 
 // Metadata for SEO
@@ -71,18 +81,15 @@ export const metadata = {
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
-    <html lang='en' className={jost.variable} suppressHydrationWarning>
+    <html
+      lang='en'
+      className={`${sourceSans.variable} ${arvo.variable}`}
+      suppressHydrationWarning>
       <head>
-        {/* Preconnect to external resources */}
-        <link rel='preconnect' href='https://fonts.googleapis.com' />
-        <link
-          rel='preconnect'
-          href='https://fonts.gstatic.com'
-          crossOrigin=''
-        />
+        {/* Fonts are self-hosted via next/font; no external preconnect needed */}
         <link rel='dns-prefetch' href='https://www.googletagmanager.com' />
       </head>
-      <body suppressHydrationWarning>
+      <body className={sourceSans.className} suppressHydrationWarning>
         {/* Google Analytics - afterInteractive for better performance */}
         {process.env.NEXT_PUBLIC_GA_ID && (
           <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_ID} />
