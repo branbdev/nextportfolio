@@ -103,17 +103,42 @@ const PortfolioClient: React.FC<PortfolioClientProps> = ({ projects }) => {
     }, 0);
   };
 
-  // Swiper configuration
+  // Dummy placeholder projects for carousel minimum requirement
+  const dummyProjects: EnrichedProject[] = [
+    {
+      slug: 'placeholder-innovation',
+      name: 'Innovation Showcase',
+      description: 'Future projects coming soon - stay tuned for cutting-edge developments',
+      content: '',
+      image: '/img/portfolio/placeholder1.webp',
+      technologies: [],
+    },
+    {
+      slug: 'placeholder-excellence',
+      name: 'Excellence in Development',
+      description: 'More incredible work on the horizon - the journey continues',
+      content: '',
+      image: '/img/portfolio/placeholder2.webp',
+      technologies: [],
+    },
+  ];
+
+  // Ensure minimum 3 items for carousel animation
+  const displayProjects = projects.length >= 3 
+    ? projects 
+    : [...projects, ...dummyProjects].slice(0, Math.max(3, projects.length));
+
+  // Swiper configuration with loop enabled only when sufficient items
   const swiperConfig = {
     modules: [Autoplay, Navigation, A11y, Keyboard],
     slidesPerView: 1,
     spaceBetween: 30,
-    loop: true,
-    autoplay: {
+    loop: displayProjects.length >= 3,
+    autoplay: displayProjects.length >= 3 ? {
       delay: 5000,
       disableOnInteraction: false,
       pauseOnMouseEnter: true,
-    },
+    } : false,
     navigation: true,
     a11y: {
       enabled: true,
@@ -127,15 +152,15 @@ const PortfolioClient: React.FC<PortfolioClientProps> = ({ projects }) => {
         spaceBetween: 20,
       },
       768: {
-        slidesPerView: 2,
+        slidesPerView: Math.min(2, displayProjects.length),
         spaceBetween: 30,
       },
       1024: {
-        slidesPerView: 2,
+        slidesPerView: Math.min(2, displayProjects.length),
         spaceBetween: 40,
       },
       1280: {
-        slidesPerView: 3,
+        slidesPerView: Math.min(3, displayProjects.length),
         spaceBetween: 40,
       },
     },
@@ -151,7 +176,7 @@ const PortfolioClient: React.FC<PortfolioClientProps> = ({ projects }) => {
       <div className={styles.carouselWrapper}>
         <Suspense fallback={<PortfolioSkeleton />}>
           <Swiper {...swiperConfig} className={styles.carouselContainer}>
-            {projects.map((project, index) => (
+            {displayProjects.map((project, index) => (
               <SwiperSlide key={project.slug}>
                 <article
                   className={styles.portfolioCard}

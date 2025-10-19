@@ -66,52 +66,189 @@
   overflow: hidden;
   contain: layout style; /* Critical for performance */
   will-change: transform; /* Hint to browser for GPU acceleration */
+  position: relative;
+  padding: 60px 0;
+}
+
+/* Oscilloscope-style geometric patterns */
+.carouselWrapper::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 200px;
+  background-image: 
+    repeating-linear-gradient(0deg,
+      transparent,
+      transparent 2px,
+      rgba(70, 130, 180, 0.08) 2px,
+      rgba(70, 130, 180, 0.08) 4px
+    ),
+    repeating-linear-gradient(90deg,
+      transparent,
+      transparent 2px,
+      rgba(16, 124, 92, 0.08) 2px,
+      rgba(16, 124, 92, 0.08) 4px
+    );
+  background-size: 100% 40px, 40px 100%;
+  opacity: 0.6;
+  pointer-events: none;
+  animation: oscilloScan 8s linear infinite;
+}
+
+.carouselWrapper::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 200px;
+  background-image: 
+    repeating-linear-gradient(0deg,
+      transparent,
+      transparent 2px,
+      rgba(205, 92, 92, 0.08) 2px,
+      rgba(205, 92, 92, 0.08) 4px
+    ),
+    repeating-linear-gradient(90deg,
+      transparent,
+      transparent 2px,
+      rgba(139, 69, 19, 0.08) 2px,
+      rgba(139, 69, 19, 0.08) 4px
+    );
+  background-size: 100% 40px, 40px 100%;
+  opacity: 0.6;
+  pointer-events: none;
+  animation: oscilloScan 8s linear infinite reverse;
+}
+
+@keyframes oscilloScan {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(40px);
+  }
 }
 
 .carouselContainer {
   width: 100%;
   position: relative;
+  z-index: 2;
 }
 
 /* ========== PORTFOLIO CARD ========== */
 .portfolioCard {
   cursor: pointer;
-  transition: transform var(--transition-base),
-    box-shadow var(--transition-base), border-color var(--transition-base);
-  background: #181715;
-  border: 1px solid #151412;
-  border-radius: 6px;
+  transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1),
+    box-shadow 0.8s cubic-bezier(0.4, 0, 0.2, 1), 
+    border-color 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+  background: linear-gradient(135deg, 
+    rgba(24, 23, 21, 0.95) 0%,
+    rgba(21, 20, 18, 0.98) 100%
+  );
+  border: 2px solid rgba(70, 130, 180, 0.25);
+  border-radius: 8px;
   padding: 20px;
   overflow: hidden;
   height: 100%;
   display: flex;
   flex-direction: column;
   contain: layout paint;
-  animation: cardFloat 6s ease-in-out infinite;
+  position: relative;
+  animation: cardFloat 8s ease-in-out infinite;
 }
 
-/* Floating animation */
+/* Sapphire glean overlay */
+.portfolioCard::before {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  border-radius: 8px;
+  padding: 2px;
+  background: linear-gradient(135deg,
+    rgba(70, 130, 180, 0.4) 0%,
+    rgba(16, 124, 92, 0.3) 33%,
+    rgba(205, 92, 92, 0.3) 66%,
+    rgba(139, 69, 19, 0.2) 100%
+  );
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  opacity: 0;
+  transition: opacity 1s ease;
+  pointer-events: none;
+  animation: prismRotate 15s linear infinite;
+}
+
+.portfolioCard:hover::before {
+  opacity: 1;
+}
+
+/* Floating animation with liquid glass feel */
 @keyframes cardFloat {
-  0% {
-    transform: translateY(0);
+  0%, 100% {
+    transform: translateY(0) rotateX(0deg);
+  }
+  25% {
+    transform: translateY(-8px) rotateX(0.5deg);
   }
   50% {
-    transform: translateY(-10px);
+    transform: translateY(-12px) rotateX(0deg);
+  }
+  75% {
+    transform: translateY(-8px) rotateX(-0.5deg);
+  }
+}
+
+@keyframes prismRotate {
+  0% {
+    background: linear-gradient(135deg,
+      rgba(70, 130, 180, 0.4) 0%,
+      rgba(16, 124, 92, 0.3) 33%,
+      rgba(205, 92, 92, 0.3) 66%,
+      rgba(139, 69, 19, 0.2) 100%
+    );
+  }
+  33% {
+    background: linear-gradient(225deg,
+      rgba(16, 124, 92, 0.4) 0%,
+      rgba(205, 92, 92, 0.3) 33%,
+      rgba(139, 69, 19, 0.3) 66%,
+      rgba(70, 130, 180, 0.2) 100%
+    );
+  }
+  66% {
+    background: linear-gradient(315deg,
+      rgba(205, 92, 92, 0.4) 0%,
+      rgba(139, 69, 19, 0.3) 33%,
+      rgba(70, 130, 180, 0.3) 66%,
+      rgba(16, 124, 92, 0.2) 100%
+    );
   }
   100% {
-    transform: translateY(0);
+    background: linear-gradient(45deg,
+      rgba(139, 69, 19, 0.4) 0%,
+      rgba(70, 130, 180, 0.3) 33%,
+      rgba(16, 124, 92, 0.3) 66%,
+      rgba(205, 92, 92, 0.2) 100%
+    );
   }
 }
 
 .portfolioCard:hover {
-  transform: translateY(-8px);
-  box-shadow: var(--shadow-lg);
-  border-color: var(--color-primary);
+  transform: translateY(-12px) scale(1.02);
+  box-shadow: 
+    0 20px 60px rgba(70, 130, 180, 0.3),
+    0 0 40px rgba(16, 124, 92, 0.2),
+    inset 0 0 60px rgba(205, 92, 92, 0.05);
+  border-color: rgba(70, 130, 180, 0.6);
 }
 
 .portfolioCard:focus-visible {
-  outline: 2px solid var(--color-primary);
-  outline-offset: 2px;
+  outline: 3px solid rgba(70, 130, 180, 0.6);
+  outline-offset: 4px;
 }
 
 /* ========== IMAGE CONTAINER ========== */
@@ -120,19 +257,74 @@
   width: 100%;
   aspect-ratio: 16 / 9; /* Prevent layout shift */
   overflow: hidden;
-  background-color: var(--color-background-secondary);
+  background: linear-gradient(135deg,
+    rgba(24, 23, 21, 0.9) 0%,
+    rgba(21, 20, 18, 0.95) 100%
+  );
   border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+}
+
+/* Carnelian prismatic strike effect */
+.imageHolder::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg,
+    transparent 0%,
+    rgba(205, 92, 92, 0.15) 20%,
+    rgba(139, 69, 19, 0.12) 40%,
+    transparent 60%,
+    rgba(70, 130, 180, 0.1) 80%,
+    transparent 100%
+  );
+  opacity: 0;
+  transform: translateX(-100%) skewX(-15deg);
+  transition: transform 1.2s cubic-bezier(0.4, 0, 0.2, 1), opacity 1.2s ease;
+  pointer-events: none;
+  z-index: 3;
+}
+
+.portfolioCard:hover .imageHolder::before {
+  opacity: 1;
+  transform: translateX(200%) skewX(-15deg);
+}
+
+/* Sunborne sword secondary strike */
+.imageHolder::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(225deg,
+    transparent 0%,
+    rgba(70, 130, 180, 0.15) 20%,
+    rgba(16, 124, 92, 0.12) 40%,
+    transparent 60%,
+    rgba(205, 92, 92, 0.1) 80%,
+    transparent 100%
+  );
+  opacity: 0;
+  transform: translateX(100%) skewX(15deg);
+  transition: transform 1.4s cubic-bezier(0.4, 0, 0.2, 1) 0.2s, opacity 1.4s ease 0.2s;
+  pointer-events: none;
+  z-index: 3;
+}
+
+.portfolioCard:hover .imageHolder::after {
+  opacity: 1;
+  transform: translateX(-200%) skewX(15deg);
 }
 
 .imageHolder img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: transform var(--transition-slow);
+  transition: transform 1s cubic-bezier(0.4, 0, 0.2, 1), filter 1s ease;
+  filter: brightness(0.95) contrast(1.05);
 }
 
 .portfolioCard:hover .imageHolder img {
-  transform: scale(1.05);
+  transform: scale(1.08);
+  filter: brightness(1.05) contrast(1.1) saturate(1.1);
 }
 
 /* Absolute positioned background image (legacy support) */

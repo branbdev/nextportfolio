@@ -197,9 +197,19 @@ a:focus {
   bottom: 20px;
   right: 0;
   top: 20px;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  border-radius: 2px;
-  transition: all 0.3s ease;
+  border: 2px solid rgba(70, 130, 180, 0.35); /* Cloudy cobalt */
+  border-radius: 3px;
+  transition: all 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+  background: linear-gradient(135deg, 
+    rgba(70, 130, 180, 0.08) 0%,
+    transparent 40%,
+    rgba(139, 69, 19, 0.06) 60%,
+    transparent 100%
+  );
+  box-shadow: 
+    inset 0 0 40px rgba(70, 130, 180, 0.15),
+    0 0 30px rgba(70, 130, 180, 0.1);
+  animation: borderPulse1 8s ease-in-out infinite;
 }
 .resumo_fn_right .border2 {
   position: absolute;
@@ -208,13 +218,48 @@ a:focus {
   bottom: 0;
   right: 20px;
   top: 0;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  border-radius: 2px;
-  transition: all 0.3s ease;
+  border: 2px solid rgba(16, 124, 92, 0.35); /* Deep jade */
+  border-radius: 3px;
+  transition: all 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+  background: linear-gradient(225deg,
+    rgba(16, 124, 92, 0.08) 0%,
+    transparent 40%,
+    rgba(112, 95, 80, 0.06) 60%,
+    transparent 100%
+  );
+  box-shadow: 
+    inset 0 0 40px rgba(16, 124, 92, 0.15),
+    0 0 30px rgba(16, 124, 92, 0.1);
+  animation: borderPulse2 8s ease-in-out infinite 2s;
 }
 .resumo_fn_right:hover .border1,
 .resumo_fn_right:hover .border2 {
-  border-color: rgba(255, 255, 255, 0.3);
+  border-width: 3px;
+  box-shadow: 
+    inset 0 0 60px rgba(70, 130, 180, 0.25),
+    0 0 50px rgba(70, 130, 180, 0.2);
+}
+
+@keyframes borderPulse1 {
+  0%, 100% {
+    border-color: rgba(70, 130, 180, 0.35);
+    box-shadow: inset 0 0 40px rgba(70, 130, 180, 0.15), 0 0 30px rgba(70, 130, 180, 0.1);
+  }
+  50% {
+    border-color: rgba(70, 130, 180, 0.55);
+    box-shadow: inset 0 0 60px rgba(70, 130, 180, 0.25), 0 0 50px rgba(70, 130, 180, 0.2);
+  }
+}
+
+@keyframes borderPulse2 {
+  0%, 100% {
+    border-color: rgba(16, 124, 92, 0.35);
+    box-shadow: inset 0 0 40px rgba(16, 124, 92, 0.15), 0 0 30px rgba(16, 124, 92, 0.1);
+  }
+  50% {
+    border-color: rgba(16, 124, 92, 0.55);
+    box-shadow: inset 0 0 60px rgba(16, 124, 92, 0.25), 0 0 50px rgba(16, 124, 92, 0.2);
+  }
 }
 .resumo_fn_right .abs_img {
   position: absolute;
@@ -223,11 +268,60 @@ a:focus {
   bottom: 0;
   right: 0;
   top: 0;
-
   border-radius: 6px;
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
+  transition: all 1.5s cubic-bezier(0.4, 0, 0.2, 1);
+  filter: contrast(1.05) brightness(1.02);
+}
+
+.resumo_fn_right .abs_img::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 6px;
+  background: linear-gradient(135deg,
+    rgba(70, 130, 180, 0.12) 0%,
+    transparent 30%,
+    rgba(205, 92, 92, 0.08) 70%,
+    transparent 100%
+  );
+  opacity: 0;
+  transition: opacity 1.5s ease;
+  pointer-events: none;
+  animation: prismShift 12s ease-in-out infinite;
+}
+
+.resumo_fn_right:hover .abs_img::before {
+  opacity: 1;
+}
+
+@keyframes prismShift {
+  0%, 100% {
+    background: linear-gradient(135deg,
+      rgba(70, 130, 180, 0.12) 0%,
+      transparent 30%,
+      rgba(205, 92, 92, 0.08) 70%,
+      transparent 100%
+    );
+  }
+  33% {
+    background: linear-gradient(225deg,
+      rgba(16, 124, 92, 0.12) 0%,
+      transparent 30%,
+      rgba(112, 95, 80, 0.08) 70%,
+      transparent 100%
+    );
+  }
+  66% {
+    background: linear-gradient(315deg,
+      rgba(139, 69, 19, 0.12) 0%,
+      transparent 30%,
+      rgba(70, 130, 180, 0.08) 70%,
+      transparent 100%
+    );
+  }
 }
 .resumo_fn_right .title_holder {
   text-align: center;
@@ -2539,11 +2633,18 @@ body.light .resumo_fn_about_info table a:hover {
 }
 body.light .resumo_fn_right .border1,
 body.light .resumo_fn_right .border2 {
-  border-color: rgba(122, 114, 105, 0.2);
+  border-color: rgba(112, 95, 80, 0.35); /* Taupe suede for light mode */
+  background: linear-gradient(135deg, 
+    rgba(112, 95, 80, 0.06) 0%,
+    transparent 40%,
+    rgba(139, 69, 19, 0.04) 60%,
+    transparent 100%
+  );
 }
 body.light .resumo_fn_right:hover .border1,
 body.light .resumo_fn_right:hover .border2 {
-  border-color: rgba(122, 114, 105, 0.3);
+  border-color: rgba(112, 95, 80, 0.5);
+  border-width: 3px;
 }
 body.light .resumo_fn_cv_btn a {
   border-color: rgba(122, 114, 105, 0.2);
