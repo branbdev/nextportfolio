@@ -1,14 +1,20 @@
 import { loadAllPosts, loadPostBySlug } from '@/lib/contentLoader';
 import { loadAllTechnologies } from '@/lib/contentLoader';
 import { notFound } from 'next/navigation';
+// Opt into full static generation for performance and SEO
+export const dynamic = 'force-static';
+export const dynamicParams = false;
+
 import Link from 'next/link';
 import Image from 'next/image';
 import type { Metadata } from 'next';
 import { compileMDX } from 'next-mdx-remote/rsc';
 import React from 'react';
 import { mdxComponents } from '../../../mdx-components';
+import RelatedContent from '@/components/RelatedContent';
 import rehypePrettyCode from 'rehype-pretty-code';
 import remarkGfm from 'remark-gfm';
+import styles from './PostStyles.module.css';
 
 interface PageProps {
   params: Promise<{
@@ -98,10 +104,30 @@ export default async function BlogPostPage({ params }: PageProps) {
   }
 
   return (
-    <article className='container mx-auto px-4 py-12 max-w-4xl'>
-      <header className='mb-12'>
+    <article
+      className={`container mx-auto px-6 py-16 max-w-4xl ${styles.page} ${styles.leftOffset}`}>
+      <header className={`mb-16 ${styles.decor}`}>
+        {/* Decorative header with optional cover image */}
+        {post.coverImage && (
+          <div className='relative mb-8 overflow-hidden rounded-3xl border border-gray-100 dark:border-zinc-800 shadow-lg'>
+            <div className='absolute inset-0 bg-gradient-to-t from-black/50 to-transparent z-10' />
+            <Image
+              src={post.coverImage}
+              alt={post.coverImageAlt || post.title}
+              width={1600}
+              height={900}
+              className='w-full h-72 md:h-96 object-cover'
+              priority
+            />
+            <div className='absolute bottom-0 left-0 right-0 p-8 z-20'>
+              <h1 className='text-4xl md:text-5xl font-extrabold text-white drop-shadow-lg'>
+                {post.title}
+              </h1>
+            </div>
+          </div>
+        )}
         {post.publishedAt && (
-          <time className='text-sm text-gray-500'>
+          <time className='text-sm text-gray-500 block mb-4'>
             {new Date(post.publishedAt).toLocaleDateString('en-US', {
               year: 'numeric',
               month: 'long',
@@ -110,39 +136,73 @@ export default async function BlogPostPage({ params }: PageProps) {
           </time>
         )}
 
-        <h1 className='text-4xl font-bold mt-2 mb-4'>{post.title}</h1>
+        {!post.coverImage && (
+          <h1 className='text-5xl font-bold mt-2 mb-6 text-center leading-tight'>
+            {post.title}
+          </h1>
+        )}
 
         {post.summary && (
-          <p className='text-xl text-gray-600'>{post.summary}</p>
+          <p className='text-xl md:text-2xl text-gray-600 text-center max-w-2xl mx-auto leading-relaxed'>
+            {post.summary}
+          </p>
+        )}
+
+        {(post.readingTime || post.difficulty || post.canonicalUrl) && (
+          <div className='mt-6 flex flex-wrap gap-5 justify-center text-sm text-gray-500'>
+            {post.readingTime && <span>⏱ {post.readingTime}</span>}
+            {post.difficulty && <span>🎯 {post.difficulty}</span>}
+            {post.canonicalUrl && (
+              <a
+                href={post.canonicalUrl}
+                className='underline underline-offset-2'
+                target='_blank'
+                rel='noopener noreferrer'>
+                Canonical
+              </a>
+            )}
+          </div>
         )}
 
         {postTechnologies.length > 0 && (
-          <div className='flex flex-wrap gap-3 mt-6'>
+          <div className='flex flex-wrap justify-center gap-4 mt-8'>
             {postTechnologies.map((tech) => (
               <span
                 key={tech!.slug}
-                className='flex items-center gap-2 px-3 py-1 bg-gray-100 rounded-full text-sm'>
+                className={`flex items-center gap-2.5 px-4 py-2 rounded-full text-sm ${styles.chip}`}>
                 {tech!.logo && (
                   <Image
                     src={tech!.logo}
                     alt={`${tech!.name} logo`}
-                    width={16}
-                    height={16}
-                    className='w-4 h-4'
+                    width={20}
+                    height={20}
+                    className='w-5 h-5'
                     loading='lazy'
                   />
                 )}
-                <span>{tech!.name}</span>
+                <span className='font-medium'>{tech!.name}</span>
               </span>
             ))}
           </div>
         )}
       </header>
 
-      <div className='prose prose-lg max-w-none'>{compiled}</div>
+      {/* Stylish minimalist background card with paper-like texture */}
+      <div className={`prose prose-lg max-w-none ${styles.paperCard}`}>
+        {compiled}
+      </div>
 
-      <footer className='mt-12 pt-8 border-t'>
-        <Link href='/blog' className='text-blue-600 hover:underline'>
+      <RelatedContent
+        item={{
+          slug: post.slug,
+          title: post.title,
+          summary: post.summary,
+          technologySlugs: post.technologySlugs,
+        }}
+      />
+
+      <footer className='mt-16 pt-10 border-t'>
+        <Link href='/blog' className='text-blue-600 hover:underline text-lg'>
           ← Back to all posts
         </Link>
       </footer>

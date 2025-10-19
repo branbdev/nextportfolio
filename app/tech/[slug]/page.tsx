@@ -1,34 +1,40 @@
-import { graphqlRequest } from '../../../src/lib/graphql/localServer';
-import {
-  GET_ALL_TECHNOLOGIES,
-  GET_TECHNOLOGY_BY_SLUG,
-} from '../../../src/lib/graphql/operations';
-import { print } from 'graphql';
 import Image from 'next/image';
+import {
+  loadAllTechnologies,
+  loadAllPosts,
+  loadAllProjects,
+  loadTechnologyBySlug,
+} from '@/lib/contentLoader';
 
 type Params = { slug: string };
 
+export const dynamic = 'force-static';
+export const dynamicParams = false;
+
 export async function generateStaticParams(): Promise<Params[]> {
-  const { data } = await graphqlRequest<{ technologies: { slug: string }[] }>(
-    print(GET_ALL_TECHNOLOGIES)
-  );
-  return data.technologies.map((t) => ({ slug: t.slug }));
+  const techs = loadAllTechnologies();
+  return techs.map((t) => ({ slug: t.slug }));
 }
 
 export default async function TechnologyPage(props: {
   params: Promise<Params>;
 }) {
   const { slug } = await props.params;
-  const { data } = await graphqlRequest<{ technology: any }>(
-    print(GET_TECHNOLOGY_BY_SLUG),
-    { slug }
-  );
 
-  const tech = data.technology;
+  const tech = loadTechnologyBySlug(slug);
   if (!tech) {
-    // In SSG, this typically won't render; but as a safeguard:
     return <div>Technology not found.</div>;
   }
+
+  const allPosts = loadAllPosts();
+  const allProjects = loadAllProjects();
+
+  const relatedPosts = allPosts.filter((p) =>
+    p.technologySlugs?.includes(slug)
+  );
+  const relatedProjects = allProjects.filter((prj) =>
+    prj.technologySlugs?.includes(slug)
+  );
 
   return (
     <main className='container mx-auto py-8'>
@@ -48,16 +54,18 @@ export default async function TechnologyPage(props: {
 
       <section className='mb-12'>
         <h2 className='text-2xl font-semibold mb-4'>Related Posts</h2>
-        {tech.relatedPosts?.length ? (
+        {relatedPosts.length ? (
           <ul className='space-y-3'>
-            {tech.relatedPosts.map((p: any) => (
+            {relatedPosts.map((p) => (
               <li key={p.slug} className='border-b pb-3'>
                 <a
                   href={`/blog/${p.slug}`}
                   className='text-lg font-medium underline'>
                   {p.title}
                 </a>
-                <p className='text-sm text-gray-600'>{p.summary}</p>
+                {p.summary && (
+                  <p className='text-sm text-gray-600'>{p.summary}</p>
+                )}
               </li>
             ))}
           </ul>
@@ -68,9 +76,9 @@ export default async function TechnologyPage(props: {
 
       <section>
         <h2 className='text-2xl font-semibold mb-4'>Related Projects</h2>
-        {tech.relatedProjects?.length ? (
+        {relatedProjects.length ? (
           <ul className='space-y-3'>
-            {tech.relatedProjects.map((prj: any) => (
+            {relatedProjects.map((prj) => (
               <li key={prj.slug} className='border-b pb-3'>
                 <a
                   href={`/projects/${prj.slug}`}
@@ -88,5 +96,3 @@ export default async function TechnologyPage(props: {
     </main>
   );
 }
-
-export const dynamic = 'error'; // ensure SSG only

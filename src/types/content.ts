@@ -24,7 +24,11 @@ export interface PostFrontmatter {
   technologies?: Slug[]; // technology slugs
   tags?: Slug[]; // fallback key
   coverImage?: string;
+  coverImageAlt?: string;
   featured?: boolean;
+  readingTime?: string; // e.g., '8 min'
+  difficulty?: string; // e.g., 'Beginner' | 'Intermediate' | 'Advanced'
+  canonicalUrl?: string;
 }
 
 export interface Post {
@@ -34,7 +38,11 @@ export interface Post {
   summary: string;
   technologySlugs: Slug[];
   coverImage?: string;
+  coverImageAlt?: string;
   featured?: boolean;
+  readingTime?: string;
+  difficulty?: string;
+  canonicalUrl?: string;
   content?: string; // raw MDX content if needed
 }
 
@@ -46,6 +54,7 @@ export interface ProjectFrontmatter {
   liveUrl?: string;
   technologies: Slug[];
   image?: string;
+  blogPostSlug?: Slug; // optional: link a relevant blog post
 }
 
 export interface Project {
@@ -57,4 +66,5 @@ export interface Project {
   technologySlugs: Slug[];
   image?: string;
   content?: string;
+  blogPostSlug?: Slug;
 }

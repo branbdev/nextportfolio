@@ -3,13 +3,9 @@ title: 'Complete App Router Migration: From Build Errors to Production-Ready Arc
 publishedAt: '2025-10-15'
 summary: 'A comprehensive deep-dive into migrating a Next.js portfolio from Pages Router to App Router, fixing server/client component boundaries, implementing data enrichment patterns, and building a three-tier content architecture with MDX, TypeScript, and static generation.'
 technologies: ['react', 'next.js', 'typescript', 'graphql', 'node']
+readingTime: '45 min'
+difficulty: 'Advanced'
 ---
-
-export const metadata = {
-  title: 'Complete App Router Migration Journey',
-  description:
-    'From build errors to production-ready: A deep technical exploration',
-};
 
 # Complete App Router Migration: From Build Errors to Production-Ready Architecture
 
@@ -638,13 +634,12 @@ children: React.ReactNode;
 modal: React.ReactNode;
 }) {
 return (
+
 <>
-{children}
-{modal}
+  {children}
+  {modal}
 </>
-);
-}
-\`\`\`
+); } \`\`\`
 
 ### Pattern 3: Server Actions (Next.js 14+)
 
@@ -666,13 +661,12 @@ import { submitContactForm } from './actions';
 
 function ContactForm() {
 return (
+
 <form action={submitContactForm}>
-<input name="email" />
-<button>Submit</button>
+  <input name='email' />
+  <button>Submit</button>
 </form>
-);
-}
-\`\`\`
+); } \`\`\`
 
 **No API routes needed!** Forms work without JavaScript.
 

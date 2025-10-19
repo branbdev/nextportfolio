@@ -1,0 +1,140 @@
+/* Post page aesthetic: geometric backdrop, paper texture card, tactile interactions */
+
+.page {
+  position: relative;
+}
+
+/* Left offset to stay out of alignment with the left A11Y panel */
+@media (min-width: 1024px) {
+  .leftOffset {
+    margin-left: 220px; /* ensure at least 200px from left edge + breathing room */
+    padding-right: 60px; /* additional right breathing room */
+  }
+}
+
+/* Geometric, calming backdrop behind the article */
+.decor {
+  position: relative;
+  margin-bottom: 3rem; /* extra breathing room before content */
+}
+
+.decor::before {
+  content: '';
+  position: absolute;
+  inset: -80px -40px -80px -40px; /* extend further for more breathing room */
+  z-index: -1;
+  pointer-events: none;
+  /* Layered gradients for soft geometry and subtle paper grain */
+  background-image: radial-gradient(
+      1200px 400px at -10% -20%,
+      rgba(99, 102, 241, 0.1),
+      transparent 60%
+    ),
+    radial-gradient(
+      800px 300px at 110% 0%,
+      rgba(16, 185, 129, 0.1),
+      transparent 60%
+    ),
+    radial-gradient(
+      500px 200px at 50% 120%,
+      rgba(59, 130, 246, 0.08),
+      transparent 60%
+    ),
+    conic-gradient(
+      from 180deg at 60% 40%,
+      rgba(255, 255, 255, 0.06),
+      rgba(0, 0, 0, 0.04),
+      rgba(255, 255, 255, 0.05)
+    ),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence baseFrequency='0.9' numOctaves='3'/%3E%3CfeColorMatrix values='0 0 0 0 0, 0 0 0 0 0, 0 0 0 0 0, 0 0 0 0.015 0'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='0.7'/%3E%3C/svg%3E");
+  filter: saturate(0.9);
+}
+
+/* Paper card with felt-like texture and gentle contrast */
+.paperCard {
+  border-radius: 20px;
+  border: 1px solid color-mix(in oklab, #e5e7eb, #000 5%);
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='noise'%3E%3CfeTurbulence baseFrequency='0.8' numOctaves='4'/%3E%3CfeColorMatrix values='0 0 0 0 0, 0 0 0 0 0, 0 0 0 0 0, 0 0 0 0.018 0'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23noise)' opacity='0.5'/%3E%3C/svg%3E"),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0.9))
+      padding-box,
+    linear-gradient(180deg, rgba(0, 0, 0, 0.06), rgba(0, 0, 0, 0.08)) border-box;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.1),
+    0 1px 0 rgba(255, 255, 255, 0.7) inset, 0 -1px 0 rgba(0, 0, 0, 0.04) inset;
+  backdrop-filter: blur(4px);
+  padding: 2.5rem 3rem; /* increased padding for breathing room */
+  margin-bottom: 3rem;
+}
+
+:root[data-theme='dark'] .paperCard {
+  border-color: color-mix(in oklab, #27272a, #fff 10%);
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='noise'%3E%3CfeTurbulence baseFrequency='0.8' numOctaves='4'/%3E%3CfeColorMatrix values='0 0 0 0 0, 0 0 0 0 0, 0 0 0 0 0, 0 0 0 0.025 0'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23noise)' opacity='0.6'/%3E%3C/svg%3E"),
+    linear-gradient(180deg, rgba(24, 24, 27, 0.95), rgba(24, 24, 27, 0.9))
+      padding-box,
+    linear-gradient(
+        180deg,
+        rgba(255, 255, 255, 0.08),
+        rgba(255, 255, 255, 0.06)
+      )
+      border-box;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4),
+    0 1px 0 rgba(255, 255, 255, 0.05) inset, 0 -1px 0 rgba(0, 0, 0, 0.25) inset;
+}
+
+/* Tactile link/card interactions (mechanical press feel) */
+.tactileCard {
+  transition: transform 120ms cubic-bezier(0.2, 0.7, 0.3, 1),
+    box-shadow 120ms ease;
+  box-shadow: 0 2px 0 rgba(0, 0, 0, 0.06), 0 8px 20px rgba(0, 0, 0, 0.08);
+}
+.tactileCard:hover {
+  box-shadow: 0 3px 0 rgba(0, 0, 0, 0.08), 0 12px 28px rgba(0, 0, 0, 0.1);
+}
+.tactileCard:active {
+  transform: translateY(2px);
+  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.1), 0 6px 18px rgba(0, 0, 0, 0.12) inset;
+}
+.tactileCard:focus-visible {
+  outline: 3px solid rgba(99, 102, 241, 0.5);
+  outline-offset: 4px;
+}
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 14px;
+  border-radius: 9999px;
+  border: 1px solid color-mix(in oklab, #e5e7eb, #000 6%);
+  background: linear-gradient(180deg, #fff, #f7fafc);
+  color: #374151;
+  cursor: pointer;
+  user-select: none;
+  transition: transform 100ms ease, box-shadow 100ms ease,
+    background-color 150ms ease;
+  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.05);
+}
+.chip:hover {
+  box-shadow: 0 2px 0 rgba(0, 0, 0, 0.06);
+}
+.chip:active {
+  transform: translateY(1px);
+}
+.chip:focus-visible {
+  outline: 3px solid rgba(99, 102, 241, 0.5);
+  outline-offset: 3px;
+}
+.chipActive {
+  background: linear-gradient(180deg, #eef2ff, #e0e7ff);
+  border-color: #a5b4fc;
+  color: #1f2937;
+}
+
+:root[data-theme='dark'] .chip {
+  background: linear-gradient(180deg, #18181b, #111827);
+  color: #d1d5db;
+  border-color: #30303a;
+}
+:root[data-theme='dark'] .chipActive {
+  background: linear-gradient(180deg, #1e293b, #0f172a);
+  border-color: #334155;
+}

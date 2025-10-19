@@ -27,7 +27,15 @@ import {
 } from 'react-icons/si';
 
 // UI Icons from Lucide React
-import { ExternalLink, Mail, MapPin, ArrowUp, Send } from 'lucide-react';
+import {
+  ExternalLink,
+  Mail,
+  MapPin,
+  ArrowUp,
+  Send,
+  BookOpen,
+  ArrowRight,
+} from 'lucide-react';
 
 export interface IconProps {
   size?: number | string;
@@ -212,6 +220,26 @@ export const IconSend: React.FC<IconProps> = ({
   className,
 }) => (
   <Send size={size} color={color || 'currentColor'} className={className} />
+);
+
+export const IconBookOpen: React.FC<IconProps> = ({
+  size = 24,
+  color,
+  className,
+}) => (
+  <BookOpen size={size} color={color || 'currentColor'} className={className} />
+);
+
+export const IconArrowRight: React.FC<IconProps> = ({
+  size = 24,
+  color,
+  className,
+}) => (
+  <ArrowRight
+    size={size}
+    color={color || 'currentColor'}
+    className={className}
+  />
 );
 
 // Helper Functions

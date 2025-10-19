@@ -96,7 +96,11 @@ export function loadAllPosts({ includeContent = false } = {}): Post[] {
       summary,
       technologySlugs,
       coverImage: frontmatter.coverImage,
+      coverImageAlt: frontmatter.coverImageAlt,
       featured: frontmatter.featured,
+      readingTime: frontmatter.readingTime,
+      difficulty: frontmatter.difficulty,
+      canonicalUrl: frontmatter.canonicalUrl,
       content: includeContent ? content : undefined,
     } satisfies Post;
   });
@@ -122,7 +126,11 @@ export function loadPostBySlug(
     summary,
     technologySlugs,
     coverImage: frontmatter.coverImage,
+    coverImageAlt: frontmatter.coverImageAlt,
     featured: frontmatter.featured,
+    readingTime: frontmatter.readingTime,
+    difficulty: frontmatter.difficulty,
+    canonicalUrl: frontmatter.canonicalUrl,
     content: includeContent ? content : undefined,
   };
 }
@@ -141,6 +149,7 @@ export function loadAllProjects({ includeContent = false } = {}): Project[] {
       liveUrl: frontmatter.liveUrl,
       technologySlugs: frontmatter.technologies || [],
       image: frontmatter.image,
+      blogPostSlug: frontmatter.blogPostSlug,
       content: includeContent ? content : undefined,
     } satisfies Project;
   });
@@ -164,6 +173,7 @@ export function loadProjectBySlug(
     liveUrl: frontmatter.liveUrl,
     technologySlugs: frontmatter.technologies || [],
     image: frontmatter.image,
+    blogPostSlug: frontmatter.blogPostSlug,
     content: includeContent ? content : undefined,
   };
 }

@@ -1,7 +1,7 @@
 .root {
   position: fixed;
   top: 20px;
-  left: 20px;
+  left: 20px; /* restored to left placement */
   z-index: var(--z-index-menu-trigger);
   font-family: inherit;
 }
